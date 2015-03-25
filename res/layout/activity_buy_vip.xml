@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/layout_nav_top"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_top" />
+
+    <LinearLayout
+        android:id="@+id/layout_vip_types"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_nav_top"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_my_visitor"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的金币" />
+
+            <TextView
+                android:id="@+id/tv_mymoney"
+                android:layout_width="80dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="0" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_vip_1_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_my_visitor"
+            android:clickable="true"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/tv_vip_type1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1个月会员" />
+
+            <TextView
+                android:id="@+id/tv_vip_type1_cost"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_price"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="11000金币" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_vip_3_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_my_visitor"
+            android:clickable="true"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/tv_vip_type2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3个月会员" />
+
+            <TextView
+                android:id="@+id/tv_vip_type2_cost"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_price"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="31000金币" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_vip_6_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_my_visitor"
+            android:clickable="true"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/tv_vip_type3_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6个月会员" />
+
+            <TextView
+                android:id="@+id/tv_vip_type3_cost"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_price"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="61000金币" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_vip_12_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_my_visitor"
+            android:clickable="true"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/tv_vip_type4_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12个月会员" />
+
+            <TextView
+                android:id="@+id/tv_vip_type4_cost"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_price"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="110000金币" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_vip_expire_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="6dp" >
+
+        <TextView
+            android:id="@+id/tv_vip_expire_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="VIP会员到期时间: "
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/tv_vip_expire_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_vip_expire_time_label"
+            android:text="2015-01-26 21:14:51"
+            android:textColor="@color/c_aaaaff"
+            android:textSize="@dimen/text_size_medium" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_get_lovemoney_free"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_vip_expire_time"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/register_button_selector"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="免费获取金币"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_size_large" />
+
+    <TextView
+        android:id="@+id/tv_lovemoney_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_get_lovemoney_free"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="金币说明"
+        android:textSize="@dimen/text_size_small" />
+
+</RelativeLayout>

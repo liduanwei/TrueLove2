@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99eeeeee" >
+
+    <ImageView
+        android:id="@+id/iv_recommend_user_face"
+        android:layout_width="70dip"
+        android:layout_height="70dip"
+        android:src="@drawable/icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_recommend_user_face"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_question_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="问题标题问题标题问题标题问题标题" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_answer_option1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="选项1" />
+
+            <TextView
+                android:id="@+id/tv_answer_option2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="选项2" />
+
+            <TextView
+                android:id="@+id/tv_answer_option3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="选项3 " />
+
+            <TextView
+                android:id="@+id/tv_answer_option4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="选项4 " />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

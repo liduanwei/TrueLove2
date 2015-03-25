@@ -1,0 +1,387 @@
+package me.himi.love.ui.fragment;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+import java.util.ArrayList;
+import java.util.List;
+
+import me.himi.love.AppServiceExtendImpl;
+import me.himi.love.IAppServiceExtend.LoadStrangeNewsPostParams;
+import me.himi.love.IAppServiceExtend.OnLoadStrangeNewsResponseListener;
+import me.himi.love.MyApplication;
+import me.himi.love.R;
+import me.himi.love.adapter.StrangeNewsAndIntriguingStoryAdapter;
+import me.himi.love.entity.StrangeNews;
+import me.himi.love.ui.StrangenewsAndStoryActivity;
+import me.himi.love.ui.fragment.base.BaseFragment;
+import me.himi.love.view.list.XListView;
+import me.himi.love.view.list.XListView.IXListViewListener;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.LayoutParams;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+/**
+ * 奇闻趣事 由编辑每日更新发布
+ * @ClassName:StrangeNewsAndIntriguingStoryFragment
+ * @author sparklee liduanwei_911@163.com
+ * @date Nov 2, 2014 10:52:08 PM
+ */
+public class StrangeNewsAndIntriguingStoryFragment extends BaseFragment implements OnItemClickListener {
+
+    View mContainerView;
+
+    XListView mListView;
+
+    StrangeNewsAndIntriguingStoryAdapter mAdapter;
+
+    TextView tvTopAction;
+
+    List<StrangeNews> datas = new ArrayList<StrangeNews>();
+
+    private static final String cahceArticlesPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/strangenews";
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	Log.e(getClass().getSimpleName(), "->onCreateView");
+	mContainerView = inflater.inflate(R.layout.fragment_strangenewsandintriguingstory, container, false);
+	//	if(mContainerView !=null) {
+	//	   ViewGroup parent = (ViewGroup) mContainerView.getParent();
+	//	   if(parent!=null) {
+	//	       parent.removeView(mContainerView);
+	//	   }
+	//	}
+	init();
+	return mContainerView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+	// TODO Auto-generated method stub
+	//	init();
+	super.onActivityCreated(savedInstanceState);
+
+    }
+
+    private ViewPager mTopViewPager;
+
+    private void init() {
+	tvTopAction = (TextView) getActivity().findViewById(R.id.tv_top_action);
+
+	mListView = (XListView) mContainerView.findViewById(R.id.listview);
+	mAdapter = new StrangeNewsAndIntriguingStoryAdapter(getActivity(), datas);
+	mListView.setAdapter(mAdapter);
+
+	// 使用代理 设置ImageLoader  在 ListView 滚动时不加载图片
+	mListView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
+
+	// 首先允许加载更多
+	mListView.setPullLoadEnable(true);
+	// 允许下拉
+	mListView.setPullRefreshEnable(true);
+	// 设置监听器
+	mListView.setXListViewListener(new IXListViewListener() {
+
+	    @Override
+	    public void onRefresh() {
+		// TODO Auto-generated method stub
+		pageNumber = 1;
+		loadStories();
+	    }
+
+	    @Override
+	    public void onLoadMore() {
+		// TODO Auto-generated method stub
+		// 如果当前处于刷新状态则不加载更多
+		loadStories();
+	    }
+	});
+	mListView.pullRefreshing();
+	mListView.setDividerHeight(0);
+
+	mListView.setOnItemClickListener(this);
+
+	//initTopViewPager();
+
+	//loadArticles();
+	loadFromCache();
+	// 广告初始化
+	initAds();
+
+    }
+
+    /**
+     * 初始化顶部viewpager
+     */
+    private void initTopViewPager() {
+	// TODO Auto-generated method stub
+//	mTopViewPager = new ViewPager(getActivity());
+//	ViewPager.LayoutParams params = new ViewPager.LayoutParams();
+//	params.height = 160;
+//	mTopViewPager.setLayoutParams(params);
+//
+//	mListView.addHeaderView(mTopViewPager);
+
+	List<View> views = new ArrayList<View>();
+	View v1 = getActivity().getLayoutInflater().inflate(R.layout.layout_top_viewpager_item, null);
+	View v2 = getActivity().getLayoutInflater().inflate(R.layout.layout_top_viewpager_item, null);
+	View v3 = getActivity().getLayoutInflater().inflate(R.layout.layout_top_viewpager_item, null);
+	ImageView ivPic1 = (ImageView) v1.findViewById(R.id.iv_pic);
+	ImageView ivPic2 = (ImageView) v2.findViewById(R.id.iv_pic);
+	ImageView ivPic3 = (ImageView) v3.findViewById(R.id.iv_pic);
+	ivPic1.setBackgroundResource(R.drawable.register);
+	ivPic2.setBackgroundResource(R.drawable.register);
+	ivPic3.setBackgroundResource(R.drawable.register);
+
+	views.add(v1);
+	views.add(v2);
+	views.add(v3);
+	
+
+	mTopViewPager = (ViewPager) mContainerView.findViewById(R.id.viewpager);
+	mTopViewPager.setAdapter(new TopViewPagerAdapter(views));
+	mTopViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+	    @Override
+	    public void onPageSelected(int arg0) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	    @Override
+	    public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	    @Override
+	    public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+
+	    }
+	});
+    }
+
+    private void initAds() {
+	// TODO Auto-generated method stub
+	initDomobAd();
+    }
+
+    /**
+     * 广告 初始化
+     */
+    private void initDomobAd() {
+	cn.domob.android.ads.AdView adview = new cn.domob.android.ads.AdView(MyApplication.getInstance().getTopActivity(), "56OJzoHYuN5N9Wvxuc", "16TLmU5aApZM2NUOnjMjOyei");
+	// // 广告 container
+	RelativeLayout adContainer = (RelativeLayout) mContainerView.findViewById(R.id.layout_adcontainer1);
+	//	adview320x50.setGravity(Gravity.CENTER);
+	//	adview.setKeyword("game");
+	//	adview.setUserGender("male");
+	//	adview.setUserBirthdayStr("2000-08-08");
+	//	adview.setUserPostcode("123456");
+	//	adview.setAdEventListener(null);
+
+	adContainer.addView(adview);
+    }
+
+    private void loadFromCache() {
+	// TODO Auto-generated method stub
+	File f = new File(cahceArticlesPath);
+	if (!f.exists()) {
+	    loadStories();
+	    return;
+	}
+
+	try {
+	    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+	    Object obj = ois.readObject();
+	    List<StrangeNews> articles = (List<StrangeNews>) obj;
+	    mAdapter.getList().clear();
+	    mAdapter.addAll(articles);
+	    ois.close();
+	} catch (StreamCorruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (FileNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (ClassNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+    }
+
+    private int pageNumber = 1;
+
+    private boolean isRefreshing;// 刷新中...
+
+    private void loadStories() {
+	if (isRefreshing) {
+	    return;
+	}
+
+	isRefreshing = true;
+
+	LoadStrangeNewsPostParams postParams = new LoadStrangeNewsPostParams();
+	postParams.page = pageNumber;
+	postParams.pageSize = 20;
+	postParams.order = "addtime DESC";
+
+	AppServiceExtendImpl.getInstance().loadStrangeNews(postParams, new OnLoadStrangeNewsResponseListener() {
+
+	    @Override
+	    public void onSuccess(List<StrangeNews> secrets) {
+		// TODO Auto-generated method stub
+		if (secrets.size() != 0) {
+		    if (pageNumber == 1) {
+			mAdapter.getList().clear();
+		    }
+		    mAdapter.addAll(secrets);
+
+		    // 缓存到本地
+		    cacheToLocal(secrets);
+		} else {
+		    if (pageNumber == 1) { // 刷新没有数据
+			mAdapter.getList().clear();
+		    }
+		    showToast(mAdapter.getList().size() != 0 ? "暂无更多" : "暂无数据");
+		}
+
+		isRefreshing = false;
+
+		if (mListView.getPullLoading()) {
+		    mListView.stopLoadMore();
+		}
+		if (mListView.getPullRefreshing()) {
+		    mListView.stopRefresh();
+		}
+		pageNumber++;
+	    }
+
+	    private void cacheToLocal(List<StrangeNews> secrets) {
+		// TODO Auto-generated method stub
+		File f = new File(cahceArticlesPath);
+		if (!f.getParentFile().exists()) {
+		    f.getParentFile().mkdirs();
+		}
+		try {
+		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+		    oos.writeObject(secrets);
+		    oos.close();
+		} catch (FileNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+
+	    @Override
+	    public void onFailure(String errorMsg) {
+
+		isRefreshing = false;
+		// TODO Auto-generated method stub
+		if (mListView.getPullLoading()) {
+		    mListView.stopLoadMore();
+		}
+		if (mListView.getPullRefreshing()) {
+		    mListView.stopRefresh();
+		}
+		showToast(errorMsg);
+	    }
+	});
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+	if (!hidden) {
+	    if (tvTopAction != null) {
+		tvTopAction.setVisibility(View.GONE);
+		//		tvTopAction.setText("发吐槽");
+		//		tvTopAction.setOnClickListener(editArticleOnClickListener);
+	    }
+	}
+	super.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	// TODO Auto-generated method stub
+	position = position - 1;//mListView.getHeaderViewsCount();
+
+	if (position <= -1 || position >= mAdapter.getList().size()) {
+	    return;
+	}
+	StrangeNews article = mAdapter.getList().get(position);
+
+	Intent intent = new Intent(this.getActivity(), StrangenewsAndStoryActivity.class);
+	Bundle bundle = new Bundle();
+	bundle.putSerializable("strangenews", article);
+	intent.putExtras(bundle);
+	startActivity(intent);
+
+    }
+
+    class TopViewPagerAdapter extends PagerAdapter {
+	private List<View> views = null;
+
+	public TopViewPagerAdapter(List<View> views) {
+	    this.views = views;
+
+	}
+
+	@Override
+	public Object instantiateItem(ViewGroup container, int position) {
+	    // TODO Auto-generated method stub
+	    View v = views.get(position);
+	    container.addView(v);
+	    return v;
+	}
+
+	@Override
+	public int getCount() {
+	    // TODO Auto-generated method stub
+	    return views.size();
+	}
+
+	@Override
+	public void destroyItem(ViewGroup container, int position, Object object) {
+	    // TODO Auto-generated method stub
+	    container.removeView(views.get(position));
+	}
+
+	@Override
+	public boolean isViewFromObject(View arg0, Object arg1) {
+	    // TODO Auto-generated method stub
+	    return arg0 == arg1;
+	}
+
+    }
+
+}

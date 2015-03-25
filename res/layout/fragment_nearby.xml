@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/ll_nearby_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/base_edit_input"
+        android:orientation="horizontal"
+        android:padding="2dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text=""
+            android:textStyle="bold" />
+
+        <me.himi.love.im.ui.customview.ClearEditText
+            android:id="@+id/et_nearby_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="搜索"
+            android:padding="4dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_domob_adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_nearby_search"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/layout_top_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_domob_adView"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <me.himi.love.view.list.XListView
+        android:id="@+id/listview_nearby"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_top_gallery"
+        android:layout_marginTop="6dp"
+        android:cacheColorHint="#00000000"
+        android:descendantFocusability="afterDescendants"
+        android:dividerHeight="0.1dip"
+        android:focusable="false"
+        android:listSelector="@drawable/list_selector_cover" />
+
+    <TextView
+        android:id="@+id/tv_empty_peopel_nearby_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="暂无附近的人"
+        android:visibility="visible" />
+
+</RelativeLayout>

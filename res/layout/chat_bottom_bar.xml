@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp" >
+
+    <TextView
+        android:id="@+id/tv_article_comment_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/layout_article_comment_reply"
+        android:layout_marginLeft="2dp"
+        android:background="@drawable/shape_message_tips"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="发送" />
+
+    <TextView
+        android:id="@+id/tv_article_comment_emo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="4dp"
+        android:background="@drawable/btn_chat_emo_selector"
+        android:clickable="true" />
+
+    <me.himi.love.im.ui.customview.EmoticonsEditText
+        android:id="@+id/et_article_comment_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/tv_article_comment_publish"
+        android:layout_toRightOf="@id/tv_article_comment_emo"
+        android:background="@drawable/selector_edittext"
+        android:hint="输入内容"
+        android:padding="6dp" />
+
+    <LinearLayout
+        android:id="@+id/layout_emo"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/et_article_comment_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_emo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="6dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="6dp" >
+
+    <ImageView
+        android:id="@+id/iv_user_face"
+        android:layout_width="60.0dip"
+        android:layout_height="60.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon" />
+
+    <RelativeLayout
+        android:id="@+id/layout_user_simple_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_user_face"
+        android:paddingLeft="10dp" >
+
+        <RelativeLayout
+            android:id="@+id/layout_user_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/iv_vip"
+                android:layout_width="20dp"
+                android:layout_height="20dip" />
+
+            <me.himi.love.view.EmojiTextView
+                android:id="@+id/tv_user_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_vip"
+                android:singleLine="true"
+                android:text="静静"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tv_user_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="6dp"
+                android:text="距离"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_age_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_user_nickname"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_user_age"
+                android:layout_width="30dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/shape_gender_age_female"
+                android:drawableLeft="@drawable/ic_user_famale2"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="25"
+                android:textColor="@color/base_color_text_white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_user_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="165cm"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_user_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="53kg"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="2000-5000"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_age_height"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="家乡:"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_user_homeplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="现居地:"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_user_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_address"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_user_interests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="兴趣,爱好"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_user_personality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个性,特征"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/layout_user_nickname"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_select_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_sayhello_selector"
+                android:clickable="true"
+                android:focusable="false"
+                android:paddingBottom="6dp"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:paddingTop="6dp"
+                android:text="提问题"
+                android:textColor="@color/sayhi_text"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_sayhi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_sayhello_selector"
+                android:clickable="true"
+                android:focusable="false"
+                android:paddingBottom="9dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="9dp"
+                android:text="打招呼"
+                android:textColor="@color/sayhi_text"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

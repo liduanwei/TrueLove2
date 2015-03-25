@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dip"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="6dp" >
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="20:21"
+        android:textColor="@color/base_color_text_gray" />
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/icon" />
+
+    <RelativeLayout
+        android:id="@+id/layout_chat_content_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_time"
+        android:layout_toLeftOf="@id/iv_avatar"
+        android:background="@drawable/selector_chat_sent" >
+
+        <me.himi.love.im.ui.customview.EmoticonsTextView
+            android:id="@+id/tv_chat_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:text="嗨,最近还好吗?" />
+
+        <ImageView
+            android:id="@+id/iv_chat_image"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:layout_below="@id/tv_chat_content"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_send_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/layout_chat_content_back"
+        
+        android:padding="6dp"
+        android:text=""
+        android:textColor="@color/base_color_text_gray" />
+
+</RelativeLayout>

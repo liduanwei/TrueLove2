@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160.0dip"
+    android:layout_height="200dip"
+    android:padding="2dp" >
+
+    <ImageView
+        android:id="@+id/iv_user_face"
+        android:layout_width="160.0dip"
+        android:layout_height="160.0dip"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_user_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="20岁"
+        android:textColor="@color/base_color_text_white" />
+
+    <TextView
+        android:id="@+id/tv_user_instruction"
+        android:layout_width="160dip"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_user_face"
+        android:layout_centerVertical="true"
+        android:text="我是88年出生来自湖北鄂州农村的一个仍在奋斗中的代码猿.16岁初中毕业去了福建打工,说是外地,其实也是我们家乡的人在当地建的石材刀具加工小作坊,在那个建在不知什么时候被废弃的小训练场的院子里的矮石头房子里我体会到了暗无天日的人间悲情,渡过了人生中不愿再回首再回首尽是血泪的一段经历"
+        android:textColor="@color/base_color_text_black"
+        android:visibility="gone" />
+
+</RelativeLayout>

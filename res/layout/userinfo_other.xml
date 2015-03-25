@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/layout_monologue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99eeeeee"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <TextView
+            android:id="@+id/tv_monologue_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="内心独白" />
+
+        <TextView
+            android:id="@+id/tv_monologue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_monologue_title"
+            android:padding="10dp"
+            android:text="" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_user_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99eeeeee"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <TextView
+            android:id="@+id/tv_user_news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="个人动态" />
+
+        <LinearLayout
+            android:id="@+id/ll_user_news"
+            android:layout_width="match_parent"
+            android:layout_height="50.0dip"
+            android:layout_below="@id/tv_user_news_title"
+            android:layout_margin="20dp"
+            android:clickable="true"
+            android:minHeight="50.0dip"
+            android:orientation="horizontal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_user_visitors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99eeeeee"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <TextView
+            android:id="@+id/tv_lable_user_visitors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="最近访客" />
+
+        <LinearLayout
+            android:id="@+id/ll_user_history_visitors"
+            android:layout_width="match_parent"
+            android:layout_height="30.0dip"
+            android:layout_margin="20dp"
+            android:clickable="true"
+            android:minHeight="30.0dip"
+            android:orientation="horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_user_fans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99eeeeee"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <TextView
+            android:id="@+id/tv_lable_user_fans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="粉丝" />
+
+        <LinearLayout
+            android:id="@+id/ll_user_fans"
+            android:layout_width="match_parent"
+            android:layout_height="30.0dip"
+            android:layout_margin="20dp"
+            android:clickable="true"
+            android:minHeight="30.0dip"
+            android:orientation="horizontal" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_line4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99eeeeee"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp" >
+
+        <TextView
+            android:id="@+id/tv_line4_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="动态" />
+
+        <LinearLayout
+            android:id="@+id/layout_row_lastlogin_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_line4_title"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_login_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="最后登录时间" />
+
+            <TextView
+                android:id="@+id/tv_user_lastlogin_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_row_register_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_row_lastlogin_time"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_register_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="注册时间" />
+
+            <TextView
+                android:id="@+id/tv_user_register_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

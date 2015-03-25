@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">恋恋</string>
+    <string name="action_settings">Settings</string>
+    <string name="savecolor">保存</string>
+    <string name="savecolor_cancel">取消</string>
+    <string name="license">同意恋恋服务<u>用户条款</u>和<u>使用协议</u></string>
+    <string name="logo">"等你发现,\n   真爱就在这里"</string>
+    <string name="iv_user_face">用户头像</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="main_tab_nearby">附近</string>
+    <string name="main_tab_userwall">速配</string>
+    <string name="main_tab_strangenews">情感</string>
+    <string name="main_tab_share">社区</string>
+    <string name="main_tab_contact">会话</string>
+    <string name="main_tab_message">消息</string>
+    <string name="main_tab_set">我</string>
+    <string name="visitor_all"><u>查看更多</u></string>
+    <string name="loading">加载中...</string>
+
+</resources>

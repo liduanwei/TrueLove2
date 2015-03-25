@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register" >
+
+    <include
+        android:id="@+id/layout_nav_top"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_top" />
+
+    <TextView
+        android:id="@+id/tv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="@string/logo"
+        android:textColor="@color/text_white"
+        android:textSize="26sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/button_start_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/register_button_selector"
+            android:onClick="btnStartRegisterOnClick"
+            android:layout_marginBottom="10dp"
+            android:text="注册" />
+
+        <Button
+            android:id="@+id/button_start_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_button_highlight"
+            android:onClick="btnStartLoginOnClick"
+            android:text="使用已有账户登录" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_line2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#99eeeeee"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:visibility="visible" >
+
+    <RelativeLayout
+        android:id="@+id/layout_line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp" >
+
+        <TextView
+            android:id="@+id/tv_user_vip"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/vip_sign_not" />
+
+        <TextView
+            android:id="@+id/tv_user_age_gender"
+            android:layout_width="30dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/tv_user_vip"
+            android:background="@drawable/shape_gender_age_female"
+            android:drawableLeft="@drawable/ic_user_famale2"
+            android:gravity="center"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:text="25"
+            android:textColor="@color/base_color_text_white"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_user_constellation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_user_age_gender"
+            android:paddingLeft="6dp"
+            android:text="天秤座" />
+
+        <TextView
+            android:id="@+id/tv_user_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_user_constellation"
+            android:paddingLeft="6dp"
+            android:text="0cm" />
+
+        <TextView
+            android:id="@+id/tv_user_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_user_height"
+            android:padding="6dp"
+            android:text="0kg" />
+
+        <TextView
+            android:id="@+id/tv_user_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_user_weight"
+            android:padding="6dp"
+            android:text="0km" />
+
+        <TextView
+            android:id="@+id/tv_user_love_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="0币"
+            android:textSize="@dimen/text_size_10" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_monologue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99eeeeee"
+        android:paddingBottom="8dp" >
+
+        <TextView
+            android:id="@+id/tv_monologue_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="内心独白" />
+
+        <TextView
+            android:id="@+id/tv_monologue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_monologue_title"
+            android:padding="10dp"
+            android:text="" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_line2_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99cccccc"
+        android:padding="7dp"
+        android:text="详细资料" />
+
+    <LinearLayout
+        android:id="@+id/layout_row_user_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="恋恋ID" />
+
+        <TextView
+            android:id="@+id/tv_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_user_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="出生日期" />
+
+        <TextView
+            android:id="@+id/tv_user_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_marital_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_marital_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="情感状况" />
+
+        <TextView
+            android:id="@+id/tv_user_marital_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_employment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_employment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="职业" />
+
+        <TextView
+            android:id="@+id/tv_user_employment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text=""
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_edu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_edu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="学历" />
+
+        <TextView
+            android:id="@+id/tv_user_edu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text=""
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_monthly_salary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_monthly_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="月薪:" />
+
+        <TextView
+            android:id="@+id/tv_monthly_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text=""
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_homeplace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_homeplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="家乡" />
+
+        <TextView
+            android:id="@+id/tv_user_homeplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="现居地" />
+
+        <TextView
+            android:id="@+id/tv_user_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_charm_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_charm_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="魅力部位" />
+
+        <TextView
+            android:id="@+id/tv_user_charm_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_house"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_house"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="住房" />
+
+        <TextView
+            android:id="@+id/tv_user_house"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_distance_love"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_distance_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="异地恋" />
+
+        <TextView
+            android:id="@+id/tv_user_distance_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_premartial_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_premartial_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="是否接受婚前性行为" />
+
+        <TextView
+            android:id="@+id/tv_user_premartial_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_opposite_sex_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_opposite_sex_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="喜欢的异性类型" />
+
+        <TextView
+            android:id="@+id/tv_user_opposite_sex_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_live_with_parents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_live_with_parents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="是否接受和其父母同住" />
+
+        <TextView
+            android:id="@+id/tv_user_live_with_parents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_want_baby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_want_baby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="是否想要小孩" />
+
+        <TextView
+            android:id="@+id/tv_user_want_baby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_interests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="兴趣爱好" />
+
+        <TextView
+            android:id="@+id/tv_user_interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_personality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_user_personality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="个性特征" />
+
+        <TextView
+            android:id="@+id/tv_user_personality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_personal_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_personal_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="个人说明" />
+
+        <TextView
+            android:id="@+id/tv_personal_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="暂未填写" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_row_often_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp" >
+
+        <TextView
+            android:id="@+id/tv_label_often_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="常出没地" />
+
+        <TextView
+            android:id="@+id/tv_often_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="暂未填写" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_line3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99eeeeee"
+        android:paddingTop="8dp" >
+
+        <TextView
+            android:id="@+id/tv_line3_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="征友要求" />
+
+        <LinearLayout
+            android:id="@+id/layout_row_wanted_homeplace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_line3_title"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_wanted_homeplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="家乡" />
+
+            <TextView
+                android:id="@+id/tv_wanted_homeplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_row_wanted_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_row_wanted_homeplace"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_wanted_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="居住地" />
+
+            <TextView
+                android:id="@+id/tv_wanted_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="不限" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_row_wanted_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_row_wanted_address"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_wanted_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="年龄范围:" />
+
+            <TextView
+                android:id="@+id/tv_wanted_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_row_wanted_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_row_wanted_age"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_wanted_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="身高范围:" />
+
+            <TextView
+                android:id="@+id/tv_wanted_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_row_wanted_education"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_row_wanted_height"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_wanted_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="学历要求:" />
+
+            <TextView
+                android:id="@+id/tv_wanted_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_row_wanted_monthly_salary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_row_wanted_education"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_wanted_monthly_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="月薪要求:" />
+
+            <TextView
+                android:id="@+id/tv_wanted_monthly_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_row_wanted_extends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_row_wanted_monthly_salary"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp" >
+
+            <TextView
+                android:id="@+id/tv_label_wanted_extends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="附加说明:" />
+
+            <TextView
+                android:id="@+id/tv_wanted_extends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

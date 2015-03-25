@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#55222222" >
+
+    <ImageView
+        android:id="@+id/iv_user_face"
+        android:layout_width="20dip"
+        android:layout_height="20dip"
+        android:layout_centerVertical="true"
+        android:layout_margin="4dp"
+        android:src="@drawable/icon" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_user_face" >
+
+        <me.himi.love.view.MarqueeTextView
+            android:id="@+id/tv_system_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="4dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_size_small" />
+    </RelativeLayout>
+
+</RelativeLayout>

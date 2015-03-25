@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/layout_nav_top"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_top" />
+
+    <RelativeLayout
+        android:id="@+id/layout_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_nav_top"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/et_question_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="问题标题" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_title"
+            android:layout_marginTop="30dip"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/et_question_option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/register_button_selector"
+                    android:gravity="center_horizontal"
+                    android:hint="选项1"
+                    android:padding="3dp" />
+
+                <EditText
+                    android:id="@+id/et_question_option2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/register_button_selector"
+                    android:gravity="center_horizontal"
+                    android:hint="选项2"
+                    android:padding="3dp" />
+
+                <EditText
+                    android:id="@+id/et_question_option3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/register_button_selector"
+                    android:gravity="center_horizontal"
+                    android:hint="选项3"
+                    android:padding="3dp" />
+
+                <EditText
+                    android:id="@+id/et_question_option4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/register_button_selector"
+                    android:gravity="center_horizontal"
+                    android:hint="选项4"
+                    android:padding="3dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

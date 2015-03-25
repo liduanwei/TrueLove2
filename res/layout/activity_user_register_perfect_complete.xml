@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_bg_color"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/layout_nav_top"
+        layout="@layout/layout_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:background="#eeffffff"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_register_user_face"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_gravity="center"
+            android:layout_margin="6dp"
+            android:background="@drawable/fml"
+            android:clickable="true"
+             />
+
+        <TextView
+            android:id="@+id/tv_uploadface_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/selector_my_visitor"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="重试"
+            android:textColor="#eeff0000"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="上传真实照片\n将极大提高交友成功率" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffeeeeee"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#99eeeeee"
+            android:padding="5dp"
+            android:text="昵称" />
+
+        <EditText
+            android:id="@+id/et_input_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入昵称"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#99eeeeee"
+            android:padding="5dp"
+            android:text="出生日期" />
+
+        <EditText
+            android:id="@+id/et_input_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="请选择你的出生日期"
+            android:onClick="inputBirthdayOnClick"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#99eeeeee"
+            android:padding="5dp"
+            android:text="性别" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <RadioButton
+                android:id="@+id/rb_register_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="男" />
+
+            <RadioButton
+                android:id="@+id/rb_register_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="女" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/button_update_perfect_complete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/c_f98800"
+            android:text="完成" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="6dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="6dp" >
+
+    <ImageView
+        android:id="@+id/iv_message_icon"
+        android:layout_width="50.0dip"
+        android:layout_height="50.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_is_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#88ee1111"
+        android:layout_alignParentRight="true"
+        android:text="新"
+        android:textColor="#ffffffff"
+        android:textSize="10sp" />
+
+    <RelativeLayout
+        android:id="@+id/layout_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_message_icon"
+        android:paddingLeft="10dp" >
+
+        <me.himi.love.view.EmojiTextView
+            android:id="@+id/tv_message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="静静"
+            android:textSize="16dp" />
+        
+        
+        <TextView
+            android:id="@+id/tv_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="false"
+            android:paddingBottom="6dp"
+            android:paddingLeft="9dp"
+            android:paddingRight="9dp"
+            android:paddingTop="6dp"
+            android:text="11-04"
+            android:textColor="@color/base_color_text_gray"
+            android:textSize="12sp" />
+        
+
+        <LinearLayout
+            android:id="@+id/layout_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_message_title"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/tv_message_time"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_message_content_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息内容摘要"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        
+    </RelativeLayout>
+
+</RelativeLayout>

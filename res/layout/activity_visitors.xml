@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/layout_nav_top"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_top" />
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:layout_below="@id/layout_nav_top"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dip"
+            android:paddingTop="10dip" >
+
+            <TextView
+                android:id="@+id/tv_tab_1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="谁看过TA"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_tab_2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="TA看过谁"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:paddingBottom="3dip" >
+
+            <ImageView
+                android:id="@+id/iv_nearby_bottom_line"
+                android:layout_width="100dip"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom|left"
+                android:scaleType="matrix"
+                android:src="@color/cursor_line" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_top"
+        android:orientation="vertical" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/nearbyPager"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+    </LinearLayout>
+
+   
+
+</RelativeLayout>

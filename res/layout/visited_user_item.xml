@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dip"
+    android:paddingBottom="6dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="6dp" >
+
+    <ImageView
+        android:id="@+id/iv_user_face"
+        android:layout_width="50.0dip"
+        android:layout_height="50.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher" />
+
+    <RelativeLayout
+        android:id="@+id/layout_user_simple_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_user_face"
+        android:paddingLeft="10dp" >
+
+        <me.himi.love.view.EmojiTextView
+            android:id="@+id/tv_user_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="静静"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_user_age"
+            android:layout_width="30dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_user_nickname"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_gender_age_female"
+            android:drawableLeft="@drawable/ic_user_famale2"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:gravity="center"
+            android:text="26"
+            android:textColor="@color/base_color_text_white"
+            android:textSize="10dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_user_visitor_visittime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="16分钟前" />
+
+</RelativeLayout>

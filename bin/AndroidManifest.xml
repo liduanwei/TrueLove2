@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.himi.love"
+    android:versionCode="11"
+    android:versionName="1.0.1" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <!-- normal permission -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> <!-- 创建桌面快捷方式 -->
+    <!-- <uses-permission android:name="android.permission.REORDER_TASKS" /> -->
+    <!-- moveToFront -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许应用打开网络套接口 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- UIL框架所需的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 通知震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- baidumap 所需的权限 -start -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- SDK1.5需要android.permission.GET_TASKS权限判断本程序是否为当前运行的应用? -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 来电消音 -->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <!-- baidumap 所需的权限 -end -->
+
+
+    <!-- 万普支付SDK -->
+    <!-- 以下为银行卡支付需多添加的权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- 万普支付SDK END -->
+    <application
+        android:name="me.himi.love.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="me.himi.love.ui.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 多盟 -->
+        <activity
+            android:name="cn.domob.android.ads.DmActivity"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- 多盟 -->
+
+        <activity android:name="me.himi.love.ui.FirstGuideActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+`
+        </activity>
+        <activity android:name="me.himi.love.ui.UserInfoTextActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.HelpActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.EmailRegisterActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.StrangenewsAndStoryActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.PhoneNumberRegisterActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.ZoombleImageActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.ColorSettingsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.PrivateMessagesActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyReceivedSystemMessageActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyFriendsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyFollowsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyFansActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserInfoPhotosActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserRegisterActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserRegisterStep2Activity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserRegisterCompleteActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserLoginActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserRegisterOrLoginActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.ResetPasswordActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.ModifyPasswordActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.SettingsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.EditMyQuestionActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyCreatedQuestionsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyReceivedSayhiActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyReceivedFansActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyReceivedQuestionsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.MyReceivedChatMessagesActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.EditMyInfoActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserNewsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.FollowsNewsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserVisitorsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserFollowsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.EditArticleActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.EditQiushiActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.ArticleCommentsActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.UserFansActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.BuyVIPActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.BuyLoveMoneyActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.CheckUpdateActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.VisitorsAndVisitwhoActivity" >
+        </activity>
+        <activity android:name="me.himi.love.ui.ChatActivity" >
+        </activity>
+        <activity
+            android:name="me.himi.love.ui.UserNewsCommentActivity"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="me.himi.love.ui.EditNewsActivity"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity android:name="me.himi.love.ui.SplashActivity" >
+        </activity>
+
+        <service android:name="me.himi.love.boost.androidservice.MessagePollService" >
+        </service>
+        <service android:name="me.himi.love.boost.androidservice.NewVersionDownloadService" >
+            <intent-filter android:priority="2147483647" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 解锁完成后会调用 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <!-- 监听网络连通性 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </service>
+
+        <!-- baidu map -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="vCztf5deOwPYykqjKdACCZIN" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <!-- 万普支付SDK -->
+        <activity
+            android:name="com.wanpu.pay.PayView"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoPluginLoadingActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoOrderDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoPayResultActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoWebViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoRiskControlActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.unionpay.uppay.PayActivityEx"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.unionpay.uppay.PayActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UPPay" />
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <!-- 万普支付SDK end -->
+
+
+        <!-- mob.com社会化分享组件配置 -->
+        <activity
+            android:name="cn.sharesdk.framework.ShareSDKUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
+                <data android:scheme="tencent100371282" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 微信分享回调 -->
+        <activity
+            android:name="me.himi.love.sharesdk.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- mob.com社会化分享组件配置 END -->
+
+
+        <!-- Begin Rong Cloud -->
+
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="6tnym1brn8ys7" />
+
+        <service android:name="io.rong.imlib.RongService" />
+
+        <activity
+            android:name="io.rong.imkit.RongActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="me.himi.love"
+                    android:pathPrefix="/conversationsetting/"
+                    android:scheme="rong" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="me.himi.love"
+                    android:path="/grouplist"
+                    android:scheme="rong" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="me.himi.love"
+                    android:path="/conversationgrouplist"
+                    android:scheme="rong" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="me.himi.love"
+                    android:pathPrefix="/friend/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.rong.imkit.RongSingleActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="me.himi.love"
+                    android:path="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.rong.imkit.RongSecActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="me.himi.love"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.rong.voipkit.activity.CallSideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="io.rong.voipkit.activity.CalledSideActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="io.rong.voipkit.calledSideActivity.action" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="me.himi.love"
+                    android:path="/calledsideactivity"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="io.rong.imkit.service.RongIMService"
+            android:enabled="true"
+            android:exported="false"
+            android:priority="1000" >
+        </service>
+        <service
+            android:name="io.rong.imlib.push.PushService"
+            android:process="io.rong.push" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="io.rong.push" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="io.rong.imlib.push.CommandService"
+            android:process="io.rong.push" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="io.rong.command" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="io.rong.imlib.push.PushReceiver"
+            android:process="io.rong.push" >
+            <intent-filter>
+                <action android:name="io.rong.imlib.action.push.heartbeat" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="io.rong.imlib.push.PushMessageReceiver" >
+            <intent-filter>
+                <action android:name="io.rong.push.message" />
+            </intent-filter>
+        </receiver>
+        <!-- End Rong Cloud -->
+
+
+        <!-- 有米配置 -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name="net.youmi.android.ExpService"
+            android:exported="false" >
+        </service>
+
+        <receiver android:name="net.youmi.android.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- 有米配置END -->
+
+    </application>
+
+</manifest>

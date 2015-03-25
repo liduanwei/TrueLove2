@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:su="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#88000000" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#ffffffff" >
+
+        <TextView
+            android:id="@+id/tv_city_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/shape_news_reply_user_content"
+            android:padding="8dp"
+            android:text="选择省市" />
+
+        <me.himi.love.im.ui.customview.ClearEditText
+            android:id="@+id/et_input_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_city_title"
+            android:hint="直接输入"
+            android:padding="6dp"
+            android:textSize="@dimen/text_size_small" />
+
+        <me.himi.love.view.city.CityPicker
+            android:id="@+id/citypicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_input_city"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/citypicker"
+            android:background="@drawable/shape_news_reply_user_content"
+            android:orientation="horizontal"
+            android:padding="8dp" >
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="确定" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

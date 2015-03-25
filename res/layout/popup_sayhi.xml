@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#99eeeeee" >
+
+    <ImageView
+        android:id="@+id/iv_user_face"
+        android:layout_width="70dip"
+        android:layout_height="70dip"
+        android:layout_centerVertical="true"
+        android:layout_margin="4dp"
+        android:src="@drawable/icon" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_user_face" >
+
+        <TextView
+            android:id="@+id/tv_sayhi_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="4dp"
+            android:text="昵称" />
+
+        <TextView
+            android:id="@+id/tv_sayhi_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_delete" />
+
+        <TextView
+            android:id="@+id/tv_sayhi_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_sayhi_title"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/tv_sayhi_close"
+            android:text="招呼内容"
+            android:textSize="@dimen/text_size_medium" />
+    </RelativeLayout>
+
+</RelativeLayout>

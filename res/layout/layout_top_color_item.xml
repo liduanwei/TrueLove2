@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp" >
+
+    <RelativeLayout
+        android:id="@+id/layout_top_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+
+        <me.himi.love.view.EmojiTextView
+            android:id="@+id/tv_top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/yuanfen"
+            android:paddingLeft="8dp"
+            android:text="标题"
+            android:textColor="@color/base_color_text_white"
+            android:textSize="18sp" />
+
+        <me.himi.love.view.EmojiTextView
+            android:id="@+id/tv_top_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:gravity="fill_horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="操作"
+            android:textColor="@color/base_color_text_white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_color_item_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/selector_delete"
+        android:clickable="true" />
+
+</RelativeLayout>

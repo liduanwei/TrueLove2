@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/layout_nav_top"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_top" />
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/c_f98800"
+            android:text="安全登出"
+            android:textSize="@dimen/text_size_medium" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_bottom"
+        android:layout_below="@id/layout_nav_top"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:id="@+id/iv_line2_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_vip_year" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_line2_icon"
+                    android:paddingLeft="20dp"
+                    android:text="自动显示提问对话框" />
+
+                <CheckBox
+                    android:id="@+id/cb_auto_show_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_settings_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/iv_line4_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_line4_icon"
+                    android:paddingLeft="20dp"
+                    android:text="配置导航栏颜色"
+                    android:textSize="@dimen/text_size_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_checkupdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/iv_line3_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_vip_year" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_line3_icon"
+                    android:paddingLeft="20dp"
+                    android:text="检查更新"
+                    android:textSize="@dimen/text_size_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_help_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/iv_line5_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_line5_icon"
+                    android:paddingLeft="20dp"
+                    android:text="帮助说明"
+                    android:textSize="@dimen/text_size_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/iv_line6_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_line6_icon"
+                    android:paddingLeft="20dp"
+                    android:text="关于我们"
+                    android:textSize="@dimen/text_size_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_offerme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/iv_line7_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_help" />
+
+                <TextView
+                    android:id="@+id/tv_offerme_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_line7_icon"
+                    android:paddingLeft="20dp"
+                    android:text="捐助我"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <LinearLayout
+                    android:id="@+id/layout_offerme_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_offerme_label"
+                    android:background="@color/base_bg"
+                    android:orientation="horizontal"
+                    android:paddingLeft="2dp" >
+
+                    <EditText
+                        android:id="@+id/et_offerme_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:hint="捐助金额"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:text="100" />
+
+                    <TextView
+                        android:id="@+id/tv_enter_offerme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/register_button_selector"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="进入支付"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_enter_offerme_cancle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="3dp"
+                        android:background="@drawable/selector_delete"
+                        android:gravity="center"
+                        android:padding="2dp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

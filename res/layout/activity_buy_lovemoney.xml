@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/layout_nav_top"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_nav_top"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:id="@+id/layout_rows"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/layout_money_1_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的金币" />
+
+                <TextView
+                    android:id="@+id/tv_mymoney"
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="0" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_buy_50_love_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50金币" />
+
+                <TextView
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_price"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="¥5" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_buy_100_love_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100金币" />
+
+                <TextView
+                    android:id="@+id/tv_price_tips"
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_price"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="¥10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/tv_price_tips"
+                    android:text="赠送10金币"
+                    android:textColor="#eeee1111"
+                    android:textSize="@dimen/text_size_10" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_buy_300_love_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300金币" />
+
+                <TextView
+                    android:id="@+id/tv_price_tips"
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_price"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="¥30" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/tv_price_tips"
+                    android:text="赠送50金币"
+                    android:textColor="#eeee1111"
+                    android:textSize="@dimen/text_size_10" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_buy_600_love_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="600金币" />
+
+                <TextView
+                    android:id="@+id/tv_price_tips"
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_price"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="¥60" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/tv_price_tips"
+                    android:text="赠送120金币"
+                    android:textColor="#eeee1111"
+                    android:textSize="@dimen/text_size_10" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_buy_1000_love_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000金币" />
+
+                <TextView
+                    android:id="@+id/tv_price_tips"
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_price"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="¥100" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/tv_price_tips"
+                    android:text="赠送300金币"
+                    android:textColor="#eeee1111"
+                    android:textSize="@dimen/text_size_10" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_buy_5000_love_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5000金币" />
+
+                <TextView
+                    android:id="@+id/tv_price_tips"
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_price"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="¥500" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/tv_price_tips"
+                    android:text="赠送1800金币"
+                    android:textColor="#eeee1111"
+                    android:textSize="@dimen/text_size_10" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_buy_10000_love_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10000金币" />
+
+                <TextView
+                    android:id="@+id/tv_price_tips"
+                    android:layout_width="80dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_price"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="¥1000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/tv_price_tips"
+                    android:text="赠送5000金币"
+                    android:textColor="#eeee1111"
+                    android:textSize="@dimen/text_size_10" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_get_lovemoney_free"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_buy_10000_love_money"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/register_button_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="6dp"
+                android:textColor="@color/text_white"
+                android:text="免费获取金币"
+                android:textSize="@dimen/text_size_large" />
+
+            <TextView
+                android:id="@+id/tv_lovemoney_instruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_get_lovemoney_free"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="金币说明" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

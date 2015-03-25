@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_my_visitor"
+    android:clickable="true"
+    android:minHeight="20dp"
+    android:padding="10dp" >
+
+    <CheckBox
+        android:id="@+id/cb_listmenu_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:button="@drawable/selector_checkbox"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/tv_listmen_label_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/cb_listmenu_select"
+        android:paddingLeft="20dp"
+        android:text="单身" />
+
+</RelativeLayout>
