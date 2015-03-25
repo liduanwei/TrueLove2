@@ -82,7 +82,6 @@ public class MyApplication extends Application {
     public void onCreate() {
 	super.onCreate();
 	instance = this;
-
 	// 标识为 非退出
 	need2Exit = false;
 

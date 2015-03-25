@@ -101,6 +101,7 @@
     <me.himi.love.view.list.XListView
         android:id="@+id/listview_article_comments"
         android:layout_width="match_parent"
+        android:background="@drawable/edittext_back"
         android:layout_height="match_parent"
         android:layout_above="@id/layout_article_comment_bottom"
         android:layout_below="@id/layout_nav_top"
