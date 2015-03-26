@@ -659,7 +659,7 @@ public interface IAppServiceExtend {
     void giveGift(GiveGiftPostParams postParams, OnGiveGiftResponseListener listener);
 
     public static class GiveGiftPostParams {
-	public int giftId;
+	public String giftId;
 	public String toUserId;
 	public String word;
     }

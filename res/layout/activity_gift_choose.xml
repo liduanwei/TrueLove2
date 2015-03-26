@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <com.huewu.pla.lib.MultiColumnPullToRefreshListView
-        xmlns:pla="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/multiColumPullToRefreshListView_gift"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        pla:plaColumnNumber="3"
-        pla:plaLandscapeColumnNumber="3" />
-
     <RelativeLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/multiColumPullToRefreshListView_gift" >
+        android:layout_alignParentBottom="true"
+        android:background="#00000000"
+        android:paddingTop="20dp" >
 
         <TextView
             android:id="@+id/tv_select_gift_tips"
@@ -23,11 +17,50 @@
             android:layout_height="wrap_content"
             android:text="对 XXXX 说:" />
 
-        <EditText
+        <me.himi.love.im.ui.customview.ClearEditText
             android:id="@+id/et_send_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_select_gift_tips" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_send_word" >
+
+            <TextView
+                android:id="@+id/tv_give_gift_publish"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/ok_button_selector"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="赠送" />
+
+            <TextView
+                android:id="@+id/tv_give_gift_cancle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/register_button_selector"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="取消" />
+        </LinearLayout>
     </RelativeLayout>
+
+    <com.huewu.pla.lib.MultiColumnPullToRefreshListView
+        xmlns:pla="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/multiColumPullToRefreshListView_gift"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_bottom"
+        android:layout_alignParentTop="true"
+        pla:plaColumnNumber="3"
+        pla:plaLandscapeColumnNumber="3" />
 
 </RelativeLayout>

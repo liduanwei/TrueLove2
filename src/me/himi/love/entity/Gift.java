@@ -13,7 +13,7 @@ public class Gift implements java.io.Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private int giftId;
+    private String giftId;
 
     private String name;
 
@@ -21,11 +21,11 @@ public class Gift implements java.io.Serializable {
 
     private String withWord; // 自身附带的赠言
 
-    public int getGiftId() {
+    public String getGiftId() {
 	return giftId;
     }
 
-    public void setGiftId(int giftId) {
+    public void setGiftId(String giftId) {
 	this.giftId = giftId;
     }
 

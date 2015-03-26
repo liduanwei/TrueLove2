@@ -2189,7 +2189,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 
 	};
 
-	HttpUtil.post(url, responseHandler);
+	HttpUtil.post(url, params, responseHandler);
 
     }
 }
