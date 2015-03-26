@@ -2144,4 +2144,30 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 	HttpUtil.post(url, params, responseHandler);
     }
 
+    @Override
+    public void giveGift(GiveGiftPostParams postParams, OnGiveGiftResponseListener listener) {
+	// TODO Auto-generated method stub
+	String url = Constants.URL_LOAD_QUESTIONS;
+
+	RequestParams params = new RequestParams();
+
+	AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
+
+	    @Override
+	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	    @Override
+	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	};
+
+	HttpUtil.post(url, responseHandler);
+
+    }
 }

@@ -648,6 +648,22 @@ public interface IAppServiceExtend {
 	void onSuccess(List<StrangeNews> news);
 
 	void onFailure(String errorMsg);
+    }
 
+    /**
+     * 赠送礼物
+     * @param postParams
+     * @param listener
+     */
+    void giveGift(GiveGiftPostParams postParams, OnGiveGiftResponseListener listener);
+
+    public static class GiveGiftPostParams {
+
+    }
+
+    public static interface OnGiveGiftResponseListener {
+	void onSuccess();
+
+	void onFailure(String errorMsg);
     }
 }

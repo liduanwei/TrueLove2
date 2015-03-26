@@ -119,6 +119,8 @@ public class MainActivity extends BaseActivity {
 	// 系统公告
 	MarqueeTextView tvNotice = getViewById(R.id.tv_system_notice);
 	tvNotice.setTextColor(getResources().getColor(R.color.text_white));
+
+	// 测试 公告, 
 	tvNotice.setText("[系统公告] ID211163用户成功开通了12个月VIP会员");
 
 	//检查更新
@@ -500,6 +502,7 @@ public class MainActivity extends BaseActivity {
 	    public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		showToast(intent.getStringExtra("content"));
+		findViewById(R.id.tv_conversation_message_tips).setVisibility(View.VISIBLE);
 		//		RongIM.getInstance().startConversationList(MainActivity.this);
 	    }
 	};

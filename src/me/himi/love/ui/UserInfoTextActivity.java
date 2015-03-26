@@ -500,9 +500,13 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
     protected void onResume() {
 	// TODO Auto-generated method stub
 	LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
-	DetailInfoUser infoUser = loginedUser.getDetailInfoUser();
-	if (null != infoUser) {
-	    setInfos(infoUser);
+
+	// 如果当前目标用户ID为当前登录用户ID则更新数据(编辑资料后返回)
+	if (mTargetUser != null && (loginedUser.getUserId() == mTargetUser.getUserId())) {
+	    DetailInfoUser infoUser = loginedUser.getDetailInfoUser();
+	    if (null != infoUser) {
+		setInfos(infoUser);
+	    }
 	}
 	super.onResume();
     }

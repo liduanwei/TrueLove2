@@ -61,6 +61,7 @@ public class FirstGuideActivity extends BaseActivity {
 	tvTopTitle.setText("恋恋");
 	TextView tvTopAction = getViewById(R.id.tv_top_action);
 	tvTopAction.setText("");
+	tvTopAction.setVisibility(View.GONE);
 
 	mViewPager = (ViewPager) findViewById(R.id.viewpager);
 	dots = new ImageView[3];
