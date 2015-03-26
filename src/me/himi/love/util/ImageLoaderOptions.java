@@ -34,7 +34,7 @@ public class ImageLoaderOptions {
 		// 。preProcessor(BitmapProcessor preProcessor)
 		.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
 		//.displayer(new RoundedBitmapDisplayer(25))//是否设置为圆角，弧度为多少
-		.displayer(new FadeInBitmapDisplayer(300))// 淡入
+		.displayer(new FadeInBitmapDisplayer(500))// 淡入
 		//		.displayer(new RoundedBitmapDisplayer(25))
 		.displayer(new CircleBitmapDisplayer()).build();
 
@@ -48,8 +48,7 @@ public class ImageLoaderOptions {
 		// // 设置图片Uri为空或是错误的时候显示的图片
 		.showImageForEmptyUri(R.drawable.errorpic)
 		// // 设置图片加载/解码过程中错误时候显示的图片
-		.showImageOnFail(R.drawable.errorpic)
-		.cacheInMemory(true)
+		.showImageOnFail(R.drawable.errorpic).cacheInMemory(true)
 		// 设置下载的图片是否缓存在内存中
 		.cacheOnDisk(true)
 		// 设置下载的图片是否缓存在SD卡中
@@ -65,7 +64,7 @@ public class ImageLoaderOptions {
 		// 。preProcessor(BitmapProcessor preProcessor)
 		.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
 		//.displayer(new RoundedBitmapDisplayer(25))//是否设置为圆角，弧度为多少
-		//		.displayer(new FadeInBitmapDisplayer(300))// 淡入
+		.displayer(new FadeInBitmapDisplayer(200))// 淡入
 		//.displayer(new RoundedBitmapDisplayer(25))
 		.build();
 
@@ -95,7 +94,7 @@ public class ImageLoaderOptions {
 		// 。preProcessor(BitmapProcessor preProcessor)
 		.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
 		//.displayer(new RoundedBitmapDisplayer(25))//是否设置为圆角，弧度为多少
-		.displayer(new FadeInBitmapDisplayer(300))// 淡入
+		.displayer(new FadeInBitmapDisplayer(500))// 淡入
 		.displayer(new CircleBitmapDisplayer(0)).build();
 
 	return options;
