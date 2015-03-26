@@ -103,6 +103,27 @@ public class GiftChooseActivity extends BaseActivity {
 	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs03/M01/DA/A3/wKhzGVGxxrzQEWzNAAAfpAOKUWI041_73-73_8-5.gif");
 	    gift.setWithWord("大口大口的吃冰淇淋，心中就能开出快活的花来！");
 	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(10);
+	    gift.setName("包包");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs03/M01/7E/91/wKhzGVHRTsqq0MDqAAAVMf9az2A373_73-73_8-5.gif");
+	    gift.setWithWord("送你一只小手包，愿你每天光彩照人！");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(11);
+	    gift.setName("香水");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M01/59/3C/wKhzLFHRTvOPzBmWAAAUHrE,PDA487_73-73_8-5.gif");
+	    gift.setWithWord("你这样的女孩子，看一眼就让人觉得花香浓郁！");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(12);
+	    gift.setName("高跟鞋");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M00/59/A5/wKhzK1HRThjEwdhnAAAXzaPqZG0490_73-73_8-5.gif");
+	    gift.setWithWord("人说每个女孩都爱小红鞋，这双鞋子你穿上一定很美。");
+	    add(gift);
 	}
     };
 
