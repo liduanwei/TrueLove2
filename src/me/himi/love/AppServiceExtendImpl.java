@@ -19,6 +19,7 @@ import me.himi.love.entity.ReceivedQuestion;
 import me.himi.love.entity.ReceivedSayHi;
 import me.himi.love.entity.RecommendUser;
 import me.himi.love.entity.StrangeNews;
+import me.himi.love.entity.UserGift;
 import me.himi.love.entity.UserNews;
 import me.himi.love.entity.VisitedUser;
 import me.himi.love.entity.loader.impl.NearbyUserLoaderImpl;
@@ -2145,24 +2146,45 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
     }
 
     @Override
-    public void giveGift(GiveGiftPostParams postParams, OnGiveGiftResponseListener listener) {
+    public void giveGift(final GiveGiftPostParams postParams, final OnGiveGiftResponseListener listener) {
 	// TODO Auto-generated method stub
-	String url = Constants.URL_LOAD_QUESTIONS;
+	String url = Constants.URL_GIVE_GIFT;
 
 	RequestParams params = new RequestParams();
+	params.put("gift_id", postParams.giftId);
+	params.put("to_user_id", postParams.toUserId);
+	params.put("word", postParams.word);
 
 	AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
 
 	    @Override
 	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
 		// TODO Auto-generated method stub
-
+		listener.onFailure("连接超时");
 	    }
 
 	    @Override
 	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 		// TODO Auto-generated method stub
+		String data = new String(arg2);
+		try {
+		    JSONObject jsonObj = new JSONObject(data);
+		    int status = jsonObj.getInt("status");
+		    if (0 == status) { // 失败
+			String msg = jsonObj.getString("msg");
+			listener.onFailure(msg);
+			return;
+		    }
+		    UserGift userGift = new UserGift();
+		    userGift.setWord(postParams.word);
+		    userGift.setFromUserId(""); // 当前用户ID
+		    userGift.setFromUserNickname("");// 当前用户昵称
+		    userGift.setWord(postParams.word);
+		    listener.onSuccess(userGift);
 
+		} catch (Throwable th) {
+		    listener.onFailure("参数错误");
+		}
 	    }
 
 	};

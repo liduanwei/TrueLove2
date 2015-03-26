@@ -503,11 +503,11 @@ public class MainActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		showToast(intent.getStringExtra("content"));
 		findViewById(R.id.tv_conversation_message_tips).setVisibility(View.VISIBLE);
+		SoundPlayer.getInstance(MainActivity.this).playNotify();
 		//		RongIM.getInstance().startConversationList(MainActivity.this);
 	    }
 	};
-
-	// 注册
+	//	// 注册聊天消息接收器
 	registerReceiver(newIMMessageReceiver, iFilter);
 
 	// 默认先查一次数据库

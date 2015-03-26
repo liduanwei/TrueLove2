@@ -14,6 +14,7 @@ import me.himi.love.entity.ReceivedQuestion;
 import me.himi.love.entity.ReceivedSayHi;
 import me.himi.love.entity.RecommendUser;
 import me.himi.love.entity.StrangeNews;
+import me.himi.love.entity.UserGift;
 import me.himi.love.entity.UserNews;
 import me.himi.love.entity.VisitedUser;
 
@@ -658,11 +659,13 @@ public interface IAppServiceExtend {
     void giveGift(GiveGiftPostParams postParams, OnGiveGiftResponseListener listener);
 
     public static class GiveGiftPostParams {
-
+	public int giftId;
+	public String toUserId;
+	public String word;
     }
 
     public static interface OnGiveGiftResponseListener {
-	void onSuccess();
+	void onSuccess(UserGift userGift);
 
 	void onFailure(String errorMsg);
     }

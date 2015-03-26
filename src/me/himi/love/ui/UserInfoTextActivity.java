@@ -4,6 +4,10 @@ import io.rong.imkit.RongIM;
 import io.rong.imkit.RongIM.GetUserBlacklistCallback;
 import io.rong.imkit.RongIM.OperationCallback;
 import io.rong.imlib.RongIMClient.BlacklistStatus;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.IAppService.OnLoadDetailUserListener;
@@ -13,9 +17,12 @@ import me.himi.love.IAppServiceExtend.OnSayHiResponseListener;
 import me.himi.love.IAppServiceExtend.SayHiParams;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
+import me.himi.love.adapter.GiftChooseAdapter;
+import me.himi.love.adapter.GiftChooseAdapter.GiftOnClickListener;
 import me.himi.love.dao.DBHelper;
 import me.himi.love.dao.DBHelper.UserFollow;
 import me.himi.love.entity.DetailInfoUser;
+import me.himi.love.entity.Gift;
 import me.himi.love.entity.LoginedUser;
 import me.himi.love.entity.loader.IUserDetailLoader;
 import me.himi.love.entity.loader.impl.UserDetailLoaderImpl;
@@ -28,7 +35,6 @@ import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.CacheUserManager;
 import me.himi.love.util.HttpUtil;
 import me.himi.love.util.ImageLoaderOptions;
-import me.himi.love.util.Share;
 import me.himi.love.util.ToastFactory;
 import me.himi.love.view.EmojiTextView;
 import android.app.Dialog;
@@ -47,6 +53,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -279,8 +286,8 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 	    }
 	});
 
-	// 分享
-	TextView btnShare = (TextView) findViewById(R.id.btn_start_share);
+	// 送礼物
+	TextView btnShare = (TextView) findViewById(R.id.btn_start_giveGift);
 	btnShare.setOnClickListener(new View.OnClickListener() {
 
 	    @Override
@@ -288,9 +295,11 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 
 		if (mTargetUser != null) {
 		    // todo
-		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
+		    //		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
+		    showGiftChooseDialog();
 		}
 	    }
+
 	});
 
 	// 是当前登录用户则不显示底部菜单
@@ -781,5 +790,107 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 		ToastFactory.getToast(UserInfoTextActivity.this, msg).show();
 	    }
 	});
+    }
+
+    Dialog giftChooseDialog;
+    GiftChooseAdapter giftChooseAdapter;
+    List<Gift> gifts = new ArrayList<Gift>() {
+	{
+	    Gift gift = new Gift();
+	    gift.setGiftId(1);
+	    gift.setName("吉他");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M03/58/A8/wKhzLFHRS4uNmlxgAAAPRncLB0M396_73-73_8-5.gif");
+	    gift.setWithWord("我要用这把吉他给你唱我的故事，你愿听吗？");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(2);
+	    gift.setName("戒指");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M04/59/23/wKhzLFHRTmuoUxNkAAAVOP2lJuc304_73-73_8-5.gif");
+	    gift.setWithWord("看你的样子很可爱，这枚戒指很衬你~");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(3);
+	    gift.setName("套娃");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M03/41/DF/wKhzKlGxxxqvhZBVAAAzsIA56-o969_73-73_8-5.gif");
+	    gift.setWithWord("送你一只胖胖的套娃，希望你天天都有好心情！");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(4);
+	    gift.setName("盆栽");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs02/M00/C2/80/wKhzRlGxxwGfS70-AAAsJYFXs4k658_73-73_8-5.gif");
+	    gift.setWithWord("这株盆栽送给你，记得来找我拿花肥！");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(5);
+	    gift.setName("钻石表");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs02/M01/C2/96/wKhzRlGxyOjuiTGhAAAhqw6pTc8783_73-73_8-5.gif");
+	    gift.setWithWord("送一只粉色的腕表，希望我们的故事能从这一刻开始。");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(6);
+	    gift.setName("甲壳虫");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs02/M03/93/C5/wKhzR1GxyQvhLJW1AAAQpHM87oM231_73-73_8-5.gif");
+	    gift.setWithWord("我想开着这辆小甲壳虫，带你去乡间兜风！你愿意吗女孩？");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(7);
+	    gift.setName("草莓蛋糕");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M03/41/AC/wKhzK1GxxmWj8fNUAAAgRyRz6Vk937_73-73_8-5.gif");
+	    gift.setWithWord("香甜蛋糕送给你，让它带去我对你所有的祝福。");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(8);
+	    gift.setName("泰迪熊");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs03/M01/7D/FA/wKhzGVHRTG72GTHZAAAU0rhMmJ8354_73-73_8-5.gif");
+	    gift.setWithWord("我是一只坐在窗边的小熊，虽然不言不语，但是每天等你... ");
+	    add(gift);
+
+	    gift = new Gift();
+	    gift.setGiftId(9);
+	    gift.setName("冰淇凌");
+	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs03/M01/DA/A3/wKhzGVGxxrzQEWzNAAAfpAOKUWI041_73-73_8-5.gif");
+	    gift.setWithWord("大口大口的吃冰淇淋，心中就能开出快活的花来！");
+	    add(gift);
+	}
+    };
+
+    /**
+     * 选择礼物进行赠送
+     */
+    private void showGiftChooseDialog() {
+	// TODO Auto-generated method stub
+//	if (null == giftChooseDialog) {
+//	    giftChooseDialog = new Dialog(this);
+//	    giftChooseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//	    View contentView = getLayoutInflater().inflate(R.layout.layout_select_gift, null);
+//	    com.huewu.pla.lib.MultiColumnPullToRefreshListView gridView = (com.huewu.pla.lib.MultiColumnPullToRefreshListView) contentView.findViewById(R.id.multiColumPullToRefreshListView_gift);
+//
+//	    final TextView tvTargetTips = (TextView) contentView.findViewById(R.id.tv_select_gift_tips);
+//	    final EditText etWord = (EditText) contentView.findViewById(R.id.et_send_word);
+//	    // 加载可选礼物
+//
+//	    giftChooseAdapter = new GiftChooseAdapter(UserInfoTextActivity.this, gifts);
+//	    gridView.setAdapter(giftChooseAdapter);
+//	    giftChooseAdapter.setGiftOnClickListener(new GiftOnClickListener() {
+//
+//		@Override
+//		public void onClick(Gift gift) {
+//		    // TODO Auto-generated method stub
+//		    etWord.setText(gift.getWithWord());
+//		}
+//	    });
+//	    giftChooseDialog.setContentView(contentView);
+//	}
+//
+//	giftChooseDialog.show();
+	startActivity(new Intent(this,GiftChooseActivity.class));
+
     }
 }

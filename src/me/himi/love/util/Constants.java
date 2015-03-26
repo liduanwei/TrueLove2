@@ -212,10 +212,12 @@ public interface Constants {
     String URL_VIP_BUYED = HOST + "/index.php/index/vip/buyed";
     // 成功购买恋恋币
     String URL_LOVE_MONEY_BUYED = HOST + "/index.php/index/money/buyed";
-    
+
     // 奇闻异事 
     String URL_STRANGENEWS = HOST + "/index.php/index/strange/select";
     // 奇闻异事 
     String URL_STRANGENEWS_DETAIL = HOST + "/index.php/index/strange/detail";
+    // 送礼物
+    String URL_GIVE_GIFT = HOST + "/index.php/index/gift/publish";
 
 }

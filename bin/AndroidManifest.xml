@@ -129,6 +129,10 @@
         </activity>
         <activity android:name="me.himi.love.ui.PrivateMessagesActivity" >
         </activity>
+        <activity
+            android:name="me.himi.love.ui.GiftChooseActivity"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
         <activity android:name="me.himi.love.ui.MyReceivedSystemMessageActivity" >
         </activity>
         <activity android:name="me.himi.love.ui.MyFriendsActivity" >

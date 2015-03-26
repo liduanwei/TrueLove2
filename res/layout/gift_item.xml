@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160.0dip"
+    android:layout_height="200dip"
+    android:padding="2dp" >
+
+    <ImageView
+        android:id="@+id/iv_gift"
+        android:layout_width="100.0dip"
+        android:layout_height="100.0dip"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_user_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="20岁"
+        android:textColor="@color/base_color_text_white" />
+
+    <TextView
+        android:id="@+id/tv_gift_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_user_face"
+        android:layout_centerHorizontal="true"
+        android:text="name"
+        android:textColor="@color/base_color_text_black"
+        android:visibility="visible" />
+
+</RelativeLayout>

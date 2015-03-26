@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.huewu.pla.lib.MultiColumnPullToRefreshListView
+        xmlns:pla="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/multiColumPullToRefreshListView_gift"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        pla:plaColumnNumber="3"
+        pla:plaLandscapeColumnNumber="3" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/multiColumPullToRefreshListView_gift" >
+
+        <TextView
+            android:id="@+id/tv_select_gift_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="对 XXXX 说:" />
+
+        <EditText
+            android:id="@+id/et_send_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_select_gift_tips" />
+    </RelativeLayout>
+
+</RelativeLayout>

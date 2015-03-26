@@ -50,7 +50,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/btn_start_share"
+            android:id="@+id/btn_start_giveGift"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
