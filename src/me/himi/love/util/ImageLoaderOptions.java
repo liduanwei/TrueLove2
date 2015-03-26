@@ -64,7 +64,7 @@ public class ImageLoaderOptions {
 		// 。preProcessor(BitmapProcessor preProcessor)
 		.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
 		//.displayer(new RoundedBitmapDisplayer(25))//是否设置为圆角，弧度为多少
-		.displayer(new FadeInBitmapDisplayer(200))// 淡入
+//		.displayer(new FadeInBitmapDisplayer(200))// 淡入
 		//.displayer(new RoundedBitmapDisplayer(25))
 		.build();
 

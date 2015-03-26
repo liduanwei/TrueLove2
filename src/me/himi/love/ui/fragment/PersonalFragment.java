@@ -75,9 +75,9 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
     TextView tvFriendsCount, tvFollowsCount, tvFansCount; //  好友,关注,粉丝
 
-    TextView tvMyVip,tvVipExpireTime;
+    TextView tvMyVip, tvVipExpireTime;
 
-    TextView tvConversationTips; // 会话消息提示
+    TextView tvVisitorsTips, tvFansTips, tvSayhiTips, tvConversationTips; // 访客提醒,粉丝提醒,打招呼提醒,会话消息提醒
 
     // 首次启动从服务器加载当前登录用户的一些基本资料
     IUserDetailLoader userLoader = new UserDetailLoaderImpl();
@@ -174,6 +174,21 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
 	// 会话消息提示
 	tvConversationTips = (TextView) mContainerView.findViewById(R.id.tv_conversation_message_tips);
+	// 访客消息提示
+	tvVisitorsTips = (TextView) mContainerView.findViewById(R.id.tv_vistors_message_tips);
+	// 粉丝消息提示
+	tvFansTips = (TextView) mContainerView.findViewById(R.id.tv_newfans_message_tips);
+
+	// 打招呼消息提示
+	tvSayhiTips = (TextView) mContainerView.findViewById(R.id.tv_sayhi_message_tips);
+
+	//  默认都是隐藏的
+	tvVisitorsTips.setVisibility(View.GONE);
+	tvFansTips.setVisibility(View.GONE);
+	tvConversationTips.setVisibility(View.GONE);
+	tvSayhiTips.setVisibility(View.GONE);
+
+	//
 	// 加载是否存在未读消息
 	if (RongIM.getInstance() != null) {
 	    tvConversationTips.setVisibility(RongIM.getInstance().getTotalUnreadCount() != 0 ? View.VISIBLE : View.GONE);
@@ -528,7 +543,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
 		if (user.getIsVip() == 1) {
 		    String dateStr = ActivityUtil.getDateStr(user.getVipExpireTime(), "yyyy/MM/dd HH:mm:ss");
-		    tvVipExpireTime.setText("VIP会员有效期至:"+dateStr);
+		    tvVipExpireTime.setText("VIP会员有效期至:" + dateStr);
 		    tvMyVip.setBackgroundResource(R.drawable.vip_sign);
 		} else {
 		    tvMyVip.setBackgroundResource(R.drawable.vip_sign_not);

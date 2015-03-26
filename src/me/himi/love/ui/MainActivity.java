@@ -471,12 +471,7 @@ public class MainActivity extends BaseActivity {
 
 		    // 声音提示
 		    SoundPlayer.getInstance(MainActivity.this).playNotify();
-
 		    queryPrivateMessages(); // 收到通知即查询数据库
-		    // 被隐藏则显示消息提示
-		    //		    if (messageFragment.isHidden()) {
-		    //			tvMessageTips.setVisibility(View.VISIBLE);
-		    //		    }
 		}
 
 		// 系统消息
@@ -808,7 +803,6 @@ public class MainActivity extends BaseActivity {
 	for (PrivateMessage msg : msges) {
 
 	    if (msg.getType() == MessageType.SAYHI) {
-		//findViewById(R.id.tv_sayhi_message_tips).setVisibility(View.VISIBLE);
 		// 展示 打招呼 弹窗
 		if (msg.getTitle() == null || !msg.getTitle().contains("=_=")) {
 		    //		showToast("null" + msg.getTitle());
@@ -843,8 +837,7 @@ public class MainActivity extends BaseActivity {
 	findViewById(R.id.btn_nearby).setBackgroundColor(bottomColor);
 	findViewById(R.id.btn_userwall).setBackgroundColor(bottomColor);
 	findViewById(R.id.btn_strangenews).setBackgroundColor(bottomColor);
-	
-	
+
 	super.onResume();
     }
 
