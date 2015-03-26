@@ -17,6 +17,9 @@ public class Gift implements java.io.Serializable {
 
     private String name;
 
+    private int price;// 售价
+    private int glamour;// 魅力值
+
     private String imageUrl;
 
     private String withWord; // 自身附带的赠言
@@ -51,5 +54,21 @@ public class Gift implements java.io.Serializable {
 
     public void setName(String name) {
 	this.name = name;
+    }
+
+    public int getPrice() {
+	return price;
+    }
+
+    public void setPrice(int price) {
+	this.price = price;
+    }
+
+    public int getGlamour() {
+	return glamour;
+    }
+
+    public void setGlamour(int glamour) {
+	this.glamour = glamour;
     }
 }

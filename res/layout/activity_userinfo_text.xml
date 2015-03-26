@@ -46,7 +46,7 @@
             android:clickable="true"
             android:drawableTop="@drawable/msg_box_foucs"
             android:gravity="center"
-            android:text="对话"
+            android:text="聊天"
             android:textSize="12sp" />
 
         <TextView

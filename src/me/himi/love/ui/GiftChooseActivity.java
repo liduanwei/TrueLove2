@@ -1,15 +1,28 @@
 package me.himi.love.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.himi.love.AppServiceExtendImpl;
+import me.himi.love.IAppServiceExtend.LoadGiftPostParams;
+import me.himi.love.IAppServiceExtend.OnLoadGiftResponseListener;
 import me.himi.love.R;
 import me.himi.love.adapter.GiftChooseAdapter;
 import me.himi.love.adapter.GiftChooseAdapter.GiftOnClickListener;
 import me.himi.love.entity.Gift;
+import me.himi.love.entity.NearbyUser;
 import me.himi.love.ui.base.BaseActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +30,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.huewu.pla.lib.MultiColumnPullToRefreshListView.OnRefreshListener;
 
 /**
  * @ClassName:CheckUpdateActivity
@@ -53,117 +68,48 @@ public class GiftChooseActivity extends BaseActivity {
 	init();
     }
 
-    List<Gift> gifts = new ArrayList<Gift>() {
-	{
-	    Gift gift = new Gift();
-	    gift.setGiftId("1");
-	    gift.setName("吉他");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M03/58/A8/wKhzLFHRS4uNmlxgAAAPRncLB0M396_73-73_8-5.gif");
-	    gift.setWithWord("我要用这把吉他给你唱我的故事，你愿听吗？");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("2");
-	    gift.setName("戒指");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M04/59/23/wKhzLFHRTmuoUxNkAAAVOP2lJuc304_73-73_8-5.gif");
-	    gift.setWithWord("看你的样子很可爱，这枚戒指很衬你~");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("3");
-	    gift.setName("套娃");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M03/41/DF/wKhzKlGxxxqvhZBVAAAzsIA56-o969_73-73_8-5.gif");
-	    gift.setWithWord("送你一只胖胖的套娃，希望你天天都有好心情！");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("4");
-	    gift.setName("盆栽");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs02/M00/C2/80/wKhzRlGxxwGfS70-AAAsJYFXs4k658_73-73_8-5.gif");
-	    gift.setWithWord("这株盆栽送给你，记得来找我拿花肥！");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("5");
-	    gift.setName("钻石表");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs02/M01/C2/96/wKhzRlGxyOjuiTGhAAAhqw6pTc8783_73-73_8-5.gif");
-	    gift.setWithWord("送一只粉色的腕表，希望我们的故事能从这一刻开始。");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("6");
-	    gift.setName("甲壳虫");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs02/M03/93/C5/wKhzR1GxyQvhLJW1AAAQpHM87oM231_73-73_8-5.gif");
-	    gift.setWithWord("我想开着这辆小甲壳虫，带你去乡间兜风！你愿意吗女孩？");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("7");
-	    gift.setName("草莓蛋糕");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M03/41/AC/wKhzK1GxxmWj8fNUAAAgRyRz6Vk937_73-73_8-5.gif");
-	    gift.setWithWord("香甜蛋糕送给你，让它带去我对你所有的祝福。");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("8");
-	    gift.setName("泰迪熊");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs03/M01/7D/FA/wKhzGVHRTG72GTHZAAAU0rhMmJ8354_73-73_8-5.gif");
-	    gift.setWithWord("我是一只坐在窗边的小熊，虽然不言不语，但是每天等你... ");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("9");
-	    gift.setName("冰淇凌");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs03/M01/DA/A3/wKhzGVGxxrzQEWzNAAAfpAOKUWI041_73-73_8-5.gif");
-	    gift.setWithWord("大口大口的吃冰淇淋，心中就能开出快活的花来！");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("10");
-	    gift.setName("包包");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs03/M01/7E/91/wKhzGVHRTsqq0MDqAAAVMf9az2A373_73-73_8-5.gif");
-	    gift.setWithWord("送你一只小手包，愿你每天光彩照人！");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("11");
-	    gift.setName("香水");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M01/59/3C/wKhzLFHRTvOPzBmWAAAUHrE,PDA487_73-73_8-5.gif");
-	    gift.setWithWord("你这样的女孩子，看一眼就让人觉得花香浓郁！");
-	    add(gift);
-
-	    gift = new Gift();
-	    gift.setGiftId("12");
-	    gift.setName("高跟鞋");
-	    gift.setImageUrl("http://image.ganjistatic1.com/gjfs04/M00/59/A5/wKhzK1HRThjEwdhnAAAXzaPqZG0490_73-73_8-5.gif");
-	    gift.setWithWord("人说每个女孩都爱小红鞋，这双鞋子你穿上一定很美。");
-	    add(gift);
-	}
-    };
+    List<Gift> gifts = new ArrayList<Gift>();
 
     Gift mSelectedGift;
+
+    com.huewu.pla.lib.MultiColumnPullToRefreshListView mGridView;
 
     private void init() {
 	final String userId = getIntent().getStringExtra("user_id");
 	final String nickname = getIntent().getStringExtra("nickname");
 
 	// TODO Auto-generated method stub
-	com.huewu.pla.lib.MultiColumnPullToRefreshListView gridView = (com.huewu.pla.lib.MultiColumnPullToRefreshListView) findViewById(R.id.multiColumPullToRefreshListView_gift);
+	mGridView = (com.huewu.pla.lib.MultiColumnPullToRefreshListView) findViewById(R.id.multiColumPullToRefreshListView_gift);
 
+	mGridView.setOnRefreshListener(new OnRefreshListener() {
+
+	    @Override
+	    public void onRefresh() {
+		// TODO Auto-generated method stub
+
+		loadGifts();
+
+	    }
+	});
 	final TextView tvTargetTips = (TextView) findViewById(R.id.tv_select_gift_tips);
 	final EditText etWord = (EditText) findViewById(R.id.et_send_word);
 
+
+	findViewById(R.id.tv_give_gift_publish).setEnabled(false);
 	// 赠送
 	findViewById(R.id.tv_give_gift_publish).setOnClickListener(new View.OnClickListener() {
 
 	    @Override
 	    public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Intent data = new Intent();
-		data.putExtra("user_id", userId);
-		data.putExtra("gift_id", mSelectedGift.getGiftId() + "");
-		data.putExtra("word", etWord.getText().toString());
-		setResult(RESULT_OK, data);
+		if (mSelectedGift != null) {
+		    Intent data = new Intent();
+		    data.putExtra("user_id", userId);
+		    data.putExtra("gift_id", mSelectedGift.getGiftId() + "");
+		    data.putExtra("word", etWord.getText().toString());
+		    setResult(RESULT_OK, data);
+		}
+
 		finish();
 	    }
 	});
@@ -178,22 +124,121 @@ public class GiftChooseActivity extends BaseActivity {
 	    }
 	});
 
-	// 加载可选礼物
-	// todo
-
 	tvTargetTips.setText("对 " + nickname + " 说:");
 
 	giftChooseAdapter = new GiftChooseAdapter(this, gifts);
-	gridView.setAdapter(giftChooseAdapter);
+	mGridView.setAdapter(giftChooseAdapter);
 	giftChooseAdapter.setGiftOnClickListener(new GiftOnClickListener() {
 
 	    @Override
 	    public void onClick(Gift gift) {
 		// TODO Auto-generated method stub
 		etWord.setText(gift.getWithWord());
+		tvTargetTips.setText("送" + gift.getName() + ",对 " + nickname + " 说:");
 		mSelectedGift = gift;
+		
+		findViewById(R.id.tv_give_gift_publish).setEnabled(true);
 	    }
 	});
 
+	// 加载可选礼物
+	// todo
+	loadFromCache(); // 优先从缓存中加载
+    }
+
+    private boolean isRefreshing;
+
+    private void loadGifts() {
+
+	if (isRefreshing)
+	    return;
+	isRefreshing = true;
+	// TODO Auto-generated method stub
+	LoadGiftPostParams postParams = new LoadGiftPostParams();
+	postParams.page = 1;
+	postParams.pageSize = 100;
+
+	AppServiceExtendImpl.getInstance().loadGift(postParams, new OnLoadGiftResponseListener() {
+
+	    @Override
+	    public void onSuccess(List<Gift> gifts) {
+		// TODO Auto-generated method stub
+		giftChooseAdapter.setList(gifts);
+		giftChooseAdapter.notifyDataSetChanged();
+
+		mGridView.onRefreshComplete();
+
+		isRefreshing = false;
+
+		// 缓存到本地
+		cacheToLocal(gifts);
+	    }
+
+	    /**
+	     * 
+	     * @param users
+	     */
+	    private void cacheToLocal(List<Gift> gifts) {
+		// TODO Auto-generated method stub
+		File f = new File(cacheUsersPath);
+		if (!f.getParentFile().exists()) {
+		    f.getParentFile().mkdirs();
+		}
+		try {
+		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+		    oos.writeObject(gifts);
+		    oos.close();
+		} catch (FileNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+
+	    @Override
+	    public void onFailure(String errorMsg) {
+		// TODO Auto-generated method stub
+		showToast(errorMsg);
+
+		mGridView.onRefreshComplete();
+
+		isRefreshing = false;
+
+	    }
+	});
+    }
+
+    // 使用本地缓存
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/gifts";
+
+    private void loadFromCache() {
+	// TODO Auto-generated method stub
+	File f = new File(cacheUsersPath);
+	if (f.exists()) {
+	    try {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+		Object obj = ois.readObject();
+		List<Gift> users = (List<Gift>) obj;
+		giftChooseAdapter.getList().clear();
+		giftChooseAdapter.addAll(users);
+	    } catch (StreamCorruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	} else {
+	    // 不存在则从网络获取
+	    loadGifts();
+	}
     }
 }

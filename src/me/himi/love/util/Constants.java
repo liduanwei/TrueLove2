@@ -219,5 +219,7 @@ public interface Constants {
     String URL_STRANGENEWS_DETAIL = HOST + "/index.php/index/strange/detail";
     // 送礼物
     String URL_GIVE_GIFT = HOST + "/index.php/index/gift/publish";
+    // 可选礼物
+    String URL_GIFT_LIST = HOST + "/index.php/index/gift/loadList";
 
 }

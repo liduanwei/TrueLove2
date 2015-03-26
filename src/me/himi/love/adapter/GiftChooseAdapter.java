@@ -54,10 +54,12 @@ public class GiftChooseAdapter extends BaseListAdapter<Gift> {
 		}
 	    }
 	});
-
 	// 礼物名称
 	TextView tvName = ViewHolder.get(convertView, R.id.tv_gift_name);
 	tvName.setText(gift.getName());
+	// 礼物售价
+	TextView tvPrice = ViewHolder.get(convertView, R.id.tv_gift_price);
+	tvPrice.setText(gift.getPrice() + "币");
 
 	return convertView;
     }

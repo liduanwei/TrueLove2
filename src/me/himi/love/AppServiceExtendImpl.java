@@ -13,6 +13,7 @@ import me.himi.love.entity.BSImageUrl;
 import me.himi.love.entity.FansUser;
 import me.himi.love.entity.FollowUser;
 import me.himi.love.entity.FriendUser;
+import me.himi.love.entity.Gift;
 import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.ReceivedFans;
 import me.himi.love.entity.ReceivedQuestion;
@@ -2191,5 +2192,63 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 
 	HttpUtil.post(url, params, responseHandler);
 
+    }
+
+    @Override
+    public void loadGift(final LoadGiftPostParams postParams, final OnLoadGiftResponseListener listener) {
+	// TODO Auto-generated method stub
+	String url = Constants.URL_GIFT_LIST;
+
+	RequestParams params = new RequestParams();
+	params.put("page", postParams.page);
+	params.put("page_size", postParams.pageSize);
+
+	AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
+
+	    @Override
+	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		// TODO Auto-generated method stub
+		listener.onFailure("连接超时");
+	    }
+
+	    @Override
+	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		// TODO Auto-generated method stub
+		String data = new String(arg2);
+
+		System.out.println("可选礼物:" + data);
+		try {
+		    JSONArray jsonArr = new JSONArray(data);
+
+		    List<Gift> gifts = new ArrayList<Gift>();
+		    for (int i = 0, n = jsonArr.length(); i < n; ++i) {
+			JSONObject jsonObj = jsonArr.getJSONObject(i);
+			Gift gift = new Gift();
+			gifts.add(gift);
+
+			String id = jsonObj.getString("id");
+			String name = jsonObj.getString("name");
+			int price = jsonObj.getInt("price");
+			int glamour = jsonObj.getInt("glamour");
+			String imageUrl = jsonObj.getString("image_url");
+			String withWord = jsonObj.getString("with_word");
+
+			gift.setGiftId(id);
+			gift.setGlamour(glamour);
+			gift.setPrice(price);
+			gift.setName(name);
+			gift.setImageUrl(imageUrl);
+			gift.setWithWord(withWord);
+
+		    }
+		    listener.onSuccess(gifts);
+		} catch (Throwable th) {
+		    listener.onFailure("参数错误");
+		}
+	    }
+
+	};
+
+	HttpUtil.post(url, params, responseHandler);
     }
 }

@@ -800,15 +800,16 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent arg2) {
 	// TODO Auto-generated method stub
-	//	System.out.println(arg2.getStringExtra("user_id"));
-	//	System.out.println(arg2.getStringExtra("gift_id"));
 	if (requestCode == 1) {
 	    if (resultCode == RESULT_OK) { // 选中礼物确认提交
+		final ProgressDialog dialog = new ProgressDialog(this);
+		dialog.setMessage("赠送中...");
+		dialog.show();
+
 		String targetUserId = arg2.getStringExtra("user_id");
 		String targetGiftId = arg2.getStringExtra("gift_id");
 		String word = arg2.getStringExtra("word"); // 赠言
 
-		showToast(targetUserId + "," + targetGiftId);
 		GiveGiftPostParams postParams = new GiveGiftPostParams();
 		postParams.giftId = targetGiftId;
 		postParams.toUserId = targetUserId;
@@ -820,12 +821,14 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 		    public void onSuccess(UserGift userGift) {
 			// TODO Auto-generated method stub
 			showToast("已赠送!");
+			dialog.dismiss();
 		    }
 
 		    @Override
 		    public void onFailure(String errorMsg) {
 			// TODO Auto-generated method stub
 			showToast(errorMsg);
+			dialog.dismiss();
 		    }
 		});
 	    }

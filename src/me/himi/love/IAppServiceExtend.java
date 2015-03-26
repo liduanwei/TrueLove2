@@ -8,6 +8,7 @@ import me.himi.love.entity.BSImageUrl;
 import me.himi.love.entity.FansUser;
 import me.himi.love.entity.FollowUser;
 import me.himi.love.entity.FriendUser;
+import me.himi.love.entity.Gift;
 import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.ReceivedFans;
 import me.himi.love.entity.ReceivedQuestion;
@@ -666,6 +667,23 @@ public interface IAppServiceExtend {
 
     public static interface OnGiveGiftResponseListener {
 	void onSuccess(UserGift userGift);
+
+	void onFailure(String errorMsg);
+    }
+
+    /**
+     * 获取可选礼物列表
+     * @param postParams
+     * @param listener
+     */
+    void loadGift(LoadGiftPostParams postParams, OnLoadGiftResponseListener listener);
+
+    public static class LoadGiftPostParams {
+	public int page, pageSize;
+    }
+
+    public static interface OnLoadGiftResponseListener {
+	void onSuccess(List<Gift> gifts);
 
 	void onFailure(String errorMsg);
     }
