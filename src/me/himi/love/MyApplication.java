@@ -91,15 +91,6 @@ public class MyApplication extends Application {
 
 	initBaidu(); // 初始化百度地图
 
-	//检查更新
-	//	SharedPreferences pref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-	//	long lastCheckTime = pref.getLong("last_checkupdate_time", 0);
-	//	if (System.currentTimeMillis() - lastCheckTime >= CHECK_UPDATE_DELAY) {
-	//	    if (ActivityUtil.hasNetwork(this)) {
-	//		checkUpdate();
-	//	    }
-	//	}
-	//	checkUpdate();
 
 	// 创建快捷方式
 	if (!"1".equals(PreferencesUtil.read(this, "shortcut_added"))) {

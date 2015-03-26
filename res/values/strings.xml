@@ -6,6 +6,7 @@
     <string name="savecolor">保存</string>
     <string name="savecolor_cancel">取消</string>
     <string name="license">同意恋恋服务<u>用户条款</u>和<u>使用协议</u></string>
+    <string name="start_login"><u>已有帐号,直接登录</u></string>
     <string name="logo">"等你发现,\n   真爱就在这里"</string>
     <string name="iv_user_face">用户头像</string>
     <string name="hello_world">Hello world!</string>

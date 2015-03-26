@@ -53,6 +53,7 @@ public class UserWallFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	Log.d(getClass().getSimpleName(), "->onCreateView");
 	mContainerView = inflater.inflate(R.layout.fragment_user_wall, container, false);
+	init();
 	return mContainerView;
     }
 
@@ -61,7 +62,7 @@ public class UserWallFragment extends BaseFragment {
 	// TODO Auto-generated method stub
 	super.onActivityCreated(savedInstanceState);
 
-	init();
+//	init();
     }
 
     final OnRefreshListener onRefreshListener = new OnRefreshListener() {

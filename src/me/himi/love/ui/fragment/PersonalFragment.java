@@ -75,7 +75,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
     TextView tvFriendsCount, tvFollowsCount, tvFansCount; //  好友,关注,粉丝
 
-    TextView tvMyVip;
+    TextView tvMyVip,tvVipExpireTime;
 
     TextView tvConversationTips; // 会话消息提示
 
@@ -169,6 +169,8 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	});
 
 	tvMyVip = (TextView) mContainerView.findViewById(R.id.tv_my_vip);
+	// 过期时间
+	tvVipExpireTime = (TextView) mContainerView.findViewById(R.id.tv_vip_expire_time);
 
 	// 会话消息提示
 	tvConversationTips = (TextView) mContainerView.findViewById(R.id.tv_conversation_message_tips);
@@ -266,6 +268,8 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 		loginedUser.setFaceUrl(user.getFaceUrl());
 		loginedUser.setNickname(user.getNickname());
 		tvLoveMoney.setText(loginedUser.getLoveMoney() + "币");
+		// 保存详细资料
+		loginedUser.setDetailInfoUser(user);
 
 		MyApplication.getInstance().setCurrentLoginedUser(loginedUser);
 		String url = user.getFaceUrl();
@@ -523,6 +527,8 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 		}
 
 		if (user.getIsVip() == 1) {
+		    String dateStr = ActivityUtil.getDateStr(user.getVipExpireTime(), "yyyy/MM/dd HH:mm:ss");
+		    tvVipExpireTime.setText("VIP会员有效期至:"+dateStr);
 		    tvMyVip.setBackgroundResource(R.drawable.vip_sign);
 		} else {
 		    tvMyVip.setBackgroundResource(R.drawable.vip_sign_not);

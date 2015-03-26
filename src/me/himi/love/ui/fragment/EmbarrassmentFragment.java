@@ -73,7 +73,6 @@ public class EmbarrassmentFragment extends BaseFragment implements OnItemClickLi
     private void init() {
 	tvTopAction = (TextView) getActivity().findViewById(R.id.tv_top_action);
 	tvTopAction.setText("发吐槽");
-	
 
 	mListView = (XListView) mContainerView.findViewById(R.id.listview_embar);
 	mAdapter = new ArticleAdapter(getActivity(), datas);
@@ -163,7 +162,13 @@ public class EmbarrassmentFragment extends BaseFragment implements OnItemClickLi
 
     private int pageNumber = 1;
 
+    private boolean isRefreshing; // 标记刷新中
+
     private void loadSecrets() {
+	if (isRefreshing)
+	    return;
+	isRefreshing = true;
+
 	LoadArticlesPostParams postParams = new LoadArticlesPostParams();
 	postParams.page = pageNumber;
 	postParams.pageSize = 20;
@@ -173,6 +178,7 @@ public class EmbarrassmentFragment extends BaseFragment implements OnItemClickLi
 
 	    @Override
 	    public void onSuccess(List<Article> secrets) {
+
 		// TODO Auto-generated method stub
 		if (secrets.size() != 0) {
 		    if (pageNumber == 1) {
@@ -194,6 +200,8 @@ public class EmbarrassmentFragment extends BaseFragment implements OnItemClickLi
 		    mListView.stopRefresh();
 		}
 		pageNumber++;
+
+		isRefreshing = false;
 	    }
 
 	    private void cacheToLocal(List<Article> secrets) {
@@ -225,6 +233,9 @@ public class EmbarrassmentFragment extends BaseFragment implements OnItemClickLi
 		    mListView.stopRefresh();
 		}
 		showToast(errorMsg);
+
+		isRefreshing = false;
+
 	    }
 	});
     }
@@ -247,14 +258,12 @@ public class EmbarrassmentFragment extends BaseFragment implements OnItemClickLi
 	if (!hidden) {
 	    if (tvTopAction != null) {
 		tvTopAction.setVisibility(View.VISIBLE);
-//		tvTopAction.setText("发糗事");
-//		tvTopAction.setOnClickListener(editEmOnClickListener);
+		//		tvTopAction.setText("发糗事");
+		//		tvTopAction.setOnClickListener(editEmOnClickListener);
 	    }
 	}
 	super.onHiddenChanged(hidden);
     }
-    
-    
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

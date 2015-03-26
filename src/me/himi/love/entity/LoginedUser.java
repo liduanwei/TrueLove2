@@ -144,4 +144,15 @@ public class LoginedUser {
     public void setVipExpireTime(int vipExpireTime) {
 	this.vipExpireTime = vipExpireTime;
     }
+
+    public DetailInfoUser getDetailInfoUser() {
+	return detailInfoUser;
+    }
+
+    public void setDetailInfoUser(DetailInfoUser detailInfoUser) {
+	this.detailInfoUser = detailInfoUser;
+    }
+
+    // 详细资料
+    private DetailInfoUser detailInfoUser;
 }

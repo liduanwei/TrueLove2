@@ -182,11 +182,36 @@
         </LinearLayout>
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/layout_start_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <TextView
+            android:id="@+id/tvTips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="如注册出现问题或有任何疑问可使用以下方式联系我们"
+            android:textColor="@color/base_color_text_gray"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTips"
+            android:layout_centerHorizontal="true"
+            android:text="QQ: 1373909802   电话:13418672673"
+            android:textColor="@color/base_color_text_gray"
+            android:textSize="@dimen/text_size_small" />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/tv_start_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/layout_start_login"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:clickable="true"
@@ -195,7 +220,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="2dp"
-        android:text="已有帐号,直接登录"
-        android:textColor="@color/base_color_text_gray" />
+        android:text="@string/start_login"
+        android:textColor="@color/base_color_text_white" />
 
 </RelativeLayout>

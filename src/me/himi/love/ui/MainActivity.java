@@ -843,6 +843,8 @@ public class MainActivity extends BaseActivity {
 	findViewById(R.id.btn_nearby).setBackgroundColor(bottomColor);
 	findViewById(R.id.btn_userwall).setBackgroundColor(bottomColor);
 	findViewById(R.id.btn_strangenews).setBackgroundColor(bottomColor);
+	
+	
 	super.onResume();
     }
 

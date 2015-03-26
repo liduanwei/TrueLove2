@@ -83,7 +83,6 @@ public class ArticleCommentsActivity extends BaseActivity implements OnItemClick
 	setContentView(R.layout.activity_article_comments);
 
 	init();
-
     }
 
     private void init() {
@@ -110,8 +109,7 @@ public class ArticleCommentsActivity extends BaseActivity implements OnItemClick
 
 	if (targetArticle.getUserId() == MyApplication.getInstance().getCurrentLoginedUser().getUserId()) {
 	    tvTopAction.setVisibility(View.VISIBLE);
-
-	    tvTopAction.setText("操作");
+	    tvTopAction.setText("");
 	} else {
 	    tvTopAction.setVisibility(View.GONE);
 	    tvTopAction.setText("");
@@ -405,10 +403,18 @@ public class ArticleCommentsActivity extends BaseActivity implements OnItemClick
 
     int pageNumber = 1;
 
+    private boolean isRefreshing;// 刷新中
+
     /**
      * 加载评论
      */
     private void loadArticleComments() {
+
+	if (isRefreshing) {
+	    return;
+	}
+
+	isRefreshing = true;
 
 	LoadArticleCommentsPostParams postParams = new LoadArticleCommentsPostParams();
 	postParams.articleId = targetArticle.getId();
@@ -444,6 +450,8 @@ public class ArticleCommentsActivity extends BaseActivity implements OnItemClick
 
 		pageNumber++;
 
+		isRefreshing = false;
+
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
 	    }
@@ -458,6 +466,9 @@ public class ArticleCommentsActivity extends BaseActivity implements OnItemClick
 
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
+		
+		isRefreshing = false;
+
 	    }
 	});
     }
@@ -538,8 +549,8 @@ public class ArticleCommentsActivity extends BaseActivity implements OnItemClick
 	List<View> views = new ArrayList<View>();
 	List<FaceText> emos01 = FaceTextUtils.faceTexts;
 	views.add(getGridView(emos01));
-//	List<FaceText> emos02 = FaceTextUtils.faceTexts2;
-//	views.add(getGridView(emos02));
+	//	List<FaceText> emos02 = FaceTextUtils.faceTexts2;
+	//	views.add(getGridView(emos02));
 	viewpager.setAdapter(new EmoViewPagerAdapter(views));
 
     }

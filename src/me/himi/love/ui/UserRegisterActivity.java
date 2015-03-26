@@ -231,8 +231,7 @@ public class UserRegisterActivity extends BaseActivity implements OnClickListene
 
 	if (TextUtils.isEmpty(username)) {
 	    etUsername.requestFocus();
-	    showToast("请填写手机号");
-	    //	    showToast("请填写手机号");
+	    showToast("请填写手机号/邮箱");
 	    return;
 	}
 

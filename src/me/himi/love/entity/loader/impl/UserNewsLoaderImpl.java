@@ -129,7 +129,7 @@ public class UserNewsLoaderImpl implements IUserNewsLoader {
 	int nameSplitIndex = bigImageUrl.lastIndexOf("/");
 	String path = bigImageUrl.substring(0, nameSplitIndex + 1);
 	String name = bigImageUrl.substring(nameSplitIndex + 1);
-	name = "s_" + name;
+	name = name.replace("m_", "s_");
 	return path + name;
     }
 }

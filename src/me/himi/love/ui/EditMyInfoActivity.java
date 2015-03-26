@@ -17,6 +17,7 @@ import me.himi.love.IAppService.UserInfo;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.entity.DetailInfoUser;
+import me.himi.love.entity.LoginedUser;
 import me.himi.love.im.util.PhotoUtil;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.ActivityUtil;
@@ -313,6 +314,10 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		// 表示当前用户资料已加载完成
 		mCurrentInfoUser = user;
 		setInfos(user);
+
+		// 更新内存中的user
+		LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
+		loginedUser.setDetailInfoUser(user);
 	    }
 
 	    @Override
@@ -389,7 +394,7 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 	mCurrentInfoUser.setMonologue(this.etMonologue.getText().toString());
 	mCurrentInfoUser.setNickname(this.etMyNickname.getText().toString());
 
-	UserInfo user = new UserInfo();
+	final UserInfo user = new UserInfo();
 	// 修改资料需要同步到 内存中的 user 对象上
 	user.setMonologue(mCurrentInfoUser.getMonologue());
 	user.setNickname(mCurrentInfoUser.getNickname());
@@ -417,7 +422,7 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 	user.setWantBaby(tvWantBaby.getText().toString());
 	user.setPremartialSex(tvPremartialSex.getText().toString());
 	user.setOppositeSexType(tvOppositeSexType.getText().toString());
-	user.setMonthlySalary("没有收入");
+	user.setMonthlySalary(tvMonthSalary.getText().toString());
 	user.setInterests(tvInterests.getText().toString());
 	user.setPersonalities(tvPersonlity.getText().toString());
 
@@ -442,6 +447,13 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		progress.cancel();
 		ActivityUtil.show(EditMyInfoActivity.this, "保存成功");
 		//setResult(UserInfoActivity.EDIT_MY_INFO_RESULT_CODE);
+
+		LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
+		DetailInfoUser infoUser = loginedUser.getDetailInfoUser();
+		if (infoUser != null) { // 更新内存中的信息
+		    resetDetailInfoUser(infoUser, user);
+		}
+
 		//finish();
 		finish();
 	    }
@@ -453,6 +465,51 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		progress.cancel();
 	    }
 	});
+    }
+
+    /**
+     * 
+     * userInfo
+     * @param user
+     */
+    private void resetDetailInfoUser(DetailInfoUser infoUser, UserInfo user) {
+	// TODO Auto-generated method stub
+	infoUser.setBirthdayDay(mCurrentInfoUser.getBirthdayDay());
+	infoUser.setBirthdayMonth(mCurrentInfoUser.getBirthdayMonth());
+	infoUser.setBirthdayYear(mCurrentInfoUser.getBirthdayYear());
+
+	infoUser.setHeight(user.getHeight());
+	infoUser.setWeight(user.getWeight());
+
+	infoUser.setMartialStatus(user.getMartialStatus());
+	infoUser.setBlood(user.getBlood());
+	infoUser.setHomeplace(user.getHomeplace());
+	infoUser.setAddress(user.getAddress());
+	infoUser.setCharmBody(user.getCharmBody());
+	infoUser.setDistanceLove(user.getDistanceLove());
+	infoUser.setHouse(user.getHouse());
+	infoUser.setEducation(user.getEducation());
+	infoUser.setEmployment(user.getEmployment());
+	infoUser.setWantBaby(user.getWantBaby());
+	infoUser.setPremartialSex(user.getPremartialSex());
+	infoUser.setOppositeSexType(user.getOppositeSexType());
+	infoUser.setMonthlySalary(user.getMonthlySalary());
+	infoUser.setInterests(user.getInterests());
+	infoUser.setPersonalities(user.getPersonalities());
+
+	infoUser.setInstruction(user.getInstruction());
+	infoUser.setOftenAddress(user.getOftenAddress());
+
+	infoUser.setWantHomeplace(user.getWantHomeplace());
+	infoUser.setWantAddress(user.getWantAddress());
+	infoUser.setWantAge(user.getWantAge());
+	infoUser.setWantHeight(user.getWantHeight());
+	infoUser.setWantEducation(user.getWantEducation());
+	infoUser.setWantMonthSalary(user.getWantMonthSalary());
+	infoUser.setWantAddtional(user.getWantAddtional());
+
+	user.setMonthlySalary(user.getMonthlySalary());
+
     }
 
     @Override
@@ -1143,10 +1200,17 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 
 	    @Override
 	    public void onSuccess(UploadFaceResponse uploadFileResponse) {
+
 		progress.dismiss();
+		showToast("上传成功!");
 		String imageUrl = Constants.HOST + uploadFileResponse.imageUrl.substring(1);
 		//		ActivityUtil.openBrowser(EditMyInfoActivity.this, imageUrl);
 		System.out.println(imageUrl);
+
+		// 修改内存中的资料
+		LoginedUser user = MyApplication.getInstance().getCurrentLoginedUser();
+		user.setFaceUrl(imageUrl);
+
 		ImageLoader.getInstance().displayImage(imageUrl, ivMyFace);
 	    }
 

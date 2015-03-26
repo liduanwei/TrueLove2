@@ -497,6 +497,17 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
     }
 
     @Override
+    protected void onResume() {
+	// TODO Auto-generated method stub
+	LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
+	DetailInfoUser infoUser = loginedUser.getDetailInfoUser();
+	if (null != infoUser) {
+	    setInfos(infoUser);
+	}
+	super.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
 	// TODO Auto-generated method stub
 	HttpUtil.getClient().cancelAllRequests(true);

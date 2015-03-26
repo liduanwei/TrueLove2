@@ -103,6 +103,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/edittext_back"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:layout_above="@id/layout_article_comment_bottom"
         android:layout_below="@id/layout_nav_top"
         android:cacheColorHint="#00000000"

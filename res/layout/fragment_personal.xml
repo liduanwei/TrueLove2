@@ -11,190 +11,188 @@
         android:gravity="center"
         android:visibility="visible" />
 
-    <RelativeLayout
-        android:id="@+id/layout_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/adContainer"
-        android:background="@drawable/register_button_selector"
-        android:clickable="true"
-        android:onClick="layoutMyInfoOnClick" >
-
-        <ImageView
-            android:id="@+id/iv_my_face"
-            android:layout_width="80dip"
-            android:layout_height="80dip"
-            android:layout_centerVertical="true"
-            android:layout_margin="6dp"
-            android:src="@drawable/icon" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/iv_my_face" >
-
-            <me.himi.love.view.EmojiTextView
-                android:id="@+id/tv_my_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:paddingLeft="10dp"
-                android:text=""
-                android:textColor="@color/base_color_text_white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_my_vip"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_toRightOf="@id/tv_my_nickname"
-                android:background="@drawable/vip_sign_not" />
-
-            <TextView
-                android:id="@+id/tv_my_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_my_nickname"
-                android:paddingLeft="10dp"
-                android:text=""
-                android:textColor="@color/base_color_text_white"
-                android:textSize="14sp" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_signin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/selector_signin"
-            android:clickable="true"
-            android:padding="6dp"
-            android:text="签到>"
-            android:textColor="@color/base_color_text_white" />
-
-        <TextView
-            android:id="@+id/tv_vip_expire_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/iv_my_face"
-            android:layout_toRightOf="@id/iv_my_face"
-            android:paddingLeft="10dp"
-            android:text="会员有效期至 2015/03/24 22:58:06"
-            android:textSize="@dimen/text_size_10"
-            android:visibility="gone" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_friends"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_top"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:id="@+id/layout_to_myfriends"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/tv_my_friends_no"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="5" />
-
-            <TextView
-                android:id="@+id/tv_my_friends"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="好友"
-                android:textSize="@dimen/text_size_medium" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_to_myfollows"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/tv_my_follows_no"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="1" />
-
-            <TextView
-                android:id="@+id/tv_my_follows"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="关注"
-                android:textSize="@dimen/text_size_medium" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_to_myfans"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-
-            <TextView
-                android:id="@+id/tv_newfans_message_tips"
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/rounder_corners"
-                android:visibility="visible" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/tv_my_fans_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="2" />
-
-                <TextView
-                    android:id="@+id/tv_my_fans"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="粉丝"
-                    android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_friends"
-        android:scrollbars="vertical" >
+        android:layout_below="@id/adContainer"
+        android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/layout_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_button_selector"
+                android:clickable="true"
+                android:onClick="layoutMyInfoOnClick" >
+
+                <ImageView
+                    android:id="@+id/iv_my_face"
+                    android:layout_width="80dip"
+                    android:layout_height="80dip"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="6dp"
+                    android:src="@drawable/icon" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/iv_my_face" >
+
+                    <me.himi.love.view.EmojiTextView
+                        android:id="@+id/tv_my_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:paddingLeft="10dp"
+                        android:text=""
+                        android:textColor="@color/base_color_text_white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_my_vip"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@id/tv_my_nickname"
+                        android:background="@drawable/vip_sign_not" />
+
+                    <TextView
+                        android:id="@+id/tv_my_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_my_nickname"
+                        android:paddingLeft="10dp"
+                        android:text=""
+                        android:textColor="@color/base_color_text_white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_signin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/selector_signin"
+                    android:clickable="true"
+                    android:padding="6dp"
+                    android:text="签到>"
+                    android:textColor="@color/base_color_text_white" />
+
+                <TextView
+                    android:id="@+id/tv_vip_expire_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/iv_my_face"
+                    android:layout_toRightOf="@id/iv_my_face"
+                    android:paddingLeft="10dp"
+                    android:text="VIP会员有效期至 2015/03/24 22:58:06"
+                    android:textSize="@dimen/text_size_10"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/layout_to_myfriends"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_my_friends_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="5" />
+
+                    <TextView
+                        android:id="@+id/tv_my_friends"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="好友"
+                        android:textSize="@dimen/text_size_medium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_to_myfollows"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_my_follows_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1" />
+
+                    <TextView
+                        android:id="@+id/tv_my_follows"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="关注"
+                        android:textSize="@dimen/text_size_medium" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_to_myfans"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/tv_newfans_message_tips"
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/rounder_corners"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_my_fans_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="2" />
+
+                        <TextView
+                            android:id="@+id/tv_my_fans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="粉丝"
+                            android:textSize="@dimen/text_size_medium" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/layout_writen_news"
