@@ -799,35 +799,35 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 	// TODO Auto-generated method stub
 	if (requestCode == 1) {
 	    if (resultCode == RESULT_OK) { // 选中礼物确认提交
-		final ProgressDialog dialog = new ProgressDialog(this);
-		dialog.setMessage("赠送中...");
-		dialog.show();
-
-		String targetUserId = arg2.getStringExtra("user_id");
-		String targetGiftId = arg2.getStringExtra("gift_id");
-		String word = arg2.getStringExtra("word"); // 赠言
-
-		GiveGiftPostParams postParams = new GiveGiftPostParams();
-		postParams.giftId = targetGiftId;
-		postParams.toUserId = targetUserId;
-		postParams.word = word;
-
-		AppServiceExtendImpl.getInstance().giveGift(postParams, new OnGiveGiftResponseListener() {
-
-		    @Override
-		    public void onSuccess(UserGift userGift) {
-			// TODO Auto-generated method stub
-			showToast("已赠送!");
-			dialog.dismiss();
-		    }
-
-		    @Override
-		    public void onFailure(String errorMsg) {
-			// TODO Auto-generated method stub
-			showToast(errorMsg);
-			dialog.dismiss();
-		    }
-		});
+//		final ProgressDialog dialog = new ProgressDialog(this);
+//		dialog.setMessage("赠送中...");
+//		dialog.show();
+//
+//		String targetUserId = arg2.getStringExtra("user_id");
+//		String targetGiftId = arg2.getStringExtra("gift_id");
+//		String word = arg2.getStringExtra("word"); // 赠言
+//
+//		GiveGiftPostParams postParams = new GiveGiftPostParams();
+//		postParams.giftId = targetGiftId;
+//		postParams.toUserId = targetUserId;
+//		postParams.word = word;
+//
+//		AppServiceExtendImpl.getInstance().giveGift(postParams, new OnGiveGiftResponseListener() {
+//
+//		    @Override
+//		    public void onSuccess(UserGift userGift) {
+//			// TODO Auto-generated method stub
+//			showToast("已赠送!");
+//			dialog.dismiss();
+//		    }
+//
+//		    @Override
+//		    public void onFailure(String errorMsg) {
+//			// TODO Auto-generated method stub
+//			showToast(errorMsg);
+//			dialog.dismiss();
+//		    }
+//		});
 	    }
 	}
 

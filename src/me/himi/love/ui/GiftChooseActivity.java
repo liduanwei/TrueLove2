@@ -12,14 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.himi.love.AppServiceExtendImpl;
+import me.himi.love.IAppServiceExtend.GiveGiftPostParams;
 import me.himi.love.IAppServiceExtend.LoadGiftPostParams;
+import me.himi.love.IAppServiceExtend.OnGiveGiftResponseListener;
 import me.himi.love.IAppServiceExtend.OnLoadGiftResponseListener;
 import me.himi.love.R;
 import me.himi.love.adapter.GiftChooseAdapter;
 import me.himi.love.adapter.GiftChooseAdapter.GiftOnClickListener;
 import me.himi.love.entity.Gift;
 import me.himi.love.entity.NearbyUser;
+import me.himi.love.entity.UserGift;
 import me.himi.love.ui.base.BaseActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -105,14 +109,15 @@ public class GiftChooseActivity extends BaseActivity {
 	    public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (mSelectedGift != null) {
-		    Intent data = new Intent();
-		    data.putExtra("user_id", userId);
-		    data.putExtra("gift_id", mSelectedGift.getGiftId() + "");
-		    data.putExtra("word", etWord.getText().toString());
-		    setResult(RESULT_OK, data);
+		    //		    Intent data = new Intent();
+		    //		    data.putExtra("user_id", userId);
+		    //		    data.putExtra("gift_id", mSelectedGift.getGiftId() + "");
+		    //		    data.putExtra("word", etWord.getText().toString());
+		    //		    setResult(RESULT_OK, data);
+		    publishGift(userId + "", mSelectedGift.getGiftId() + "", etWord.getText().toString());
 		}
 
-		finish();
+		//finish();
 	    }
 	});
 
@@ -244,7 +249,7 @@ public class GiftChooseActivity extends BaseActivity {
 
 		Object obj = ois.readObject();
 
-		List<Gift> gfits = (List<Gift>) obj;
+		List<Gift> gifts = (List<Gift>) obj;
 
 		giftChooseAdapter.getList().clear();
 
@@ -269,5 +274,41 @@ public class GiftChooseActivity extends BaseActivity {
 	    // 不存在则从网络获取
 	    loadGifts(gender);
 	}
+    }
+
+    /**
+     * 赠送礼物
+     * @param targetUserId
+     * @param targetGiftId
+     * @param word
+     */
+    private void publishGift(String targetUserId, String targetGiftId, String word) {
+	final ProgressDialog dialog = new ProgressDialog(this);
+	dialog.setMessage("赠送中...");
+	dialog.show();
+
+	GiveGiftPostParams postParams = new GiveGiftPostParams();
+	postParams.giftId = targetGiftId;
+	postParams.toUserId = targetUserId;
+	postParams.word = word;
+
+	AppServiceExtendImpl.getInstance().giveGift(postParams, new OnGiveGiftResponseListener() {
+
+	    @Override
+	    public void onSuccess(UserGift userGift) {
+		// TODO Auto-generated method stub
+		showToast("已赠送!");
+		dialog.dismiss();
+		finish();
+	    }
+
+	    @Override
+	    public void onFailure(String errorMsg) {
+		// TODO Auto-generated method stub
+		showToast(errorMsg);
+		dialog.dismiss();
+
+	    }
+	});
     }
 }

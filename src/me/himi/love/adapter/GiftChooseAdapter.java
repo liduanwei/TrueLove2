@@ -44,7 +44,7 @@ public class GiftChooseAdapter extends BaseListAdapter<Gift> {
 	// 加载礼物图片
 	ImageLoader.getInstance().displayImage(gift.getImageUrl(), ivGift, ImageLoaderOptions.normalOptions());
 	// 
-	ivGift.setOnClickListener(new View.OnClickListener() {
+	convertView.setOnClickListener(new View.OnClickListener() {
 
 	    @Override
 	    public void onClick(View v) {
@@ -54,12 +54,16 @@ public class GiftChooseAdapter extends BaseListAdapter<Gift> {
 		}
 	    }
 	});
+	
 	// 礼物名称
 	TextView tvName = ViewHolder.get(convertView, R.id.tv_gift_name);
 	tvName.setText(gift.getName());
 	// 礼物售价
 	TextView tvPrice = ViewHolder.get(convertView, R.id.tv_gift_price);
 	tvPrice.setText(gift.getPrice() + "币");
+	// 礼物魅力值
+	TextView tvGlamour = ViewHolder.get(convertView, R.id.tv_gift_glamour);
+	tvGlamour.setText("+" + gift.getGlamour());
 
 	return convertView;
     }
