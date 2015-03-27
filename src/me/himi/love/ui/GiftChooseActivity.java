@@ -38,7 +38,7 @@ import android.widget.TextView;
 import com.huewu.pla.lib.MultiColumnPullToRefreshListView.OnRefreshListener;
 
 /**
- * @ClassName:CheckUpdateActivity
+ * @ClassName:GiftChooseActivity
  * @author sparklee liduanwei_911@163.com
  * @date Nov 14, 2014 3:08:53 PM
  */
@@ -116,8 +116,6 @@ public class GiftChooseActivity extends BaseActivity {
 		    //		    setResult(RESULT_OK, data);
 		    publishGift(userId + "", mSelectedGift.getGiftId() + "", etWord.getText().toString());
 		}
-
-		//finish();
 	    }
 	});
 
