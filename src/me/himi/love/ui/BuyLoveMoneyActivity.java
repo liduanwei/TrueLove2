@@ -87,7 +87,7 @@ public class BuyLoveMoneyActivity extends BaseActivity implements OnClickListene
 
 	// 虚拟币说明
 	tvMoneyInstruction = (TextView) findViewById(R.id.tv_lovemoney_instruction);
-	String instruction = "金币说明: \n   1. 可用于开通VIP会员.送礼物.打招呼;\n   2. <<速配>>栏排序优先: 金币数越多排序越靠前\n(曝光量越大自然交友成功率更高)";
+	String instruction = "金币说明: \n   1. 可用于开通VIP会员.送礼物;\n   2. <<速配>>栏排序优先: 金币数越多排序越靠前\n(曝光量越大自然交友成功率更高)";
 
 	tvMoneyInstruction.setText(instruction);
 

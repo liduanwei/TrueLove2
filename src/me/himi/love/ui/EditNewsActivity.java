@@ -135,14 +135,14 @@ public class EditNewsActivity extends BaseActivity implements OnClickListener {
 		foruploadFiles.remove(0);
 		ivPics[1].setVisibility(View.GONE);
 		ivPics[0].setImageBitmap(null);
-		ivPics[0].setBackgroundResource(R.drawable.shape_user_news_picture);
+		ivPics[0].setBackgroundResource(R.drawable.fml);
 		return;
 	    }
 
 	    // 
 	    tvDels[foruploadFiles.size() - 1].setVisibility(View.GONE);
 	    ivPics[foruploadFiles.size() - 1].setImageBitmap(null);
-	    ivPics[foruploadFiles.size() - 1].setBackgroundResource(R.drawable.shape_user_news_picture);
+	    ivPics[foruploadFiles.size() - 1].setBackgroundResource(R.drawable.fml);
 
 	    foruploadFiles.remove(index);
 	    ivPics[index].setImageBitmap(null);

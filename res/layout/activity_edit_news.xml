@@ -36,7 +36,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/shape_user_news_picture" />
+                    android:src="@drawable/fml" />
 
                 <TextView
                     android:id="@+id/tv_remove_news_picture1"
@@ -62,7 +62,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/shape_user_news_picture" />
+                    android:src="@drawable/fml" />
 
                 <TextView
                     android:id="@+id/tv_remove_news_picture2"
@@ -87,7 +87,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/shape_user_news_picture" />
+                    android:src="@drawable/fml" />
 
                 <TextView
                     android:id="@+id/tv_remove_news_picture3"
