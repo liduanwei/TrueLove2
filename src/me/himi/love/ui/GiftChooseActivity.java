@@ -129,6 +129,16 @@ public class GiftChooseActivity extends BaseActivity {
 	    }
 	});
 
+	// 充值/获取金币
+	findViewById(R.id.tv_buy_money).setOnClickListener(new View.OnClickListener() {
+
+	    @Override
+	    public void onClick(View v) {
+		// TODO Auto-generated method stub
+		startActivity(new Intent(GiftChooseActivity.this, BuyLoveMoneyActivity.class));
+	    }
+	});
+
 	tvTargetTips.setText("对 " + nickname + " 说:");
 
 	giftChooseAdapter = new GiftChooseAdapter(this, gifts);
@@ -234,8 +244,6 @@ public class GiftChooseActivity extends BaseActivity {
 	} else {
 	    cacheGiftsPath = cacheGiftsFemalePath;
 	}
-
-	showToast(cacheGiftsPath);
 
 	File f = new File(cacheGiftsPath);
 

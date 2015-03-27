@@ -118,10 +118,10 @@ public class BuyLoveMoneyActivity extends BaseActivity implements OnClickListene
 	// TODO Auto-generated method stub
 	switch (v.getId()) {
 	case R.id.layout_buy_50_love_money:
-	    buyLoveMoney(50, 5);
+	    buyLoveMoney(50, 0.01f);
 	    break;
 	case R.id.layout_buy_100_love_money:
-	    buyLoveMoney(100, 10);
+	    buyLoveMoney(100, 0.02f);
 	    break;
 	case R.id.layout_buy_300_love_money:
 	    buyLoveMoney(300, 30); // 
@@ -146,7 +146,7 @@ public class BuyLoveMoneyActivity extends BaseActivity implements OnClickListene
      * @param i
      * @param price
      */
-    private void buyLoveMoney(int i, int price) {
+    private void buyLoveMoney(int i, float price) {
 	// TODO Auto-generated method stub
 	// 订单ID
 	String orderId = "truelove2" + StringUtils.md5(System.currentTimeMillis() + "");

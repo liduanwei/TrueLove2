@@ -291,7 +291,7 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 
 		if (mTargetUser != null) {
 		    // todo
-		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
+//		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
 		    
 		    Intent intent = new Intent(UserInfoTextActivity.this, GiftChooseActivity.class);
 		    intent.putExtra("user_id", mTargetUser.getUserId() + "");
@@ -382,7 +382,7 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 		pbLoading.setVisibility(View.GONE);
 
 		if (detailInfoUser == null) {
-		    ActivityUtil.show(UserInfoTextActivity.this, "!-_-加载出错了,请重新注册/登录");
+		    ActivityUtil.show(UserInfoTextActivity.this, "!-_-加载出错了!\n\n请重新注册/登录");
 		    return;
 		}
 

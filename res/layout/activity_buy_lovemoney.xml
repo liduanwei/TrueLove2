@@ -55,7 +55,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50金币" />
+                    android:text="1000金币" />
 
                 <TextView
                     android:layout_width="80dip"
@@ -64,7 +64,7 @@
                     android:background="@drawable/shape_price"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="¥5" />
+                    android:text="¥1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100金币" />
+                    android:text="10000金币" />
 
                 <TextView
                     android:id="@+id/tv_price_tips"
@@ -111,7 +111,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="300金币" />
+                    android:text="30000金币" />
 
                 <TextView
                     android:id="@+id/tv_price_tips"
@@ -144,7 +144,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="600金币" />
+                    android:text="60000金币" />
 
                 <TextView
                     android:id="@+id/tv_price_tips"
@@ -177,7 +177,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1000金币" />
+                    android:text="100000金币" />
 
                 <TextView
                     android:id="@+id/tv_price_tips"
@@ -210,7 +210,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5000金币" />
+                    android:text="500000金币" />
 
                 <TextView
                     android:id="@+id/tv_price_tips"
@@ -243,7 +243,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10000金币" />
+                    android:text="1000000金币" />
 
                 <TextView
                     android:id="@+id/tv_price_tips"
