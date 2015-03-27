@@ -77,24 +77,26 @@ public class GiftChooseActivity extends BaseActivity {
     private void init() {
 	final String userId = getIntent().getStringExtra("user_id");
 	final String nickname = getIntent().getStringExtra("nickname");
+	final int gender = getIntent().getIntExtra("gender", 0); // 限制性别的礼物
 
 	// TODO Auto-generated method stub
 	mGridView = (com.huewu.pla.lib.MultiColumnPullToRefreshListView) findViewById(R.id.multiColumPullToRefreshListView_gift);
 
+	//
 	mGridView.setOnRefreshListener(new OnRefreshListener() {
 
 	    @Override
 	    public void onRefresh() {
 		// TODO Auto-generated method stub
 
-		loadGifts();
+		loadGifts(gender);
 
 	    }
 	});
 	final TextView tvTargetTips = (TextView) findViewById(R.id.tv_select_gift_tips);
 	final EditText etWord = (EditText) findViewById(R.id.et_send_word);
 
-
+	// 默认按钮不可用
 	findViewById(R.id.tv_give_gift_publish).setEnabled(false);
 	// 赠送
 	findViewById(R.id.tv_give_gift_publish).setOnClickListener(new View.OnClickListener() {
@@ -136,19 +138,19 @@ public class GiftChooseActivity extends BaseActivity {
 		etWord.setText(gift.getWithWord());
 		tvTargetTips.setText("送" + gift.getName() + ",对 " + nickname + " 说:");
 		mSelectedGift = gift;
-		
+
 		findViewById(R.id.tv_give_gift_publish).setEnabled(true);
 	    }
 	});
 
 	// 加载可选礼物
 	// todo
-	loadFromCache(); // 优先从缓存中加载
+	loadFromCache(gender); // 优先从缓存中加载
     }
 
     private boolean isRefreshing;
 
-    private void loadGifts() {
+    private void loadGifts(final int gender) {
 
 	if (isRefreshing)
 	    return;
@@ -157,6 +159,7 @@ public class GiftChooseActivity extends BaseActivity {
 	LoadGiftPostParams postParams = new LoadGiftPostParams();
 	postParams.page = 1;
 	postParams.pageSize = 100;
+	postParams.targetUserGender = gender;
 
 	AppServiceExtendImpl.getInstance().loadGift(postParams, new OnLoadGiftResponseListener() {
 
@@ -171,16 +174,22 @@ public class GiftChooseActivity extends BaseActivity {
 		isRefreshing = false;
 
 		// 缓存到本地
-		cacheToLocal(gifts);
+		cacheToLocal(gifts, gender);
 	    }
 
 	    /**
 	     * 
 	     * @param users
 	     */
-	    private void cacheToLocal(List<Gift> gifts) {
+	    private void cacheToLocal(List<Gift> gifts, int gender) {
 		// TODO Auto-generated method stub
-		File f = new File(cacheUsersPath);
+		String cacheGiftsPath = null;
+		if (1 == gender) {
+		    cacheGiftsPath = cacheGiftsMalePath;
+		} else {
+		    cacheGiftsPath = cacheGiftsFemalePath;
+		}
+		File f = new File(cacheGiftsPath);
 		if (!f.getParentFile().exists()) {
 		    f.getParentFile().mkdirs();
 		}
@@ -211,18 +220,38 @@ public class GiftChooseActivity extends BaseActivity {
     }
 
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/gifts";
+    private final static String cacheGiftsMalePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/gifts_male";
+    private final static String cacheGiftsFemalePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/gifts_female";
 
-    private void loadFromCache() {
+    private void loadFromCache(int gender) {
 	// TODO Auto-generated method stub
-	File f = new File(cacheUsersPath);
+	String cacheGiftsPath = null;
+	if (gender == 1) {
+	    cacheGiftsPath = cacheGiftsMalePath; // 
+	} else {
+	    cacheGiftsPath = cacheGiftsFemalePath;
+	}
+
+	showToast(cacheGiftsPath);
+
+	File f = new File(cacheGiftsPath);
+
 	if (f.exists()) {
+
 	    try {
+
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+
 		Object obj = ois.readObject();
-		List<Gift> users = (List<Gift>) obj;
+
+		List<Gift> gfits = (List<Gift>) obj;
+
 		giftChooseAdapter.getList().clear();
-		giftChooseAdapter.addAll(users);
+
+		giftChooseAdapter.addAll(gifts);
+
+		ois.close();
+
 	    } catch (StreamCorruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -238,7 +267,7 @@ public class GiftChooseActivity extends BaseActivity {
 	    }
 	} else {
 	    // 不存在则从网络获取
-	    loadGifts();
+	    loadGifts(gender);
 	}
     }
 }

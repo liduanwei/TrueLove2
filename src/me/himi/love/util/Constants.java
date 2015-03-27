@@ -221,5 +221,7 @@ public interface Constants {
     String URL_GIVE_GIFT = HOST + "/index.php/index/gift/publish";
     // 可选礼物
     String URL_GIFT_LIST = HOST + "/index.php/index/gift/loadList";
+    // 查看目标用户的礼物
+    String URL_USER_GIFT_LIST = HOST + "/index.php/index/gift/select";
 
 }

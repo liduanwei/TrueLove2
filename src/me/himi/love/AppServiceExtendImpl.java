@@ -2202,6 +2202,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 	RequestParams params = new RequestParams();
 	params.put("page", postParams.page);
 	params.put("page_size", postParams.pageSize);
+	params.put("gender", postParams.targetUserGender);
 
 	AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
 
@@ -2250,5 +2251,11 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 	};
 
 	HttpUtil.post(url, params, responseHandler);
+    }
+
+    @Override
+    public void findGiftByUserId(FindGiftByUserIdPostParams postParams, OnFindGiftByUserIdResponseListener listener) {
+	// TODO Auto-generated method stub
+
     }
 }

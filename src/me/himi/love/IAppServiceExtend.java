@@ -680,10 +680,28 @@ public interface IAppServiceExtend {
 
     public static class LoadGiftPostParams {
 	public int page, pageSize;
+	public int targetUserGender;//对应目标用户性别的礼物
     }
 
     public static interface OnLoadGiftResponseListener {
 	void onSuccess(List<Gift> gifts);
+
+	void onFailure(String errorMsg);
+    }
+
+    /**
+     * 查看某个用户的礼物
+     * @param postParams
+     * @param listener
+     */
+    void findGiftByUserId(FindGiftByUserIdPostParams postParams, OnFindGiftByUserIdResponseListener listener);
+
+    public static class FindGiftByUserIdPostParams {
+	public int page, pageSize;
+    }
+
+    public static interface OnFindGiftByUserIdResponseListener {
+	void onSuccess(List<UserGift> gifts);
 
 	void onFailure(String errorMsg);
     }

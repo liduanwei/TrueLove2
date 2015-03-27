@@ -4,10 +4,6 @@ import io.rong.imkit.RongIM;
 import io.rong.imkit.RongIM.GetUserBlacklistCallback;
 import io.rong.imkit.RongIM.OperationCallback;
 import io.rong.imlib.RongIMClient.BlacklistStatus;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.IAppService.OnLoadDetailUserListener;
@@ -19,11 +15,9 @@ import me.himi.love.IAppServiceExtend.OnSayHiResponseListener;
 import me.himi.love.IAppServiceExtend.SayHiParams;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
-import me.himi.love.adapter.GiftChooseAdapter;
 import me.himi.love.dao.DBHelper;
 import me.himi.love.dao.DBHelper.UserFollow;
 import me.himi.love.entity.DetailInfoUser;
-import me.himi.love.entity.Gift;
 import me.himi.love.entity.LoginedUser;
 import me.himi.love.entity.UserGift;
 import me.himi.love.entity.loader.IUserDetailLoader;
@@ -37,6 +31,7 @@ import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.CacheUserManager;
 import me.himi.love.util.HttpUtil;
 import me.himi.love.util.ImageLoaderOptions;
+import me.himi.love.util.Share;
 import me.himi.love.util.ToastFactory;
 import me.himi.love.view.EmojiTextView;
 import android.app.Dialog;
@@ -296,10 +291,12 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 
 		if (mTargetUser != null) {
 		    // todo
-		    //		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
+		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
+		    
 		    Intent intent = new Intent(UserInfoTextActivity.this, GiftChooseActivity.class);
 		    intent.putExtra("user_id", mTargetUser.getUserId() + "");
 		    intent.putExtra("nickname", mTargetUser.getNickname());
+		    intent.putExtra("gender", mTargetUser.getGender());
 		    int requestCode = 1;
 		    startActivityForResult(intent, requestCode);
 		}
