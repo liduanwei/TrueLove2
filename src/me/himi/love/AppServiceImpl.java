@@ -71,6 +71,7 @@ public class AppServiceImpl implements IAppService {
 	nameAndValues.put("latitude", user.getLatitude());
 	nameAndValues.put("username", user.getUsername());
 	nameAndValues.put("password", user.getPassword());
+	nameAndValues.put("model", user.getModel());
 
 	RequestParams params = new RequestParams(nameAndValues);
 

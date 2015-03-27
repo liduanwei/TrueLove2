@@ -364,6 +364,9 @@ public interface IAppService {
 
 	private String imei;
 	private String phoneNumber;
+	
+	
+	private String model;// 设备型号 
 
 	private String longtitude, latitude;//经纬度
 
@@ -413,6 +416,14 @@ public interface IAppService {
 
 	public void setPassword(String password) {
 	    this.password = password;
+	}
+
+	public String getModel() {
+	    return model;
+	}
+
+	public void setModel(String model) {
+	    this.model = model;
 	}
 
     }

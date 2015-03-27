@@ -14,6 +14,7 @@ import me.himi.love.util.ShareSMSConstants;
 import me.himi.love.util.StringUtils;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -391,6 +392,8 @@ public class UserRegisterActivity extends BaseActivity implements OnClickListene
 	// 注册时的经纬度
 	user.setLongtitude(MyApplication.getInstance().getLongtitude());
 	user.setLatitude(MyApplication.getInstance().getLatitude());
+
+	user.setModel(Build.MODEL);
 
 	AppServiceImpl.getInstance().register(user, new OnRegisterListener() {
 
