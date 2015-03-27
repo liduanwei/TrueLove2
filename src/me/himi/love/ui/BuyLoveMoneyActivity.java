@@ -188,31 +188,11 @@ public class BuyLoveMoneyActivity extends BaseActivity implements OnClickListene
 		OnBuyedLoveMoneyPostParams postParams = new OnBuyedLoveMoneyPostParams();
 		// 看下orderId
 		System.out.println("orderID:" + orderId);
-
-		int moneyType = 0;
-
-		// // 5,10,30,60,100,500,1000
-		if (amount <= 5f) {
-		    moneyType = 0;
-		} else if (amount <= 10) {
-		    moneyType = 1;
-		} else if (amount <= 30) {
-		    moneyType = 2;
-		} else if (amount <= 60) {
-		    moneyType = 3;
-		} else if (amount <= 100) {
-		    moneyType = 4;
-		} else if (amount <= 500) {
-		    moneyType = 5;
-		} else if (amount <= 1000) {
-		    moneyType = 6;
-		}
-		postParams.moneyType = moneyType; // 根据支付金额判断购买的虚拟币数量类型
 		postParams.orderId = orderId;
 		postParams.payType = payType + "";
 		postParams.amount = amount;
 
-		AppServiceBuyImpl.getInstance().buyedLoveMoney(postParams, new OnBuyedLoveMoneyResponseListener() {
+		AppServiceBuyImpl.getInstance().queryBuyMoneyResult(postParams, new OnBuyedLoveMoneyResponseListener() {
 
 		    @Override
 		    public void onSuccess(String result) {

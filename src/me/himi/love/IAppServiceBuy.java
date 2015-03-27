@@ -8,15 +8,13 @@ package me.himi.love;
 public interface IAppServiceBuy {
 
     /**
-     * 购买恋恋币
+     * 查询充值结果
      * @param postParams
      * @param listener
      */
-    void buyedLoveMoney(OnBuyedLoveMoneyPostParams postParams, OnBuyedLoveMoneyResponseListener listener);
+    void queryBuyMoneyResult(OnBuyedLoveMoneyPostParams postParams, OnBuyedLoveMoneyResponseListener listener);
 
     public static class OnBuyedLoveMoneyPostParams {
-	public int moneyType; // 购买的恋恋币数量类型,0:10,1:50,...
-
 	public String orderId; // 万普支付 订单id
 	public String payType;// 万普支付 支付类型
 

@@ -25,10 +25,9 @@ public class AppServiceBuyImpl implements IAppServiceBuy {
     }
 
     @Override
-    public void buyedLoveMoney(OnBuyedLoveMoneyPostParams postParams, final OnBuyedLoveMoneyResponseListener listener) {
+    public void queryBuyMoneyResult(OnBuyedLoveMoneyPostParams postParams, final OnBuyedLoveMoneyResponseListener listener) {
 	// TODO Auto-generated method stub
 	RequestParams params = new RequestParams();
-	params.put("money_type", postParams.moneyType);
 	params.put("order_id", postParams.orderId);
 	params.put("pay_type", postParams.payType);
 	params.put("amount", postParams.amount);
