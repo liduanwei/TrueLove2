@@ -227,7 +227,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_toLeftOf="@id/tv_price_tips"
-                    android:text="赠送35000金币"
+                    android:text="赠送90000金币"
                     android:textColor="#eeee1111"
                     android:textSize="@dimen/text_size_10" />
             </RelativeLayout>
@@ -260,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_toLeftOf="@id/tv_price_tips"
-                    android:text="赠送75000金币"
+                    android:text="赠送200000金币"
                     android:textColor="#eeee1111"
                     android:textSize="@dimen/text_size_10" />
             </RelativeLayout>
