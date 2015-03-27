@@ -118,25 +118,25 @@ public class BuyLoveMoneyActivity extends BaseActivity implements OnClickListene
 	// TODO Auto-generated method stub
 	switch (v.getId()) {
 	case R.id.layout_buy_50_love_money:
-	    buyLoveMoney(50, 0.01f);
+	    buyLoveMoney(1000, 0.01f);
 	    break;
 	case R.id.layout_buy_100_love_money:
-	    buyLoveMoney(100, 0.02f);
+	    buyLoveMoney(10000, 0.02f);
 	    break;
 	case R.id.layout_buy_300_love_money:
-	    buyLoveMoney(300, 30); // 
+	    buyLoveMoney(30000, 30); // 
 	    break;
 	case R.id.layout_buy_600_love_money:
-	    buyLoveMoney(600, 60);
+	    buyLoveMoney(60000, 60);
 	    break;
 	case R.id.layout_buy_1000_love_money:
-	    buyLoveMoney(1000, 100);
+	    buyLoveMoney(100000, 100);
 	    break;
 	case R.id.layout_buy_5000_love_money:
-	    buyLoveMoney(5000, 500);
+	    buyLoveMoney(500000, 500);
 	    break;
 	case R.id.layout_buy_10000_love_money:
-	    buyLoveMoney(10000, 1000);
+	    buyLoveMoney(1000000, 1000);
 	    break;
 	}
     }
