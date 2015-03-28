@@ -201,10 +201,10 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	registerBroadcastReceivers();
 
 	// 
-	RongIMEvent imEvent = RongIMEvent.getInstance(getActivity());
-	if (imEvent != null) {
-	    imEvent.setOtherListener();
-	}
+//	RongIMEvent imEvent = RongIMEvent.getInstance(getActivity());
+//	if (imEvent != null) {
+//	    imEvent.setOtherListener();
+//	}
 
 	// 广告
 	initAds();

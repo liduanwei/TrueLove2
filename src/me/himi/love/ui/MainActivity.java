@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 
 import me.himi.love.AppServiceImpl;
 import me.himi.love.AppServiceRongCloudIMImpl;
+import me.himi.love.RongIMEvent;
 import me.himi.love.IAppService.CheckUpdateParams;
 import me.himi.love.IAppService.OnCheckUpdateListener;
 import me.himi.love.IAppServiceRongCloudIM.OnTokenResponseListener;
@@ -1002,6 +1003,9 @@ public class MainActivity extends BaseActivity {
 			// 隐藏
 			mLoadingView.setVisibility(View.GONE);
 			AppServiceRongCloudIMImpl.getInstance().refreshUserInfo();
+			
+			// 注册新消息监听器
+			RongIMEvent.getInstance(MainActivity.this).setOtherListener();
 
 		    }
 		});

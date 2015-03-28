@@ -80,7 +80,7 @@ public class AppServiceImpl implements IAppService {
 	    @Override
 	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 		handleRegisterJson(new String(arg2));
-//		System.out.println("注册:" + new String(arg2));
+		//		System.out.println("注册:" + new String(arg2));
 	    }
 
 	    private void handleRegisterJson(String responseJson) {
@@ -90,8 +90,8 @@ public class AppServiceImpl implements IAppService {
 
 	    @Override
 	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-		onRegisterListener.onFailure("注册失败:"+new String(arg2));
-		System.out.println("注册失败:"+new String(arg2));
+		onRegisterListener.onFailure("注册失败:" + new String(arg2));
+		System.out.println("注册失败:" + new String(arg2));
 	    }
 	};
 

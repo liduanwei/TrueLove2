@@ -120,8 +120,6 @@ public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongI
 	    });
 	}
     }
-    
-    
 
     private void initGetUserInfoProvider(final Map<String, UserInfo> users) {
 	// TODO Auto-generated method stub
@@ -206,12 +204,9 @@ public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongI
      * 在RongIM-connect-onSuccess后调用。
      */
     public void setOtherListener() {
-	RongIM rongIM = RongIM.getInstance();
-	if (rongIM != null) {
-	    RongIM.getInstance().setReceiveMessageListener(this);//设置消息接收监听器。
-	    //	    RongIM.getInstance().setSendMessageListener(this);//设置发出消息接收监听器.
-	    RongIM.getInstance().setConnectionStatusListener(this);//设置连接状态监听器。    
-	}
+	RongIM.getInstance().setReceiveMessageListener(this);//设置消息接收监听器。
+	//	    RongIM.getInstance().setSendMessageListener(this);//设置发出消息接收监听器.
+	RongIM.getInstance().setConnectionStatusListener(this);//设置连接状态监听器。    
 
     }
 
