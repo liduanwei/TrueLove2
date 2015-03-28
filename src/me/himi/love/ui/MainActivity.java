@@ -115,9 +115,6 @@ public class MainActivity extends BaseActivity {
 
 	initServices();
 	initBroadcastReceiver();
-	
-	//model
-	showToast("model:" + ActivityUtil.getModel());
 
 	// 系统公告
 	MarqueeTextView tvNotice = getViewById(R.id.tv_system_notice);
@@ -205,8 +202,6 @@ public class MainActivity extends BaseActivity {
 	net.youmi.android.offers.OffersBrowserConfig.setBrowserTitleBackgroundColor(readTopBackgroundColor());
 
 	//	showToast("积分:" + net.youmi.android.offers.PointsManager.getInstance(this).queryPoints() + "");
-
-	//	showToast("配置状态:"+net.youmi.android.offers.OffersManager.getInstance(this).checkOffersAdConfig());
 
 	//在onDestroy时 调用exit
 	//	net.youmi.android.offers.OffersManager.getInstance(this).onAppExit();
