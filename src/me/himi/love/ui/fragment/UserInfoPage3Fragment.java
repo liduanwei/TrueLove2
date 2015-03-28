@@ -22,8 +22,11 @@ import me.himi.love.view.list.XListView.IXListViewListener;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 /**
  * @ClassName:UserInfoPage3Fragment
@@ -78,6 +81,28 @@ public class UserInfoPage3Fragment extends BaseFragment {
 		if (mTargetUser != null) {
 		    loadUserGifts(mTargetUser.getUserId() + "");
 		}
+	    }
+	});
+
+	// 解决scorllview 嵌套 listview 不能滑动的问题
+	// 父 scrollView 容器
+	final ScrollView svContainer = (ScrollView) getActivity().findViewById(R.id.sv_center);
+
+	mListView.setOnTouchListener(new OnTouchListener() {
+
+	    @Override
+	    public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+		    svContainer.requestDisallowInterceptTouchEvent(true); // 让父scrollview不拦截触摸事件
+		    break;
+		case MotionEvent.ACTION_CANCEL:
+		case MotionEvent.ACTION_UP:
+		    svContainer.requestDisallowInterceptTouchEvent(false);
+		    break;
+		}
+		return false;
 	    }
 	});
 
