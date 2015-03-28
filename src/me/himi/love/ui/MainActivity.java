@@ -115,6 +115,9 @@ public class MainActivity extends BaseActivity {
 
 	initServices();
 	initBroadcastReceiver();
+	
+	//model
+	showToast("model:" + ActivityUtil.getModel());
 
 	// 系统公告
 	MarqueeTextView tvNotice = getViewById(R.id.tv_system_notice);

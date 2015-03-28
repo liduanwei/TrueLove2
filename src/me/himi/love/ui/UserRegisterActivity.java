@@ -392,8 +392,8 @@ public class UserRegisterActivity extends BaseActivity implements OnClickListene
 	// 注册时的经纬度
 	user.setLongtitude(MyApplication.getInstance().getLongtitude());
 	user.setLatitude(MyApplication.getInstance().getLatitude());
-
-	user.setModel(Build.MODEL);
+	// 设备型号
+	user.setModel(ActivityUtil.getModel());
 
 	AppServiceImpl.getInstance().register(user, new OnRegisterListener() {
 

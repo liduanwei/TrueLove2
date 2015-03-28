@@ -63,7 +63,7 @@ public class AppServiceImpl implements IAppService {
 	String url = Constants.URL_REGISTER;
 
 	Map<String, String> nameAndValues = new HashMap<String, String>();
-	nameAndValues.put("app_id", "abaxca232zdfasf");
+	nameAndValues.put("app_id", "aBaCcA232CDfaEf");
 	nameAndValues.put("device_id", user.getImei());
 	nameAndValues.put("phone_number", user.getPhoneNumber());
 	nameAndValues.put("phone_imei", user.getImei());
@@ -90,7 +90,8 @@ public class AppServiceImpl implements IAppService {
 
 	    @Override
 	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-		onRegisterListener.onFailure("连接超时");
+		onRegisterListener.onFailure("注册失败:"+new String(arg2));
+		System.out.println("注册失败:"+new String(arg2));
 	    }
 	};
 

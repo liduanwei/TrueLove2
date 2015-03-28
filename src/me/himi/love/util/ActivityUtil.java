@@ -510,6 +510,14 @@ public final class ActivityUtil {
     }
 
     /**
+     * 设备型号
+     * @return
+     */
+    public static String getModel() {
+	return Build.MODEL;
+    }
+
+    /**
      * 判断网络连接是否可用
      * @param context
      * @return
