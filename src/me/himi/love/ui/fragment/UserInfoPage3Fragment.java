@@ -84,7 +84,7 @@ public class UserInfoPage3Fragment extends BaseFragment {
 	    }
 	});
 
-	// 解决scorllview 嵌套 listview 不能滑动的问题
+	// 解决scrollview 嵌套 listview 不能滑动的问题
 	// 父 scrollView 容器
 	final ScrollView svContainer = (ScrollView) getActivity().findViewById(R.id.sv_center);
 
