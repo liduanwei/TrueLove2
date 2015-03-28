@@ -240,15 +240,16 @@ public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongI
 	} else if (messageContent instanceof ImageMessage) {//图片消息
 	    ImageMessage imageMessage = (ImageMessage) messageContent;
 	    String s = new String(imageMessage.encode());
-	    content = s + imageMessage.getRemoteUri();
+//	    content = s + imageMessage.getRemoteUri();
+	    content = "[ 新图片消息 ]";
 	    Log.d(TAG, "onReceived-ImageMessage:" + imageMessage.getRemoteUri());
 	} else if (messageContent instanceof VoiceMessage) {//语音消息
 	    VoiceMessage voiceMessage = (VoiceMessage) messageContent;
-	    content = voiceMessage.getUri().toString();
+	    content = "[ 新语音消息 ]";//voiceMessage.getUri().toString();
 	    Log.d(TAG, "onReceived-voiceMessage:" + voiceMessage.getUri().toString());
 	} else if (messageContent instanceof RichContentMessage) {//图文消息
 	    RichContentMessage richContentMessage = (RichContentMessage) messageContent;
-	    content = richContentMessage.getContent();
+	    content = "[ 新图文消息 ]";//richContentMessage.getContent();
 	    Log.d(TAG, "onReceived-RichContentMessage:" + richContentMessage.getContent());
 	} else {
 	    content = "其它消息";
