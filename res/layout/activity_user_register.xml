@@ -202,7 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTips"
             android:layout_centerHorizontal="true"
-            android:text="QQ: 1373909802   电话:13418672673"
+            android:text="QQ: 1373909802   邮箱:sparklee2088@gmail.com"
             android:textColor="@color/base_color_text_gray"
             android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
