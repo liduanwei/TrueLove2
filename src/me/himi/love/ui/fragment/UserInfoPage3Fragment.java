@@ -188,8 +188,9 @@ public class UserInfoPage3Fragment extends BaseFragment {
 		    if (pageNumber == 1) {
 			mAdapter.setList(gifts);
 			//			mAdapter.getList().clear();
+		    } else {
+			mAdapter.addAll(gifts);
 		    }
-		    mAdapter.addAll(gifts);
 		} else {
 		    showToast("暂无数据");
 		}
