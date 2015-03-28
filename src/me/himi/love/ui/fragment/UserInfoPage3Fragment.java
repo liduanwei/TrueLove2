@@ -183,7 +183,7 @@ public class UserInfoPage3Fragment extends BaseFragment {
 	    @Override
 	    public void onSuccess(List<UserGift> gifts) {
 		// TODO Auto-generated method stub
-		showToast("礼物数:" + gifts.size());
+//		showToast("礼物数:" + gifts.size());
 		if (gifts.size() != 0) {
 		    if (pageNumber == 1) {
 			mAdapter.setList(gifts);
