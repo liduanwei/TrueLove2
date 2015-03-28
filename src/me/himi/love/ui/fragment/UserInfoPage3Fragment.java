@@ -84,7 +84,7 @@ public class UserInfoPage3Fragment extends BaseFragment {
 	    }
 	});
 
-	// 解决scrollview 嵌套 listview 不能滑动的问题
+	// 解决scrollview 嵌套 listview 不能滑动的问题(触摸listview时让父scrollview不拦截触摸)
 	// 父 scrollView 容器
 	final ScrollView svContainer = (ScrollView) getActivity().findViewById(R.id.sv_center);
 
@@ -94,7 +94,7 @@ public class UserInfoPage3Fragment extends BaseFragment {
 	    public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
 		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
+		case MotionEvent.ACTION_DOWN: // 
 		    svContainer.requestDisallowInterceptTouchEvent(true); // 让父scrollview不拦截触摸事件
 		    break;
 		case MotionEvent.ACTION_CANCEL:
