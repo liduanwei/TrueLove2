@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content" >
 
     <TextView
         android:id="@+id/tv_xx_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="礼物列表" />
+        android:text="礼物列表"
+        android:visibility="visible" />
 
-    <GridView
-        android:id="@+id/gridview_gift"
+    <me.himi.love.view.list.XListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="3" >
-    </GridView>
+        android:layout_height="300dp"
+        android:layout_below="@id/tv_xx_tips"
+        android:cacheColorHint="#00000000"
+        android:descendantFocusability="afterDescendants"
+        android:dividerHeight="0.1dip"
+        android:focusable="false"
+        android:listSelector="@drawable/list_selector_cover" />
 
-</LinearLayout>
+</RelativeLayout>

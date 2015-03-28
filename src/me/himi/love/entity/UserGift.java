@@ -13,19 +13,32 @@ public class UserGift implements java.io.Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private Gift gift;
+    private String id;
+
+    public String getGiftName() {
+	return giftName;
+    }
+
+    public void setGiftName(String giftName) {
+	this.giftName = giftName;
+    }
+
+    public String getGiftImageUrl() {
+	return giftImageUrl;
+    }
+
+    public void setGiftImageUrl(String giftImageUrl) {
+	this.giftImageUrl = giftImageUrl;
+    }
+
+    private String giftName, giftImageUrl;
 
     private String fromUserId;
     private String fromUserNickname;
+    private String fromUserAvatar;
     private String word;
 
-    public Gift getGift() {
-	return gift;
-    }
-
-    public void setGift(Gift gift) {
-	this.gift = gift;
-    }
+    private int addTime;
 
     public String getFromUserId() {
 	return fromUserId;
@@ -49,5 +62,29 @@ public class UserGift implements java.io.Serializable {
 
     public void setWord(String word) {
 	this.word = word;
+    }
+
+    public String getFromUserAvatar() {
+	return fromUserAvatar;
+    }
+
+    public void setFromUserAvatar(String fromUserAvatar) {
+	this.fromUserAvatar = fromUserAvatar;
+    }
+
+    public String getId() {
+	return id;
+    }
+
+    public void setId(String id) {
+	this.id = id;
+    }
+
+    public int getAddTime() {
+	return addTime;
+    }
+
+    public void setAddTime(int addTime) {
+	this.addTime = addTime;
     }
 }

@@ -2254,8 +2254,68 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
     }
 
     @Override
-    public void findGiftByUserId(FindGiftByUserIdPostParams postParams, OnFindGiftByUserIdResponseListener listener) {
+    public void findGiftsByUserId(FindGiftsByUserIdPostParams postParams, final OnFindGiftsByUserIdResponseListener listener) {
 	// TODO Auto-generated method stub
+	String url = Constants.URL_USER_GIFT_LIST;
 
+	RequestParams params = new RequestParams();
+	params.put("to_user_id", postParams.toUserId);
+	params.put("page", postParams.page);
+	params.put("page_size", postParams.pageSize);
+
+	AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
+
+	    @Override
+	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		// TODO Auto-generated method stub
+		listener.onFailure("连接超时");
+	    }
+
+	    @Override
+	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		// TODO Auto-generated method stub
+		String data = new String(arg2);
+
+		System.out.println("收到的礼物:" + data);
+
+		try {
+		    JSONArray jsonArr = new JSONArray(data);
+
+		    List<UserGift> gifts = new ArrayList<UserGift>();
+		    for (int i = 0, n = jsonArr.length(); i < n; ++i) {
+			JSONObject jsonObj = jsonArr.getJSONObject(i);
+			UserGift userGift = new UserGift();
+			gifts.add(userGift);
+
+			String id = jsonObj.getString("id");
+			String avatar = jsonObj.getString("face");
+			String nickname = jsonObj.getString("nickname");
+			String giftName = jsonObj.getString("name");
+			String giftImageUrl = jsonObj.getString("image_url");
+			String sendWord = jsonObj.getString("send_word");
+			int addtime = jsonObj.getInt("addtime");
+
+			if (avatar.startsWith(".")) {
+			    avatar = Constants.HOST + avatar.substring(1);
+			}
+
+			userGift.setId(id);
+			userGift.setFromUserAvatar(avatar);
+			userGift.setFromUserNickname(nickname);
+			userGift.setWord(sendWord);
+			userGift.setGiftImageUrl(giftImageUrl);
+			userGift.setGiftName(giftName);
+			userGift.setAddTime(addtime);
+
+		    }
+		    listener.onSuccess(gifts);
+		} catch (Throwable th) {
+		    listener.onFailure("参数错误");
+		}
+	    }
+
+	};
+
+	HttpUtil.post(url, params, responseHandler);
     }
 }

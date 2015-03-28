@@ -690,17 +690,18 @@ public interface IAppServiceExtend {
     }
 
     /**
-     * 查看某个用户的礼物
+     * 查看某个用户的所有礼物
      * @param postParams
      * @param listener
      */
-    void findGiftByUserId(FindGiftByUserIdPostParams postParams, OnFindGiftByUserIdResponseListener listener);
+    void findGiftsByUserId(FindGiftsByUserIdPostParams postParams, OnFindGiftsByUserIdResponseListener listener);
 
-    public static class FindGiftByUserIdPostParams {
+    public static class FindGiftsByUserIdPostParams {
+	public String toUserId;
 	public int page, pageSize;
     }
 
-    public static interface OnFindGiftByUserIdResponseListener {
+    public static interface OnFindGiftsByUserIdResponseListener {
 	void onSuccess(List<UserGift> gifts);
 
 	void onFailure(String errorMsg);

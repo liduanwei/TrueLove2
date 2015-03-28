@@ -291,8 +291,8 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 
 		if (mTargetUser != null) {
 		    // todo
-//		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
-		    
+		    //		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
+
 		    Intent intent = new Intent(UserInfoTextActivity.this, GiftChooseActivity.class);
 		    intent.putExtra("user_id", mTargetUser.getUserId() + "");
 		    intent.putExtra("nickname", mTargetUser.getNickname());
@@ -436,6 +436,7 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 	try {
 	    this.page1Fragment.setInfos(user);
 	    this.page2Fragment.setInfos(user);
+	    this.page3Fragment.load(user);
 	} catch (Throwable th) {
 
 	}
@@ -799,35 +800,35 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 	// TODO Auto-generated method stub
 	if (requestCode == 1) {
 	    if (resultCode == RESULT_OK) { // 选中礼物确认提交
-//		final ProgressDialog dialog = new ProgressDialog(this);
-//		dialog.setMessage("赠送中...");
-//		dialog.show();
-//
-//		String targetUserId = arg2.getStringExtra("user_id");
-//		String targetGiftId = arg2.getStringExtra("gift_id");
-//		String word = arg2.getStringExtra("word"); // 赠言
-//
-//		GiveGiftPostParams postParams = new GiveGiftPostParams();
-//		postParams.giftId = targetGiftId;
-//		postParams.toUserId = targetUserId;
-//		postParams.word = word;
-//
-//		AppServiceExtendImpl.getInstance().giveGift(postParams, new OnGiveGiftResponseListener() {
-//
-//		    @Override
-//		    public void onSuccess(UserGift userGift) {
-//			// TODO Auto-generated method stub
-//			showToast("已赠送!");
-//			dialog.dismiss();
-//		    }
-//
-//		    @Override
-//		    public void onFailure(String errorMsg) {
-//			// TODO Auto-generated method stub
-//			showToast(errorMsg);
-//			dialog.dismiss();
-//		    }
-//		});
+	    //		final ProgressDialog dialog = new ProgressDialog(this);
+	    //		dialog.setMessage("赠送中...");
+	    //		dialog.show();
+	    //
+	    //		String targetUserId = arg2.getStringExtra("user_id");
+	    //		String targetGiftId = arg2.getStringExtra("gift_id");
+	    //		String word = arg2.getStringExtra("word"); // 赠言
+	    //
+	    //		GiveGiftPostParams postParams = new GiveGiftPostParams();
+	    //		postParams.giftId = targetGiftId;
+	    //		postParams.toUserId = targetUserId;
+	    //		postParams.word = word;
+	    //
+	    //		AppServiceExtendImpl.getInstance().giveGift(postParams, new OnGiveGiftResponseListener() {
+	    //
+	    //		    @Override
+	    //		    public void onSuccess(UserGift userGift) {
+	    //			// TODO Auto-generated method stub
+	    //			showToast("已赠送!");
+	    //			dialog.dismiss();
+	    //		    }
+	    //
+	    //		    @Override
+	    //		    public void onFailure(String errorMsg) {
+	    //			// TODO Auto-generated method stub
+	    //			showToast(errorMsg);
+	    //			dialog.dismiss();
+	    //		    }
+	    //		});
 	    }
 	}
 
