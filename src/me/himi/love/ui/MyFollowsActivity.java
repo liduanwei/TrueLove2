@@ -1,5 +1,13 @@
 package me.himi.love.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +20,13 @@ import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.MyFollowsAdapter;
 import me.himi.love.dao.DBHelper;
+import me.himi.love.entity.FriendUser;
 import me.himi.love.entity.NearbyUser;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -124,9 +134,58 @@ public class MyFollowsActivity extends BaseActivity implements OnItemClickListen
 	    }
 	});
 
-	loadFollowUsers();
+	//	loadFollowUsers();
+	// 从缓存加载
+	loadUsersFromCache(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
 
 	mListView.setOnItemClickListener(this);
+    }
+
+    // 使用本地缓存
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/myfollows_";
+
+    /**
+     * 
+     * 
+     */
+    private void loadUsersFromCache(String userId) {
+	// TODO Auto-generated method stub
+	File f = new File(cacheUsersPath + userId);
+
+	if (f.exists()) {
+
+	    try {
+
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+
+		Object obj = ois.readObject();
+
+		List<NearbyUser> users = (List<NearbyUser>) obj;
+
+		mAdapter.getList().clear();
+
+		mAdapter.addAll(users);
+
+		ois.close();
+
+	    } catch (StreamCorruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	} else {
+	    // 不存在则从网络获取
+	    loadFollowUsers();
+	}
+
     }
 
     @Override
@@ -191,6 +250,9 @@ public class MyFollowsActivity extends BaseActivity implements OnItemClickListen
 			mAdapter.getList().clear();
 		    }
 		    mAdapter.addAll(users);
+
+		    // 缓存到本地
+		    cacheToLocal(users, MyApplication.getInstance().getCurrentLoginedUser().getUserId());
 		} else {
 
 		}
@@ -208,6 +270,29 @@ public class MyFollowsActivity extends BaseActivity implements OnItemClickListen
 		isRefreshing = false;
 	    }
 
+	    /**
+	     * 
+	     * @param users
+	     */
+	    private void cacheToLocal(List<NearbyUser> users, int currentUserId) {
+		// TODO Auto-generated method stub
+		File f = new File(cacheUsersPath + currentUserId);
+		if (!f.getParentFile().exists()) {
+		    f.getParentFile().mkdirs();
+		}
+		try {
+		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+		    oos.writeObject(users);
+		    oos.close();
+		} catch (FileNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+
 	    @Override
 	    public void onFailure(String errorMsg) {
 		// TODO Auto-generated method stub
@@ -220,7 +305,7 @@ public class MyFollowsActivity extends BaseActivity implements OnItemClickListen
 		showToast(errorMsg);
 
 		isRefreshing = false;
-		
+
 		// 重试按钮隐藏
 		mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 	    }

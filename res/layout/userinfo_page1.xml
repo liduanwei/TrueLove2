@@ -99,7 +99,7 @@
 
         <View
             android:id="@+id/view_monologue_left"
-            android:layout_width="10dip"
+            android:layout_width="7dip"
             android:layout_height="32dip"
             android:layout_alignParentLeft="true"
             android:background="@color/bar3" />
@@ -129,7 +129,7 @@
 
         <View
             android:id="@+id/view_line2_left"
-            android:layout_width="10dip"
+            android:layout_width="7dip"
             android:layout_height="32dip"
             android:background="@color/bar3" />
 
@@ -598,7 +598,7 @@
 
             <View
                 android:id="@+id/view_line3_left"
-                android:layout_width="10dip"
+                android:layout_width="7dip"
                 android:layout_height="32dip"
                 android:background="@color/bar3" />
 

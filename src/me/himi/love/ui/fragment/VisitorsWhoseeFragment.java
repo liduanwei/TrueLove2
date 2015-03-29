@@ -1,10 +1,19 @@
 package me.himi.love.ui.fragment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
+import me.himi.love.MyApplication;
 import me.himi.love.IAppService.OnLoadUserVisitorsListener;
 import me.himi.love.IAppService.UserVisitorsParams;
 import me.himi.love.IAppServiceExtend.LoadFansParams;
@@ -12,6 +21,7 @@ import me.himi.love.IAppServiceExtend.OnLoadFansResponseListener;
 import me.himi.love.R;
 import me.himi.love.adapter.UserVisitorsAdapter;
 import me.himi.love.entity.NearbyUser;
+import me.himi.love.entity.VisitedUser;
 import me.himi.love.entity.VisitorUser;
 import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.UserVisitorsActivity;
@@ -21,6 +31,7 @@ import me.himi.love.util.ToastFactory;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +55,7 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 	Bundle args = getArguments();
 
 	// 放在只创建一次的地方避免重复添加数据
-	loadUsers();
+	//	loadUsers();
     }
 
     @Override
@@ -57,15 +68,15 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 
     List<VisitorUser> data = new ArrayList<VisitorUser>();
 
-//    ProgressBar pbLoading;// 加载中
-//    TextView tvLoadRetry;// 重试
+    //    ProgressBar pbLoading;// 加载中
+    //    TextView tvLoadRetry;// 重试
 
     private void init(View v) {
 
 	// 加载中
-//	pbLoading = (ProgressBar) v.findViewById(R.id.pb_whosee_loading);
-//	// 加载重试
-//	tvLoadRetry = (TextView) v.findViewById(R.id.tv_whosee_load_retry);
+	//	pbLoading = (ProgressBar) v.findViewById(R.id.pb_whosee_loading);
+	//	// 加载重试
+	//	tvLoadRetry = (TextView) v.findViewById(R.id.tv_whosee_load_retry);
 
 	mListView = (me.himi.love.view.list.XListView) v.findViewById(R.id.listview);
 	mListView.setPullRefreshEnable(true);
@@ -91,11 +102,61 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 	});
 
 	mListView.setOnItemClickListener(this);
+
+	// 从缓存中加载数据
+	loadUsersFromCache(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
     }
 
     public void setTargetUserId(int targetUserId) {
 	this.targetUserId = targetUserId;
 	//	loadUsers();
+    }
+
+    // 使用本地缓存
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/whosee_users_";
+
+    /**
+     * 
+     * 
+     */
+    private void loadUsersFromCache(String userId) {
+	// TODO Auto-generated method stub
+	File f = new File(cacheUsersPath + userId);
+
+	if (f.exists()) {
+
+	    try {
+
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+
+		Object obj = ois.readObject();
+
+		List<VisitorUser> users = (List<VisitorUser>) obj;
+
+		mAdapter.getList().clear();
+
+		mAdapter.addAll(users);
+
+		ois.close();
+
+	    } catch (StreamCorruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	} else {
+	    // 不存在则从网络获取
+	    loadUsers();
+	}
+
     }
 
     int pageNumber = 1;
@@ -123,6 +184,9 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 		    }
 		    mAdapter.addAll(users);
 
+		    // 缓存到本地
+		    cacheToLocal(mAdapter.getList(), MyApplication.getInstance().getCurrentLoginedUser().getUserId());
+
 		} else {
 
 		    if (mAdapter.getList().size() == 0) {
@@ -139,7 +203,30 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 		mListView.stopLoadMore();
 		mListView.stopRefresh();
 
-//		pbLoading.setVisibility(View.GONE);
+		//		pbLoading.setVisibility(View.GONE);
+	    }
+
+	    /**
+	     * 
+	     * @param users
+	     */
+	    private void cacheToLocal(List<VisitorUser> users, int currentUserId) {
+		// TODO Auto-generated method stub
+		File f = new File(cacheUsersPath + currentUserId);
+		if (!f.getParentFile().exists()) {
+		    f.getParentFile().mkdirs();
+		}
+		try {
+		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+		    oos.writeObject(users);
+		    oos.close();
+		} catch (FileNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
 	    }
 
 	    @Override
@@ -149,7 +236,7 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 		mListView.stopLoadMore();
 		mListView.stopRefresh();
 
-//		tvLoadRetry.setVisibility(View.VISIBLE);
+		//		tvLoadRetry.setVisibility(View.VISIBLE);
 
 	    }
 	});
