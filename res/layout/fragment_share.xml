@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
-        android:layout_height="45dip"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:orientation="vertical" >
 
@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="5dip"
-            android:visibility="gone"
-            android:paddingTop="10dip" >
+            android:paddingTop="10dip"
+            android:visibility="gone" >
 
             <TextView
                 android:id="@+id/tv_tab_embarrassment"

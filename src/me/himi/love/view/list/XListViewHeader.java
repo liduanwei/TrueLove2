@@ -121,7 +121,7 @@ public class XListViewHeader extends LinearLayout {
     }
 
     public void setRefreshTime(String time) {
-	mHeaderTimeLabel.setVisibility(View.VISIBLE);
+	//mHeaderTimeLabel.setVisibility(View.VISIBLE);
 	mHeaderTimeView.setText(time);
     }
 }
