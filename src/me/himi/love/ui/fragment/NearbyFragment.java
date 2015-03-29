@@ -1,7 +1,5 @@
 package me.himi.love.ui.fragment;
 
-import io.rong.imkit.RongIM;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,6 +29,7 @@ import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.ui.sound.SoundPlayer;
 import me.himi.love.util.ActivityUtil;
+import me.himi.love.util.CacheUtils;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -219,7 +218,13 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
 	});
 
 	//	loadRecommendUsers();
-	loadFromCache();
+	// 优先从缓存加载
+	List<NearbyUser> users = CacheUtils.loadFromCache(cacheUsersPath);
+	if (users != null) {
+	    mAdapter.setList(users);
+	} else {
+	    loadRecommendUsers();
+	}
 	// 广告初始化
 	initAds();
 
@@ -254,35 +259,6 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
 
     // 使用本地缓存
     private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users";
-
-    private void loadFromCache() {
-	// TODO Auto-generated method stub
-	File f = new File(cacheUsersPath);
-	if (f.exists()) {
-	    try {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-		Object obj = ois.readObject();
-		List<NearbyUser> users = (List<NearbyUser>) obj;
-		mAdapter.getList().clear();
-		mAdapter.addAll(users);
-	    } catch (StreamCorruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
-	} else {
-	    // 不存在则从网络获取
-	    loadRecommendUsers();
-	}
-    }
 
     private boolean isRefreshing;// 刷新中...
 
@@ -365,7 +341,7 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
 		    pageNumber++;
 
 		    // 缓存到本地,下次启动首先从缓存加载
-		    cacheToLocal(users);
+		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
 
 		} else {
 		    showToast(mAdapter.getList().size() != 0 ? "暂无更多" : "暂无数据");
@@ -379,29 +355,6 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
 		}
 		if (mListView.getPullRefreshing()) {
 		    mListView.stopRefresh();
-		}
-	    }
-
-	    /**
-	     * 
-	     * @param users
-	     */
-	    private void cacheToLocal(List<NearbyUser> users) {
-		// TODO Auto-generated method stub
-		File f = new File(cacheUsersPath);
-		if (!f.getParentFile().exists()) {
-		    f.getParentFile().mkdirs();
-		}
-		try {
-		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		    oos.writeObject(users);
-		    oos.close();
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
 		}
 	    }
 

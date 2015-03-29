@@ -22,6 +22,7 @@ import me.himi.love.entity.loader.IRecommendUserLoader;
 import me.himi.love.entity.loader.impl.NearbyUserLoaderImpl;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.ui.sound.SoundPlayer;
+import me.himi.love.util.CacheUtils;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -62,7 +63,7 @@ public class UserWallFragment extends BaseFragment {
 	// TODO Auto-generated method stub
 	super.onActivityCreated(savedInstanceState);
 
-//	init();
+	//	init();
     }
 
     final OnRefreshListener onRefreshListener = new OnRefreshListener() {
@@ -73,7 +74,7 @@ public class UserWallFragment extends BaseFragment {
 
 	    loadRecommendUsers();
 
-//	    mMultiColListView.onRefreshComplete();
+	    //	    mMultiColListView.onRefreshComplete();
 	}
     };
 
@@ -123,55 +124,34 @@ public class UserWallFragment extends BaseFragment {
 	this.mMultiColListView.setOnRefreshListener(onRefreshListener);
 
 	// 滑动到底部自动加载更多
-//	this.mMultiColListView.setOnLoadMoreListener(new OnLoadMoreListener() {
-//
-//	    @Override
-//	    public void onLoadMore() {
-//		showToast("加载更多中.........");
-//		loadRecommendUsers();
-//	    }
-//	});
+	//	this.mMultiColListView.setOnLoadMoreListener(new OnLoadMoreListener() {
+	//
+	//	    @Override
+	//	    public void onLoadMore() {
+	//		showToast("加载更多中.........");
+	//		loadRecommendUsers();
+	//	    }
+	//	});
 
 	// 加载推荐的用户(符合当前用户征婚年龄段的异性,按虚拟币数量和VIP排序)
 	//	loadRecommendUsers();
-	
-	
+
 	loadFromCache();
     }
 
     private void loadFromCache() {
-	// TODO Auto-generated method stub
-	File f = new File(cacheUsersPath);
-	if (f.exists()) {
-	    try {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-		Object obj = ois.readObject();
-		List<RecommendUser> users = (List<RecommendUser>) obj;
-		mAdapter.getList().clear();
-		mAdapter.addAll(users);
-		ois.close();
-	    } catch (StreamCorruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
+	List<RecommendUser> users = CacheUtils.loadFromCache(cacheUsersPath);
+	if (users != null) {
+	    mAdapter.setList(users);
 	} else {
-	    // 不存在则从网络获取
 	    loadRecommendUsers();
 	}
+
     }
 
     private boolean isRefreshing;// 是否加载中
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users_recommend";
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users_recommend" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     private void loadRecommendUsers() {
 	if (isRefreshing)
@@ -240,7 +220,7 @@ public class UserWallFragment extends BaseFragment {
 		    pageNumber++;
 
 		    // 缓存到本地,下次启动首先从缓存加载
-		    cacheToLocal(users);
+		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
 
 		} else {
 		    showToast(mAdapter.getList().size() != 0 ? "暂无更多" : "暂无数据");
@@ -251,29 +231,6 @@ public class UserWallFragment extends BaseFragment {
 
 		mMultiColListView.onRefreshComplete();
 
-	    }
-
-	    /**
-	     * 
-	     * @param users
-	     */
-	    private void cacheToLocal(List<RecommendUser> users) {
-		// TODO Auto-generated method stub
-		File f = new File(cacheUsersPath);
-		if (!f.getParentFile().exists()) {
-		    f.getParentFile().mkdirs();
-		}
-		try {
-		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		    oos.writeObject(users);
-		    oos.close();
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
 	    }
 
 	    @Override
