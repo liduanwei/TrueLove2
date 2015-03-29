@@ -38,6 +38,8 @@ public class UserGift implements java.io.Serializable {
     private String fromUserAvatar;
     private String word;
 
+    private boolean isVip;
+
     private int addTime;
 
     public String getFromUserId() {
@@ -86,5 +88,13 @@ public class UserGift implements java.io.Serializable {
 
     public void setAddTime(int addTime) {
 	this.addTime = addTime;
+    }
+
+    public boolean isVip() {
+	return isVip;
+    }
+
+    public void setVip(boolean isVip) {
+	this.isVip = isVip;
     }
 }

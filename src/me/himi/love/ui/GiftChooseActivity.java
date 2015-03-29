@@ -97,6 +97,7 @@ public class GiftChooseActivity extends BaseActivity {
 
 	    }
 	});
+
 	final TextView tvTargetTips = (TextView) findViewById(R.id.tv_select_gift_tips);
 	final EditText etWord = (EditText) findViewById(R.id.et_send_word);
 

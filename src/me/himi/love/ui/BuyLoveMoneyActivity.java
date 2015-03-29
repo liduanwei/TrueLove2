@@ -1,12 +1,18 @@
 package me.himi.love.ui;
 
 import me.himi.love.AppServiceBuyImpl;
+import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.IAppServiceBuy.OnBuyedLoveMoneyPostParams;
 import me.himi.love.IAppServiceBuy.OnBuyedLoveMoneyResponseListener;
+import me.himi.love.IAppServiceExtend.HomeInfo;
+import me.himi.love.IAppServiceExtend.LoadHomeInfoPostParams;
+import me.himi.love.IAppServiceExtend.OnLoadHomeInfoResponseListener;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.entity.DetailInfoUser;
+import me.himi.love.entity.LoginedUser;
 import me.himi.love.ui.base.BaseActivity;
+import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
 import me.himi.love.util.StringUtils;
 import me.himi.love.util.ToastFactory;
@@ -210,6 +216,79 @@ public class BuyLoveMoneyActivity extends BaseActivity implements OnClickListene
 		Toast.makeText(getApplicationContext(), resultString, Toast.LENGTH_LONG).show();
 	    }
 	}
+    }
+
+    @Override
+    protected void onResume() {
+	// TODO Auto-generated method stub
+	updateHomeInfo();
+	super.onResume();
+    }
+
+    /**
+     * 重新获取首页信息
+     */
+    private void updateHomeInfo() {
+	//显示状态改变时 尝试更新为当前内存中保存的资料
+	final LoginedUser user = MyApplication.getInstance().getCurrentLoginedUser();
+
+	LoadHomeInfoPostParams postParams = new LoadHomeInfoPostParams();
+
+	AppServiceExtendImpl.getInstance().loadHomeInfo(postParams, new OnLoadHomeInfoResponseListener() {
+
+	    @Override
+	    public void onSuccess(HomeInfo homeInfo) {
+		// TODO Auto-generated method stub
+
+		//		tvFansCount.setText(homeInfo.fans + "");
+		//		tvFriendsCount.setText(homeInfo.friends + "");
+		//		tvFollowsCount.setText(homeInfo.follows + "");
+
+		// 更新 loginedUser中的数据
+		user.setFansCount(homeInfo.fans);
+		user.setFollowsCount(homeInfo.follows);
+		user.setFriendsCount(homeInfo.friends);
+
+		user.setLoveMoney(homeInfo.loveMoney);
+		user.setNickname(homeInfo.nickname);
+
+		user.setIsVip(homeInfo.isVip ? 1 : 0);
+
+		user.setVipExpireTime(homeInfo.vipExpireTime);
+
+		//更新view
+
+		tvMyMoney.setText(user.getLoveMoney() + "");
+		if (user.getIsVip() == 1) {
+		    //		    String dateStr = ActivityUtil.getDateStr(user.getVipExpireTime(), "yyyy/MM/dd HH:mm:ss");
+		    //		    tvVipExpireTime.setText(dateStr);
+		} else { // 非会员
+		//		    tvVipExpireTime.setText("您目前还没有开通VIP会员");
+		}
+
+		//		tvMyId.setText("ID:" + user.getUserId());
+		//		tvMyNickname.setEmojiText(user.getNickname());
+		//		tvLoveMoney.setText(user.getLoveMoney() + "币");
+		//		if (homeInfo.signed) {
+		//		    tvSignin.setText("已签到");
+		//		    tvSignin.setEnabled(false);
+		//		}
+		//
+		//		if (user.getIsVip() == 1) {
+		//		    tvMyVip.setBackgroundResource(R.drawable.vip_sign);
+		//		} else {
+		//		    tvMyVip.setBackgroundResource(R.drawable.vip_sign_not);
+		//		}
+		//		String url = user.getFaceUrl();// "http://t11.baidu.com/it/u=751031812,971358817&fm=56" : "http://img1.imgtn.bdimg.com/it/u=1983880049,3609856836&fm=116&gp=0.jpg";
+		//		refreshMyFace(url);
+	    }
+
+	    @Override
+	    public void onFailure(String errorMsg) {
+		// TODO Auto-generated method stub
+
+	    }
+	});
     }
 
     @Override

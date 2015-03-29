@@ -90,7 +90,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	return mContainerView;
     }
 
-//    private BroadcastReceiver rcNewMsgBroadcastReceiver; // im聊天消息
+    //    private BroadcastReceiver rcNewMsgBroadcastReceiver; // im聊天消息
     private BroadcastReceiver privateMsgBroadcastReceiver; // 私信消息
 
     @Override
@@ -132,6 +132,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	mContainerView.findViewById(R.id.layout_to_myfriends).setOnClickListener(this); // 查看我的好友
 	mContainerView.findViewById(R.id.layout_to_myfollows).setOnClickListener(this); // 查看我的关注
 	mContainerView.findViewById(R.id.layout_to_myfans).setOnClickListener(this); // 查看我的粉丝
+	mContainerView.findViewById(R.id.layout_to_mygifts).setOnClickListener(this); // 查看我的礼物
 
 	tvFriendsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_friends_no)); // 好友
 	tvFollowsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_follows_no));//关注
@@ -201,10 +202,10 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	registerBroadcastReceivers();
 
 	// 
-//	RongIMEvent imEvent = RongIMEvent.getInstance(getActivity());
-//	if (imEvent != null) {
-//	    imEvent.setOtherListener();
-//	}
+	//	RongIMEvent imEvent = RongIMEvent.getInstance(getActivity());
+	//	if (imEvent != null) {
+	//	    imEvent.setOtherListener();
+	//	}
 
 	// 广告
 	initAds();
@@ -212,20 +213,20 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
     private void registerBroadcastReceivers() {
 	// TODO Auto-generated method stub
-//	IntentFilter filter = new IntentFilter();
-//	filter.addAction(MainActivity.ACTION_IM_RECEIVE_MESSAGE);
-//
-//	rcNewMsgBroadcastReceiver = new BroadcastReceiver() {
-//
-//	    @Override
-//	    public void onReceive(Context context, Intent intent) {
-//		tvConversationTips.setVisibility(View.VISIBLE);
-//		showToast(intent.getStringExtra("content"));
-//	    }
-//	};
-//
-//	// z
-//	getActivity().registerReceiver(rcNewMsgBroadcastReceiver, filter);
+	//	IntentFilter filter = new IntentFilter();
+	//	filter.addAction(MainActivity.ACTION_IM_RECEIVE_MESSAGE);
+	//
+	//	rcNewMsgBroadcastReceiver = new BroadcastReceiver() {
+	//
+	//	    @Override
+	//	    public void onReceive(Context context, Intent intent) {
+	//		tvConversationTips.setVisibility(View.VISIBLE);
+	//		showToast(intent.getStringExtra("content"));
+	//	    }
+	//	};
+	//
+	//	// z
+	//	getActivity().registerReceiver(rcNewMsgBroadcastReceiver, filter);
 
 	//	filter = new IntentFilter();
 	//	filter.addAction(MessagePollService.ACTION_PRIVATE_MESSAGE);
@@ -385,6 +386,9 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	    // 制造异常
 	    //	    System.out.println(1/0);
 	    startActivity(intent8);
+	    break;
+	case R.id.layout_to_mygifts: // 我的礼物
+	    mContainerView.findViewById(R.id.tv_newgifts_message_tips).setVisibility(View.GONE);
 	    break;
 	}
     }
@@ -622,7 +626,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
     private void unregisterBroadcastReceivers() {
 	// TODO Auto-generated method stub
-	
-//	getActivity().unregisterReceiver(rcNewMsgBroadcastReceiver);
+
+	//	getActivity().unregisterReceiver(rcNewMsgBroadcastReceiver);
     }
 }

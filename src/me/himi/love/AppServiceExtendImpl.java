@@ -2288,6 +2288,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 			gifts.add(userGift);
 
 			String id = jsonObj.getString("id");
+			int isVip = jsonObj.getInt("is_vip");
 			String avatar = jsonObj.getString("face");
 			String nickname = jsonObj.getString("nickname");
 			String giftName = jsonObj.getString("name");
@@ -2300,6 +2301,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 			}
 
 			userGift.setId(id);
+			userGift.setVip(isVip == 1);
 			userGift.setFromUserAvatar(avatar);
 			userGift.setFromUserNickname(nickname);
 			userGift.setWord(sendWord);

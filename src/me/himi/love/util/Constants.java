@@ -6,7 +6,7 @@ package me.himi.love.util;
  * @date Nov 4, 2014 9:14:59 PM
  */
 public interface Constants {
-    //            String HOST = "http://192.168.1.101/RedLove2";
+//                String HOST = "http://192.168.1.104/RedLove2";
 
     String HOST = "http://love5.leavtechintl.com";
 

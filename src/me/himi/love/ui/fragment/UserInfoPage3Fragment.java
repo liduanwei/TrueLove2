@@ -15,10 +15,13 @@ import me.himi.love.IAppServiceExtend.OnFindGiftsByUserIdResponseListener;
 import me.himi.love.R;
 import me.himi.love.adapter.UserGiftsAdapter;
 import me.himi.love.entity.DetailInfoUser;
+import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.UserGift;
+import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.view.list.XListView;
 import me.himi.love.view.list.XListView.IXListViewListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -26,6 +29,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 
 /**
@@ -33,7 +38,7 @@ import android.widget.ScrollView;
  * @author sparklee liduanwei_911@163.com
  * @date Nov 2, 2014 10:52:08 PM
  */
-public class UserInfoPage3Fragment extends BaseFragment {
+public class UserInfoPage3Fragment extends BaseFragment implements OnItemClickListener {
 
     View mContainerView;
 
@@ -106,6 +111,7 @@ public class UserInfoPage3Fragment extends BaseFragment {
 	    }
 	});
 
+	mListView.setOnItemClickListener(this);
     }
 
     public void load(DetailInfoUser userInfo) {
@@ -183,7 +189,7 @@ public class UserInfoPage3Fragment extends BaseFragment {
 	    @Override
 	    public void onSuccess(List<UserGift> gifts) {
 		// TODO Auto-generated method stub
-//		showToast("礼物数:" + gifts.size());
+		//		showToast("礼物数:" + gifts.size());
 		if (gifts.size() != 0) {
 		    if (pageNumber == 1) {
 			mAdapter.setList(gifts);
@@ -218,5 +224,20 @@ public class UserInfoPage3Fragment extends BaseFragment {
     public void onDestroy() {
 
 	super.onDestroy();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	// TODO Auto-generated method stub
+	UserGift userGift = mAdapter.getList().get(position - 1);
+
+	Intent intent = new Intent();
+	intent.setClass(getActivity(), UserInfoTextActivity.class);
+	intent.putExtra("user_id", Integer.parseInt(userGift.getFromUserId()));
+	intent.putExtra("is_vip", userGift.isVip());
+	intent.putExtra("user_nickname", userGift.getFromUserNickname());
+	intent.putExtra("user_face_url", userGift.getFromUserAvatar());
+
+	getActivity().startActivity(intent);
     }
 }

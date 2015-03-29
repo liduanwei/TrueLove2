@@ -71,7 +71,7 @@ public class AppServiceImpl implements IAppService {
 	nameAndValues.put("latitude", user.getLatitude());
 	nameAndValues.put("username", user.getUsername());
 	nameAndValues.put("password", user.getPassword());
-	nameAndValues.put("model", user.getModel());
+	nameAndValues.put("mo", user.getModel()); //  model 服务器端无法更新数据表? 
 
 	RequestParams params = new RequestParams(nameAndValues);
 

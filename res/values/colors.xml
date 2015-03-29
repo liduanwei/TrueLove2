@@ -38,6 +38,7 @@
     <color name="c_f98800">#eeff2233</color>
     <color name="c_aaaaff">#eeee1111</color>
     <color name="c_ee888888">#ee888888</color>
+    <color name="c_ffffffff">#ffffffff</color>
     <color name="c_333388">#ee333388</color>
     <color name="c_vip">#eeee2222</color>
     <color name="c_not_vip">#ee111111</color>
