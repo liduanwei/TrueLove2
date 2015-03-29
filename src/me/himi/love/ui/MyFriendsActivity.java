@@ -23,6 +23,7 @@ import me.himi.love.entity.FriendUser;
 import me.himi.love.entity.Gift;
 import me.himi.love.entity.UserGift;
 import me.himi.love.ui.base.BaseActivity;
+import me.himi.love.util.CacheUtils;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.os.Bundle;
 import android.os.Environment;
@@ -116,8 +117,12 @@ public class MyFriendsActivity extends BaseActivity implements OnItemClickListen
 	});
 
 	//	loadFriends();
-	loadUsersFromCache(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
-
+	List<FriendUser> users = CacheUtils.loadFromCache(cacheUsersPath);
+	if (null == users) {
+	    loadFriends();
+	} else {
+	    mAdapter.setList(users);
+	}
 	mListView.setOnItemClickListener(this);
     }
 
@@ -133,51 +138,7 @@ public class MyFriendsActivity extends BaseActivity implements OnItemClickListen
     }
 
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/myfriends_";
-
-    /**
-     * 
-     * 
-     */
-    private void loadUsersFromCache(String userId) {
-	// TODO Auto-generated method stub
-	File f = new File(cacheUsersPath + userId);
-
-	if (f.exists()) {
-
-	    try {
-
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-
-		Object obj = ois.readObject();
-
-		List<FriendUser> users = (List<FriendUser>) obj;
-
-		mAdapter.getList().clear();
-
-		mAdapter.addAll(users);
-
-		ois.close();
-
-	    } catch (StreamCorruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
-	} else {
-	    // 不存在则从网络获取
-	    loadFriends();
-	}
-
-    }
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/myfriends_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     private boolean isRefreshing;// 是否刷新中.
 
@@ -237,7 +198,7 @@ public class MyFriendsActivity extends BaseActivity implements OnItemClickListen
 		    pageNumber++;
 
 		    // 缓存到本地
-		    cacheToLocal(users, MyApplication.getInstance().getCurrentLoginedUser().getUserId());
+		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
 		} else {
 		    showToast(mAdapter.getList().size() != 0 ? "暂无更多" : "暂无好友");
 		}
@@ -252,29 +213,6 @@ public class MyFriendsActivity extends BaseActivity implements OnItemClickListen
 		// 隐藏
 		mLoadingView.setVisibility(View.GONE);
 
-	    }
-
-	    /**
-	     * 
-	     * @param users
-	     */
-	    private void cacheToLocal(List<FriendUser> users, int currentUserId) {
-		// TODO Auto-generated method stub
-		File f = new File(cacheUsersPath + currentUserId);
-		if (!f.getParentFile().exists()) {
-		    f.getParentFile().mkdirs();
-		}
-		try {
-		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		    oos.writeObject(users);
-		    oos.close();
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
 	    }
 
 	    @Override

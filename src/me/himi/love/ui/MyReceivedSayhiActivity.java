@@ -1,19 +1,29 @@
 package me.himi.love.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.himi.love.AppServiceExtendImpl;
+import me.himi.love.MyApplication;
 import me.himi.love.IAppServiceExtend.LoadSayHiParams;
 import me.himi.love.IAppServiceExtend.OnLoadSayHiResponseListener;
 import me.himi.love.R;
 import me.himi.love.adapter.MyReceivedSayhiAdapter;
+import me.himi.love.entity.FriendUser;
 import me.himi.love.entity.ReceivedSayHi;
 import me.himi.love.ui.base.BaseActivity;
+import me.himi.love.util.CacheUtils;
 import me.himi.love.view.list.XListView;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -92,9 +102,20 @@ public class MyReceivedSayhiActivity extends BaseActivity implements OnItemClick
 
 	mListView.setOnItemClickListener(this);
 
-	loadSayhis();
+	//	loadSayhis();
+	// 从缓存加载
+
+	List<ReceivedSayHi> his = CacheUtils.loadFromCache(cacheUsersPath);
+	if (his == null) {
+	    loadSayhis();
+	} else {
+	    mSayhiAdapter.setList(his);
+	}
 
     }
+
+    // 使用本地缓存
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/mysayhis_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     View mLoadingView;
 
@@ -143,7 +164,9 @@ public class MyReceivedSayhiActivity extends BaseActivity implements OnItemClick
 		}
 		mSayhiAdapter.addAll(sayhis);
 
-		mListView.stopRefresh();
+		// 缓存到本地
+		CacheUtils.cacheToLocal(mSayhiAdapter.getList(), cacheUsersPath);
+
 		mListView.stopLoadMore();
 
 		pageNumber++;

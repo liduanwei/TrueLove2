@@ -27,6 +27,7 @@ import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.UserVisitorsActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.util.ActivityUtil;
+import me.himi.love.util.CacheUtils;
 import me.himi.love.util.ToastFactory;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
@@ -104,7 +105,12 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 	mListView.setOnItemClickListener(this);
 
 	// 从缓存中加载数据
-	loadUsersFromCache(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
+	List<VisitorUser> users = CacheUtils.loadFromCache(cacheUsersPath);
+	if (users != null) {
+	    mAdapter.setList(users);
+	} else {
+	    loadUsers();
+	}
     }
 
     public void setTargetUserId(int targetUserId) {
@@ -113,51 +119,7 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
     }
 
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/whosee_users_";
-
-    /**
-     * 
-     * 
-     */
-    private void loadUsersFromCache(String userId) {
-	// TODO Auto-generated method stub
-	File f = new File(cacheUsersPath + userId);
-
-	if (f.exists()) {
-
-	    try {
-
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-
-		Object obj = ois.readObject();
-
-		List<VisitorUser> users = (List<VisitorUser>) obj;
-
-		mAdapter.getList().clear();
-
-		mAdapter.addAll(users);
-
-		ois.close();
-
-	    } catch (StreamCorruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
-	} else {
-	    // 不存在则从网络获取
-	    loadUsers();
-	}
-
-    }
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/whosee_users_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     int pageNumber = 1;
 
@@ -185,7 +147,7 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 		    mAdapter.addAll(users);
 
 		    // 缓存到本地
-		    cacheToLocal(mAdapter.getList(), MyApplication.getInstance().getCurrentLoginedUser().getUserId());
+		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
 
 		} else {
 
@@ -204,29 +166,6 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 		mListView.stopRefresh();
 
 		//		pbLoading.setVisibility(View.GONE);
-	    }
-
-	    /**
-	     * 
-	     * @param users
-	     */
-	    private void cacheToLocal(List<VisitorUser> users, int currentUserId) {
-		// TODO Auto-generated method stub
-		File f = new File(cacheUsersPath + currentUserId);
-		if (!f.getParentFile().exists()) {
-		    f.getParentFile().mkdirs();
-		}
-		try {
-		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		    oos.writeObject(users);
-		    oos.close();
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
 	    }
 
 	    @Override

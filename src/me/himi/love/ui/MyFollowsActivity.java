@@ -23,6 +23,7 @@ import me.himi.love.dao.DBHelper;
 import me.himi.love.entity.FriendUser;
 import me.himi.love.entity.NearbyUser;
 import me.himi.love.ui.base.BaseActivity;
+import me.himi.love.util.CacheUtils;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -136,57 +137,18 @@ public class MyFollowsActivity extends BaseActivity implements OnItemClickListen
 
 	//	loadFollowUsers();
 	// 从缓存加载
-	loadUsersFromCache(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
+	List<NearbyUser> users = CacheUtils.loadFromCache(cacheUsersPath);
+	if (null == users) {
+	    loadFollowUsers();
+	} else {
+	    mAdapter.setList(users);
+	}
 
 	mListView.setOnItemClickListener(this);
     }
 
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/myfollows_";
-
-    /**
-     * 
-     * 
-     */
-    private void loadUsersFromCache(String userId) {
-	// TODO Auto-generated method stub
-	File f = new File(cacheUsersPath + userId);
-
-	if (f.exists()) {
-
-	    try {
-
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-
-		Object obj = ois.readObject();
-
-		List<NearbyUser> users = (List<NearbyUser>) obj;
-
-		mAdapter.getList().clear();
-
-		mAdapter.addAll(users);
-
-		ois.close();
-
-	    } catch (StreamCorruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
-	} else {
-	    // 不存在则从网络获取
-	    loadFollowUsers();
-	}
-
-    }
+    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/myfollows_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     @Override
     public void onResume() {
@@ -252,7 +214,7 @@ public class MyFollowsActivity extends BaseActivity implements OnItemClickListen
 		    mAdapter.addAll(users);
 
 		    // 缓存到本地
-		    cacheToLocal(users, MyApplication.getInstance().getCurrentLoginedUser().getUserId());
+		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
 		} else {
 
 		}
@@ -268,29 +230,6 @@ public class MyFollowsActivity extends BaseActivity implements OnItemClickListen
 		mLoadingView.setVisibility(View.GONE);
 
 		isRefreshing = false;
-	    }
-
-	    /**
-	     * 
-	     * @param users
-	     */
-	    private void cacheToLocal(List<NearbyUser> users, int currentUserId) {
-		// TODO Auto-generated method stub
-		File f = new File(cacheUsersPath + currentUserId);
-		if (!f.getParentFile().exists()) {
-		    f.getParentFile().mkdirs();
-		}
-		try {
-		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		    oos.writeObject(users);
-		    oos.close();
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
 	    }
 
 	    @Override
