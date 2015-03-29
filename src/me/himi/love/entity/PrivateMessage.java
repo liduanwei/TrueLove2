@@ -13,7 +13,7 @@ public class PrivateMessage extends AbstractMessage {
     private static final long serialVersionUID = 531295090454103383L;
 
     public static enum MessageType {
-	SAYHI, QUESTION, FOLLOW, VISITOR, SYSTEM, CHAT // 招呼消息,问题消息,新粉丝消息,新访客消息,系统消息,聊天消息
+	SAYHI, QUESTION, FOLLOW, VISITOR, SYSTEM, CHAT, GIFTS // 招呼消息,问题消息,新粉丝消息,新访客消息,系统消息,聊天消息,礼物消息
     }
 
     private int id; // 本地数据库中的ID

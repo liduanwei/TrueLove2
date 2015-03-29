@@ -105,6 +105,7 @@ public class MessagePollService extends Service {
 	loadQuestion();
 	loadVisitor();
 	loadSystem();
+	loadGifts(); // 礼物消息
 
 	// 获取好友的最新一条聊天消息
 	//loadChatMessages();
@@ -483,8 +484,7 @@ public class MessagePollService extends Service {
 			msg.setIcon(icon);
 
 			intent.putExtra("message_type", MessageType.QUESTION.ordinal()); // 消息类型
-			
-			
+
 			// 发送已接收成功的消息时间,服务器端会进行保存记录
 			notifyQuestionMessageReceived(lastMsgTime);
 
@@ -582,8 +582,7 @@ public class MessagePollService extends Service {
 			msg.setIcon(icon);
 
 			intent.putExtra("message_type", MessageType.FOLLOW.ordinal()); // 消息类型
-			
-			
+
 			//通知服务器记录最后收到的消息的时间
 			notifyFansMessageReceived(lastMsgTime);
 
@@ -683,10 +682,9 @@ public class MessagePollService extends Service {
 			    icon = Constants.HOST + icon.substring(1);
 			}
 			msg.setIcon(icon);
-			
+
 			// hi
 			intent.putExtra("message_type", MessageType.SAYHI.ordinal()); // 消息类型
-			
 
 			//通知服务器记录最后收到的消息的时间
 			notifyHiMessageReceived(lastMsgTime);
@@ -708,6 +706,107 @@ public class MessagePollService extends Service {
 		    }
 		}
 
+	    }
+
+	    @Override
+	    public Header[] getRequestHeaders() {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+	});
+    }
+
+    private void loadGifts() {
+	// TODO Auto-generated method stub
+	String url = Constants.URL_USER_MESSAGE_GIFTS;
+	RequestParams params = new RequestParams();
+	params.add("user_id", "xxxxxxxx");
+	final DBHelper db = DBHelper.getInstance(getApplicationContext(), DBHelper.DB_NAME, null, 1);
+
+	HttpUtil.getClient().post(url, params, new AsyncHttpResponseHandlerAdapter() {
+
+	    @Override
+	    public void onPreProcessResponse(ResponseHandlerInterface arg0, HttpResponse arg1) {
+		// TODO Auto-generated method stub
+		//		System.out.println("PrivateMessagePollService 预处理Response:" + arg1.toString());
+	    }
+
+	    @Override
+	    public void onPostProcessResponse(ResponseHandlerInterface arg0, HttpResponse response) {
+		// TODO Auto-generated method stub
+
+		String data = null;
+		try {
+		    InputStream in;
+		    in = response.getEntity().getContent();
+		    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		    byte[] buffer = new byte[1024 << 1];
+		    int len = 0;
+		    while ((len = in.read(buffer)) != -1) {
+			baos.write(buffer, 0, len);
+		    }
+		    baos.flush();
+		    baos.close();
+		    in.close();
+
+		    data = new String(baos.toByteArray());
+
+		    System.out.println("gifts msg:" + data);
+
+		} catch (IllegalStateException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+
+		if (null != data) {
+		    try {
+			JSONObject jsonObj = new JSONObject(data);
+
+			String title = jsonObj.getString("title");
+			String content = jsonObj.getString("content");
+			String icon = jsonObj.getString("icon");
+			int lastMsgTime = jsonObj.getInt("last_time");
+			int time = jsonObj.getInt("time");
+
+			System.out.println("最后礼物时间:" + lastMsgTime + content);
+
+			int count = jsonObj.getInt("count");
+
+			Intent intent = new Intent();
+			intent.setAction(ACTION_PRIVATE_MESSAGE);
+			PrivateMessage msg = new PrivateMessage();
+			msg.setType(MessageType.GIFTS);
+			msg.setTitle("礼物");
+			msg.setContent("你有" + content + "个礼物了");
+			msg.setLastMsgTime(lastMsgTime);
+			msg.setCount(count);
+
+			msg.setTime(ActivityUtil.convertTimeToString(lastMsgTime * 1000L));
+			msg.setIcon(icon);
+
+			// 礼物消息
+			intent.putExtra("message_type", MessageType.GIFTS.ordinal()); // 消息类型
+
+			// 发送已接收成功的消息时间,服务器端会进行保存记录
+			notifyGiftsMessageReceived(lastMsgTime);
+
+			msg.setUserId(MyApplication.getInstance().getCurrentLoginedUser().getUserId());
+			// 保存消息到本地
+			db.insertMessage(msg);
+			//			db.close();
+
+			System.out.println("礼物消息插入成功");
+
+			// 广播通知消息
+			sendBroadcast(intent);
+		    } catch (JSONException e) {
+			// TODO Auto-generated catch block
+			//			e.printStackTrace();
+		    }
+		}
 	    }
 
 	    @Override
@@ -977,6 +1076,51 @@ public class MessagePollService extends Service {
 		    System.out.println("错误!");
 		}
 		System.out.println("更新最后聊天消息时间:" + data);
+		super.onPostProcessResponse(arg0, response);
+	    }
+	});
+    }
+
+    /**
+     * 发送已收到最新消息的时间,服务器端会进行记录
+     * @param lastMsgTime
+     */
+    private void notifyGiftsMessageReceived(int lastMsgTime) {
+	RequestParams params = new RequestParams();
+	params.add("last_time", lastMsgTime + "");
+	String url = Constants.URL_UPDATE_USER_MESSAGE_GIFTS_TIME;
+	HttpUtil.getClient().post(url, params, new AsyncHttpResponseHandlerAdapter() {
+
+	    @Override
+	    public void onPostProcessResponse(ResponseHandlerInterface arg0, HttpResponse response) {
+		// TODO Auto-generated method stub
+
+		String data = null;
+		try {
+		    InputStream in;
+		    in = response.getEntity().getContent();
+		    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		    byte[] buffer = new byte[1024 << 1];
+		    int len = 0;
+		    while ((len = in.read(buffer)) != -1) {
+			baos.write(buffer, 0, len);
+		    }
+		    baos.flush();
+		    baos.close();
+		    in.close();
+
+		    data = new String(baos.toByteArray());
+
+		} catch (IllegalStateException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		    System.out.println("错误!");
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		    System.out.println("错误!");
+		}
+		System.out.println("更新最后礼物消息时间:" + data);
 		super.onPostProcessResponse(arg0, response);
 	    }
 	});

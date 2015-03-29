@@ -229,6 +229,10 @@ public class UserInfoPage3Fragment extends BaseFragment implements OnItemClickLi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	// TODO Auto-generated method stub
+	if(mAdapter.getList()== null || mAdapter.getList().size() == 0) {
+	    
+	    return;
+	}
 	UserGift userGift = mAdapter.getList().get(position - 1);
 
 	Intent intent = new Intent();

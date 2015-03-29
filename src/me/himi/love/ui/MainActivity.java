@@ -468,6 +468,8 @@ public class MainActivity extends BaseActivity {
 			findViewById(R.id.tv_sayhi_message_tips).setVisibility(View.VISIBLE);
 		    } else if (msgType == MessageType.FOLLOW.ordinal()) { //新关注消息
 			findViewById(R.id.tv_newfans_message_tips).setVisibility(View.VISIBLE);
+		    } else if (msgType == MessageType.GIFTS.ordinal()) { // 新礼物消息
+			findViewById(R.id.tv_newgifts_message_tips).setVisibility(View.VISIBLE);
 		    }
 
 		    // 声音提示
@@ -1003,7 +1005,7 @@ public class MainActivity extends BaseActivity {
 			// 隐藏
 			mLoadingView.setVisibility(View.GONE);
 			AppServiceRongCloudIMImpl.getInstance().refreshUserInfo();
-			
+
 			// 注册新消息监听器
 			RongIMEvent.getInstance(MainActivity.this).setOtherListener();
 

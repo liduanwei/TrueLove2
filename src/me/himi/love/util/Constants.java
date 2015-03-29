@@ -6,7 +6,7 @@ package me.himi.love.util;
  * @date Nov 4, 2014 9:14:59 PM
  */
 public interface Constants {
-//                String HOST = "http://192.168.1.104/RedLove2";
+    //                String HOST = "http://192.168.1.104/RedLove2";
 
     String HOST = "http://love5.leavtechintl.com";
 
@@ -114,6 +114,8 @@ public interface Constants {
     String URL_USER_MESSAGE_QUESTION = HOST + "/index.php/index/message/question";
     // 获取当前登录用户收到的问题消息
     String URL_USER_MESSAGE_VISITOR = HOST + "/index.php/index/message/visitor";
+    // 获取当前登录用户收到的礼物消息
+    String URL_USER_MESSAGE_GIFTS = HOST + "/index.php/index/message/gifts";
     // 获取当前登录用户收到的系统消息
     String URL_USER_MESSAGE_SYSTEM = HOST + "/index.php/index/message/system";
     // 获取当前登录用户最后收到的聊天消息
@@ -127,6 +129,8 @@ public interface Constants {
     String URL_UPDATE_USER_MESSAGE_QUESTION_TIME = HOST + "/index.php/index/message/updateQuestionLastTime";
     // 通知更新当前登录用户最后收到的访客消息
     String URL_UPDATE_USER_MESSAGE_VISITOR_TIME = HOST + "/index.php/index/message/updateVisitorLastTime";
+    // 通知更新当前登录用户最后收到的礼物消息
+    String URL_UPDATE_USER_MESSAGE_GIFTS_TIME = HOST + "/index.php/index/message/updateGiftsLastTime";
     // 通知更新当前登录用户最后收到的系统消息
     String URL_UPDATE_USER_MESSAGE_SYSTEM_TIME = HOST + "/index.php/index/message/updateSystemLastTime";
     // 通知更新当前登录用户最后收到的聊天消息

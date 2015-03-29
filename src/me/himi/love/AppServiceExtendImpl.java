@@ -1892,6 +1892,8 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 		    int followsCount = jsonObj.getInt("follows_count");
 		    int fansCount = jsonObj.getInt("fans_count");
 
+		    int giftsCount = jsonObj.getInt("gifts_count"); // 礼物数量
+
 		    String nickname = jsonObj.getString("nickname");
 		    String faceUrl = jsonObj.getString("face_url");
 		    int gender = jsonObj.getInt("gender");
@@ -1909,6 +1911,8 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 		    homeInfo.fans = fansCount;
 		    homeInfo.friends = friendsCount;
 		    homeInfo.follows = followsCount;
+
+		    homeInfo.gifts = giftsCount;
 
 		    homeInfo.nickname = nickname;
 		    homeInfo.faceUrl = faceUrl;
@@ -2290,6 +2294,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 			String id = jsonObj.getString("id");
 			int isVip = jsonObj.getInt("is_vip");
 			String avatar = jsonObj.getString("face");
+			String fromUserId = jsonObj.getString("user_id");
 			String nickname = jsonObj.getString("nickname");
 			String giftName = jsonObj.getString("name");
 			String giftImageUrl = jsonObj.getString("image_url");
@@ -2301,6 +2306,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 			}
 
 			userGift.setId(id);
+			userGift.setFromUserId(fromUserId);
 			userGift.setVip(isVip == 1);
 			userGift.setFromUserAvatar(avatar);
 			userGift.setFromUserNickname(nickname);

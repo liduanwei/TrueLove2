@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Message;
 
 /**
  * @ClassName:DBHelper
@@ -466,6 +467,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	    } else if (type == MessageType.CHAT.ordinal()) {
 		msg.setType(MessageType.CHAT);
 		msg.setCount(count);
+	    } else if (type == MessageType.GIFTS.ordinal()) {
+		msg.setType(MessageType.GIFTS);
+		msg.setCount(count);
 	    }
 	    msg.setContent(content);
 	    msg.setReaded(false);
@@ -533,6 +537,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		msg.setCount(count);
 	    } else if (type == MessageType.CHAT.ordinal()) {
 		msg.setType(MessageType.CHAT);
+		msg.setCount(count);
+	    } else if (type == MessageType.GIFTS.ordinal()) {
+		msg.setType(MessageType.GIFTS);
 		msg.setCount(count);
 	    }
 	    msg.setContent(content);

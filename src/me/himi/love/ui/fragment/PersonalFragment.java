@@ -73,7 +73,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
     TextView tvSignin; // 签到
     TextView tvLoveMoney; //
 
-    TextView tvFriendsCount, tvFollowsCount, tvFansCount; //  好友,关注,粉丝
+    TextView tvFriendsCount, tvFollowsCount, tvFansCount, tvMyGiftsCount; //  好友,关注,粉丝,礼物
 
     TextView tvMyVip, tvVipExpireTime;
 
@@ -137,6 +137,8 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	tvFriendsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_friends_no)); // 好友
 	tvFollowsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_follows_no));//关注
 	tvFansCount = (TextView) (mContainerView.findViewById(R.id.tv_my_fans_no)); //粉丝
+	tvMyGiftsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_gifts_no)); //礼物
+	
 	LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
 	tvFriendsCount.setText(loginedUser.getFriendsCount() + "");
 	tvFollowsCount.setText(loginedUser.getFollowsCount() + "");
@@ -521,6 +523,8 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 		tvFansCount.setText(homeInfo.fans + "");
 		tvFriendsCount.setText(homeInfo.friends + "");
 		tvFollowsCount.setText(homeInfo.follows + "");
+
+		tvMyGiftsCount.setText(homeInfo.gifts + "");
 
 		// 更新 loginedUser中的数据
 		user.setFansCount(homeInfo.fans);

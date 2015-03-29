@@ -610,7 +610,7 @@ public interface IAppServiceExtend {
 	public int loveMoney;
 
 	public String nickname, faceUrl;
-	public int friends, follows, fans;
+	public int friends, follows, fans, gifts;
     }
 
     /**
