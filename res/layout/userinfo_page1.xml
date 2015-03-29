@@ -97,11 +97,19 @@
         android:background="#99eeeeee"
         android:paddingBottom="8dp" >
 
+        <View
+            android:id="@+id/view_monologue_left"
+            android:layout_width="10dip"
+            android:layout_height="32dip"
+            android:layout_alignParentLeft="true"
+            android:background="@color/bar3" />
+
         <TextView
             android:id="@+id/tv_monologue_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/view_monologue_left"
             android:background="#99cccccc"
             android:padding="7dp"
             android:text="内心独白" />
@@ -115,13 +123,25 @@
             android:text="" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_line2_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#99cccccc"
-        android:padding="7dp"
-        android:text="详细资料" />
+        android:layout_height="wrap_content" >
+
+        <View
+            android:id="@+id/view_line2_left"
+            android:layout_width="10dip"
+            android:layout_height="32dip"
+            android:background="@color/bar3" />
+
+        <TextView
+            android:id="@+id/tv_line2_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/view_line2_left"
+            android:background="#99cccccc"
+            android:padding="7dp"
+            android:text="详细资料" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/layout_row_user_id"
@@ -571,20 +591,33 @@
         android:background="#99eeeeee"
         android:paddingTop="8dp" >
 
-        <TextView
-            android:id="@+id/tv_line3_title"
+        <RelativeLayout
+            android:id="@+id/layout_line3_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="#99cccccc"
-            android:padding="7dp"
-            android:text="征友要求" />
+            android:layout_height="wrap_content" >
+
+            <View
+                android:id="@+id/view_line3_left"
+                android:layout_width="10dip"
+                android:layout_height="32dip"
+                android:background="@color/bar3" />
+
+            <TextView
+                android:id="@+id/tv_line3_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/view_line3_left"
+                android:background="#99cccccc"
+                android:padding="7dp"
+                android:text="征友要求" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/layout_row_wanted_homeplace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_line3_title"
+            android:layout_below="@id/layout_line3_title"
             android:paddingBottom="6dp"
             android:paddingTop="6dp" >
 

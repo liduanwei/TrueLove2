@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/tv_empty_gifts"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:text="人气有点低, 还没有人送过礼物" />

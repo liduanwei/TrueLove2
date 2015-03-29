@@ -3,6 +3,8 @@ package me.himi.love.ui.fragment;
 import me.himi.love.R;
 import me.himi.love.entity.DetailInfoUser;
 import me.himi.love.ui.fragment.base.BaseFragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -150,6 +152,13 @@ public class UserInfoPage1Fragment extends BaseFragment implements OnClickListen
 	tvInterests = (TextView) mContainerView.findViewById(R.id.tv_user_interests);
 	tvPersonlity = (TextView) mContainerView.findViewById(R.id.tv_user_personality);
 
+	// 动态设置 颜色
+	SharedPreferences sp = getActivity().getSharedPreferences(getActivity().getPackageName(), Context.MODE_PRIVATE);
+	int color = sp.getInt("back_color", getResources().getColor(R.color.bar));
+	//line left 
+	mContainerView.findViewById(R.id.view_monologue_left).setBackgroundColor(color);
+	mContainerView.findViewById(R.id.view_line2_left).setBackgroundColor(color);
+	mContainerView.findViewById(R.id.view_line3_left).setBackgroundColor(color);
     }
 
     public void setInfos(DetailInfoUser user) {

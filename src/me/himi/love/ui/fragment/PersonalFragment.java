@@ -77,7 +77,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
     TextView tvMyVip, tvVipExpireTime;
 
-    TextView tvVisitorsTips, tvFansTips, tvSayhiTips, tvConversationTips; // 访客提醒,粉丝提醒,打招呼提醒,会话消息提醒
+    TextView tvVisitorsTips, tvFansTips, tvSayhiTips, tvConversationTips, tvGiftsTips; // 访客提醒,粉丝提醒,打招呼提醒,会话消息提醒,礼物提醒
 
     // 首次启动从服务器加载当前登录用户的一些基本资料
     IUserDetailLoader userLoader = new UserDetailLoaderImpl();
@@ -138,7 +138,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	tvFollowsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_follows_no));//关注
 	tvFansCount = (TextView) (mContainerView.findViewById(R.id.tv_my_fans_no)); //粉丝
 	tvMyGiftsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_gifts_no)); //礼物
-	
+
 	LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
 	tvFriendsCount.setText(loginedUser.getFriendsCount() + "");
 	tvFollowsCount.setText(loginedUser.getFollowsCount() + "");
@@ -184,11 +184,14 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
 	// 打招呼消息提示
 	tvSayhiTips = (TextView) mContainerView.findViewById(R.id.tv_sayhi_message_tips);
+	// 礼物消息 提示
+	tvGiftsTips = (TextView) mContainerView.findViewById(R.id.tv_newgifts_message_tips);
 
 	//  默认都是隐藏的
 	tvVisitorsTips.setVisibility(View.GONE);
 	tvFansTips.setVisibility(View.GONE);
 	tvSayhiTips.setVisibility(View.GONE);
+	tvGiftsTips.setVisibility(View.GONE);
 	//
 	// 加载是否存在未读聊天消息
 	if (RongIM.getInstance() != null) {

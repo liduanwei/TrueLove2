@@ -15,7 +15,6 @@ import me.himi.love.IAppServiceExtend.OnFindGiftsByUserIdResponseListener;
 import me.himi.love.R;
 import me.himi.love.adapter.UserGiftsAdapter;
 import me.himi.love.entity.DetailInfoUser;
-import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.UserGift;
 import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
@@ -32,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 /**
  * @ClassName:UserInfoPage3Fragment
@@ -50,6 +50,8 @@ public class UserInfoPage3Fragment extends BaseFragment implements OnItemClickLi
 
     me.himi.love.view.list.XListView mListView;
 
+    TextView tvEmptyGifts; // 没有礼物
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	mContainerView = inflater.inflate(R.layout.userinfo_page3, container, false);
@@ -64,6 +66,11 @@ public class UserInfoPage3Fragment extends BaseFragment implements OnItemClickLi
     }
 
     private void init() {
+	// 没有礼物
+	tvEmptyGifts = (TextView) mContainerView.findViewById(R.id.tv_empty_gifts);
+	//
+	tvEmptyGifts.setVisibility(View.GONE);
+
 	mListView = (XListView) mContainerView.findViewById(R.id.listview);
 	//礼物 adapter
 	mAdapter = new UserGiftsAdapter(getActivity(), gifts);
@@ -197,8 +204,11 @@ public class UserInfoPage3Fragment extends BaseFragment implements OnItemClickLi
 		    } else {
 			mAdapter.addAll(gifts);
 		    }
+
+		    tvEmptyGifts.setVisibility(View.GONE);
 		} else {
 		    showToast("暂无数据");
+		    tvEmptyGifts.setVisibility(View.VISIBLE);
 		}
 
 		isRefreshing = false;
@@ -229,8 +239,8 @@ public class UserInfoPage3Fragment extends BaseFragment implements OnItemClickLi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	// TODO Auto-generated method stub
-	if(mAdapter.getList()== null || mAdapter.getList().size() == 0) {
-	    
+	if (mAdapter.getList() == null || mAdapter.getList().size() == 0) {
+
 	    return;
 	}
 	UserGift userGift = mAdapter.getList().get(position - 1);
