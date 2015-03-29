@@ -119,7 +119,7 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
     }
 
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/whosee_users_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/whosee_users_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     int pageNumber = 1;
 

@@ -111,7 +111,7 @@ public class VisitorsSeewhoFragment extends BaseFragment implements OnItemClickL
     }
 
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/seewho_users_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/seewho_users_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     private int pageNumber = 1;
 

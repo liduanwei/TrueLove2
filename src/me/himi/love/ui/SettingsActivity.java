@@ -23,6 +23,7 @@ import me.himi.love.util.ActivityManagerUtils;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
 import me.himi.love.util.StringUtils;
+import me.himi.love.view.city.FileUtil;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -53,6 +54,8 @@ import com.wanpu.pay.PayResultListener;
  * @date Nov 5, 2014 3:50:36 PM
  */
 public class SettingsActivity extends BaseActivity implements OnClickListener {
+
+    TextView mTvCacheSize; // 缓存大小
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -243,9 +246,18 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 	// 帮助说明
 	findViewById(R.id.layout_help_instructions).setOnClickListener(this);
 
+	// 清除缓存
+	findViewById(R.id.layout_cache_clear).setOnClickListener(this);
+
+	// 缓存文件size
+	mTvCacheSize = getViewById(R.id.tv_cache_size);
+
+	mTvCacheSize.setText(FileUtil.getDirSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2") / 1024.0f + "kb");
+
 	// 退出登录
 	Button btnLogout = (Button) findViewById(R.id.btn_logout);
 	btnLogout.setOnClickListener(this);
+
     }
 
     @Override
@@ -257,6 +269,12 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 	case R.id.layout_help_instructions: // 帮助说明
 	    Intent intent = new Intent(SettingsActivity.this, HelpActivity.class);
 	    startActivity(intent);
+	    break;
+
+	case R.id.layout_cache_clear:
+	    boolean isDeleted = FileUtil.deleteDirFromSD(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2");
+	    showToast("缓存已清除");
+	    mTvCacheSize.setText(FileUtil.getDirSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2") / 1024.0f + "kb");
 	    break;
 	}
     }

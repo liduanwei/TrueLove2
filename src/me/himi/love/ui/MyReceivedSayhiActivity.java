@@ -115,7 +115,7 @@ public class MyReceivedSayhiActivity extends BaseActivity implements OnItemClick
     }
 
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/mysayhis_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/mysayhis_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     View mLoadingView;
 

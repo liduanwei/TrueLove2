@@ -123,6 +123,42 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_cache_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/iv_linex_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_linex_icon"
+                    android:paddingLeft="20dp"
+                    android:text="清除缓存"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tv_cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="20dp"
+                    android:text="20mb"
+                    android:textSize="@dimen/text_size_10" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/layout_help_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

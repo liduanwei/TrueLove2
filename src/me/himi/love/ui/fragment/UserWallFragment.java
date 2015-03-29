@@ -151,7 +151,7 @@ public class UserWallFragment extends BaseFragment {
 
     private boolean isRefreshing;// 是否加载中
     // 使用本地缓存
-    private final static String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users_recommend" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users_recommend" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
 
     private void loadRecommendUsers() {
 	if (isRefreshing)
