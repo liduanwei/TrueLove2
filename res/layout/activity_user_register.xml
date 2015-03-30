@@ -50,38 +50,6 @@
                 android:padding="5dp" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_phone_number_verifycode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp" >
-
-            <TextView
-                android:id="@+id/tv_send_phonenumber_verifycode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="#99333366"
-                android:padding="6dp"
-                android:text="获取验证码"
-                android:textColor="#ffffffff"
-                android:textSize="16sp"
-                android:textStyle="normal" />
-
-            <EditText
-                android:id="@+id/et_phone_number_verifycode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@id/tv_send_phonenumber_verifycode"
-                android:hint="短信验证码"
-                android:inputType="number"
-                android:padding="5dp" />
-        </RelativeLayout>
-
         <LinearLayout
             android:id="@+id/ll_password"
             android:layout_width="match_parent"
@@ -137,6 +105,38 @@
                 android:hint="请再次输入密码"
                 android:padding="5dp" />
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_phone_number_verifycode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/tv_send_phonenumber_verifycode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="#99333366"
+                android:padding="6dp"
+                android:text="获取验证码"
+                android:textColor="#ffffffff"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/et_phone_number_verifycode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/tv_send_phonenumber_verifycode"
+                android:hint="短信验证码"
+                android:inputType="number"
+                android:padding="5dp" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

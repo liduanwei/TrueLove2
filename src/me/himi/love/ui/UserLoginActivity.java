@@ -283,12 +283,12 @@ public class UserLoginActivity extends BaseActivity implements View.OnClickListe
 		//
 		//		startActivity(new Intent(UserLoginActivity.this, MainActivity.class));
 		finish();
-		
+
 		ToastFactory.getToast(UserLoginActivity.this, "欢迎回来").show();
 		//进入主页, 清除所有Activity,避免回退
 		ActivityManagerUtils.getInstance().removeAllActivity();
 		startActivity(new Intent(UserLoginActivity.this, MainActivity.class));
-		
+
 	    }
 
 	    @Override
@@ -456,8 +456,10 @@ public class UserLoginActivity extends BaseActivity implements View.OnClickListe
 		    historyUsersPopupWindow.dismiss();
 
 		    System.out.println("faceUrl:" + user.faceUrl);
-		    ivFace.setVisibility(user.faceUrl.trim().length() != 0 ? View.VISIBLE : View.GONE);
-		    ImageLoader.getInstance().displayImage(user.faceUrl, ivFace, ImageLoaderOptions.circleOptions());
+		    if (user.faceUrl != null) {
+			ivFace.setVisibility(user.faceUrl.trim().length() != 0 ? View.VISIBLE : View.GONE);
+			ImageLoader.getInstance().displayImage(user.faceUrl, ivFace, ImageLoaderOptions.circleOptions());
+		    }
 		}
 	    });
 	}

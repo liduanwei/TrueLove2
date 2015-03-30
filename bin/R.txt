@@ -2502,10 +2502,10 @@ int id et_nearby_search 0x7f060210
 int id et_news_comment_content 0x7f06018b
 int id et_offerme_money 0x7f060174
 int id et_often_address 0x7f0600eb
-int id et_password 0x7f060196
-int id et_password_confirm 0x7f060198
+int id et_password 0x7f060193
+int id et_password_confirm 0x7f060195
 int id et_personal_instruction 0x7f0600e8
-int id et_phone_number_verifycode 0x7f060194
+int id et_phone_number_verifycode 0x7f060198
 int id et_phonenumber 0x7f060157
 int id et_phonenumber_verify 0x7f06015b
 int id et_put_identify 0x7f060407
@@ -2813,8 +2813,8 @@ int id ll_follows_news 0x7f060230
 int id ll_main 0x7f06018e
 int id ll_main_content 0x7f060288
 int id ll_nearby_search 0x7f06020f
-int id ll_password 0x7f060195
-int id ll_password_confirm 0x7f060197
+int id ll_password 0x7f060192
+int id ll_password_confirm 0x7f060194
 int id ll_user_fans 0x7f06043f
 int id ll_user_history_visitors 0x7f06043c
 int id ll_user_news 0x7f060439
@@ -3111,7 +3111,7 @@ int id rl_modify_code 0x7f060142
 int id rl_modify_submit 0x7f060144
 int id rl_modify_top 0x7f060140
 int id rl_modify_verifycode_input 0x7f06013c
-int id rl_phone_number_verifycode 0x7f060192
+int id rl_phone_number_verifycode 0x7f060196
 int id rl_resetpwd_code 0x7f06015f
 int id rl_resetpwd_submit 0x7f060162
 int id rl_resetpwd_top 0x7f06015d
@@ -3354,7 +3354,7 @@ int id tv_search_confirm 0x7f0603d7
 int id tv_secret_content 0x7f0601c7
 int id tv_select_gift_tips 0x7f06011a
 int id tv_select_question 0x7f0601f8
-int id tv_send_phonenumber_verifycode 0x7f060193
+int id tv_send_phonenumber_verifycode 0x7f060197
 int id tv_send_question 0x7f0601f7
 int id tv_send_sayhi 0x7f0601fb
 int id tv_send_status 0x7f0601e5

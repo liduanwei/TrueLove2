@@ -4362,10 +4362,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int et_news_comment_content=0x7f06018b;
         public static final int et_offerme_money=0x7f060174;
         public static final int et_often_address=0x7f0600eb;
-        public static final int et_password=0x7f060196;
-        public static final int et_password_confirm=0x7f060198;
+        public static final int et_password=0x7f060193;
+        public static final int et_password_confirm=0x7f060195;
         public static final int et_personal_instruction=0x7f0600e8;
-        public static final int et_phone_number_verifycode=0x7f060194;
+        public static final int et_phone_number_verifycode=0x7f060198;
         public static final int et_phonenumber=0x7f060157;
         public static final int et_phonenumber_verify=0x7f06015b;
         public static final int et_put_identify=0x7f060407;
@@ -4673,8 +4673,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ll_main=0x7f06018e;
         public static final int ll_main_content=0x7f060288;
         public static final int ll_nearby_search=0x7f06020f;
-        public static final int ll_password=0x7f060195;
-        public static final int ll_password_confirm=0x7f060197;
+        public static final int ll_password=0x7f060192;
+        public static final int ll_password_confirm=0x7f060194;
         public static final int ll_user_fans=0x7f06043f;
         public static final int ll_user_history_visitors=0x7f06043c;
         public static final int ll_user_news=0x7f060439;
@@ -4971,7 +4971,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int rl_modify_submit=0x7f060144;
         public static final int rl_modify_top=0x7f060140;
         public static final int rl_modify_verifycode_input=0x7f06013c;
-        public static final int rl_phone_number_verifycode=0x7f060192;
+        public static final int rl_phone_number_verifycode=0x7f060196;
         public static final int rl_resetpwd_code=0x7f06015f;
         public static final int rl_resetpwd_submit=0x7f060162;
         public static final int rl_resetpwd_top=0x7f06015d;
@@ -5214,7 +5214,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tv_secret_content=0x7f0601c7;
         public static final int tv_select_gift_tips=0x7f06011a;
         public static final int tv_select_question=0x7f0601f8;
-        public static final int tv_send_phonenumber_verifycode=0x7f060193;
+        public static final int tv_send_phonenumber_verifycode=0x7f060197;
         public static final int tv_send_question=0x7f0601f7;
         public static final int tv_send_sayhi=0x7f0601fb;
         public static final int tv_send_status=0x7f0601e5;

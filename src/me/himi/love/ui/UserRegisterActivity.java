@@ -419,8 +419,12 @@ public class UserRegisterActivity extends BaseActivity implements OnClickListene
 		// 同时注册 IM 聊天帐号
 		//		registerIM(registeredUser);
 
+		//		Intent intent = new Intent(UserRegisterActivity.this, MainActivity.class);
+		//		intent.putExtra("is_from_register", true); // 标记为来自注册, 
+		//		startActivity(intent);
 		// 进入完善资料
 		startActivity(new Intent(UserRegisterActivity.this, UserRegisterCompleteActivity.class));
+
 		finish();
 	    }
 

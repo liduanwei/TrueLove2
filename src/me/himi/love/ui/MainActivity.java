@@ -141,6 +141,12 @@ public class MainActivity extends BaseActivity {
 
 	// 连接IM
 	connectRongCloudIM(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
+
+//	boolean isFromRegister = getIntent().getBooleanExtra("is_from_register", false);
+//	if (isFromRegister) { // 首次注册需要完善资料
+//	    startActivity(new Intent(this, UserRegisterCompleteActivity.class));
+//	}
+
     }
 
     /**

@@ -411,10 +411,12 @@ public class UserRegisterCompleteActivity extends BaseActivity {
     public void onBackPressed() {
 	// TODO Auto-generated method stub
 	if (firstTime + 2000 > System.currentTimeMillis()) {
-	    MyApplication.getInstance().exit();
+	    //	    MyApplication.getInstance().exit();
+	    startActivity(new Intent(this, MainActivity.class));
+	    finish();
 	    super.onBackPressed();
 	} else {
-	    ActivityUtil.show(this, "再按一次退出应用");
+	    ActivityUtil.show(this, "请完善交友资料, 强制退出将导致性别资料不可修改\n再按一次返回键确认关闭本页面");
 	}
 	firstTime = System.currentTimeMillis();
     }

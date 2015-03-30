@@ -119,7 +119,7 @@ public class AppServiceRongCloudIMImpl implements IAppServiceRongCloudIM {
 
 	    @Override
 	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-		System.out.println("refresh RongCloud userInfo " + new String(arg2));
+//		System.out.println("refresh RongCloud userInfo " + new String(arg2));
 	    }
 	};
 	HttpUtil.post(url, params, responseHandler);
