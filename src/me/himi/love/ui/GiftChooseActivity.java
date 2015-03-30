@@ -23,6 +23,7 @@ import me.himi.love.entity.Gift;
 import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.UserGift;
 import me.himi.love.ui.base.BaseActivity;
+import me.himi.love.util.CacheUtils;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -188,7 +189,7 @@ public class GiftChooseActivity extends BaseActivity {
 		isRefreshing = false;
 
 		// 缓存到本地
-		cacheToLocal(gifts, gender);
+		cacheToLocal(giftChooseAdapter.getList(), gender);
 	    }
 
 	    /**
@@ -203,21 +204,7 @@ public class GiftChooseActivity extends BaseActivity {
 		} else {
 		    cacheGiftsPath = cacheGiftsFemalePath;
 		}
-		File f = new File(cacheGiftsPath);
-		if (!f.getParentFile().exists()) {
-		    f.getParentFile().mkdirs();
-		}
-		try {
-		    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		    oos.writeObject(gifts);
-		    oos.close();
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
+		CacheUtils.cacheToLocal(gifts, cacheGiftsPath);
 	    }
 
 	    @Override
@@ -246,39 +233,10 @@ public class GiftChooseActivity extends BaseActivity {
 	    cacheGiftsPath = cacheGiftsFemalePath;
 	}
 
-	File f = new File(cacheGiftsPath);
-
-	if (f.exists()) {
-
-	    try {
-
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-
-		Object obj = ois.readObject();
-
-		List<Gift> gifts = (List<Gift>) obj;
-
-		giftChooseAdapter.getList().clear();
-
-		giftChooseAdapter.addAll(gifts);
-
-		ois.close();
-
-	    } catch (StreamCorruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    } catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
+	List<Gift> gifts = CacheUtils.loadFromCache(cacheGiftsPath);
+	if (gifts != null) {
+	    giftChooseAdapter.setList(gifts);
 	} else {
-	    // 不存在则从网络获取
 	    loadGifts(gender);
 	}
     }

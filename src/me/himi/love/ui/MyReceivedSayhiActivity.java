@@ -167,7 +167,6 @@ public class MyReceivedSayhiActivity extends BaseActivity implements OnItemClick
 		// 缓存到本地
 		CacheUtils.cacheToLocal(mSayhiAdapter.getList(), cacheUsersPath);
 
-		mListView.stopLoadMore();
 
 		pageNumber++;
 
@@ -178,6 +177,9 @@ public class MyReceivedSayhiActivity extends BaseActivity implements OnItemClick
 		}
 
 		mLoadingView.setVisibility(View.GONE);
+
+		mListView.stopLoadMore();
+		mListView.stopRefresh();
 
 		isRefreshing = false;
 

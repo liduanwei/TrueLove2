@@ -1,13 +1,5 @@
 package me.himi.love.ui.fragment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +9,7 @@ import me.himi.love.IAppServiceExtend.OnLoadVisitedUsersResponseListener;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.VisitedUsersAdapter;
-import me.himi.love.entity.FriendUser;
-import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.VisitedUser;
-import me.himi.love.entity.VisitorUser;
 import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.util.CacheUtils;
@@ -31,10 +20,7 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class VisitorsSeewhoFragment extends BaseFragment implements OnItemClickListener {
@@ -94,24 +80,25 @@ public class VisitorsSeewhoFragment extends BaseFragment implements OnItemClickL
 	    }
 	});
 
+	mListView.setOnItemClickListener(this);
+
 	// 从缓存中加载数据
-	List<VisitedUser> users = CacheUtils.loadFromCache(cacheUsersPath);
+	List<VisitedUser> users = CacheUtils.loadFromCache(cacheUsersPath + targetUserId);
 	if (users != null) {
 	    mAdapter.setList(users);
 	} else {
 	    loadUsers();
 	}
-
-	mListView.setOnItemClickListener(this);
     }
 
     public void setTargetUserId(int targetUserId) {
 	this.targetUserId = targetUserId;
 	//	loadUsers();
+
     }
 
     // 使用本地缓存
-    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/seewho_users_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/seewho_users_";
 
     private int pageNumber = 1;
 
@@ -132,7 +119,7 @@ public class VisitorsSeewhoFragment extends BaseFragment implements OnItemClickL
 		    }
 		    mAdapter.addAll(users);
 		    // 缓存到本地
-		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
+		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath + targetUserId);
 		} else {
 
 		}

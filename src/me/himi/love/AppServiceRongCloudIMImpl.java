@@ -111,7 +111,7 @@ public class AppServiceRongCloudIMImpl implements IAppServiceRongCloudIM {
 	    @Override
 	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 		String res = new String(arg2);
-		System.out.println("refresh RongCloud userInfo:" + res);
+		System.out.println("RC: refresh userInfo: " + res);
 	    }
 
 	    @Override

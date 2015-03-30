@@ -1,30 +1,16 @@
 package me.himi.love.ui.fragment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
-import me.himi.love.MyApplication;
 import me.himi.love.IAppService.OnLoadUserVisitorsListener;
 import me.himi.love.IAppService.UserVisitorsParams;
-import me.himi.love.IAppServiceExtend.LoadFansParams;
-import me.himi.love.IAppServiceExtend.OnLoadFansResponseListener;
+import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.UserVisitorsAdapter;
-import me.himi.love.entity.NearbyUser;
-import me.himi.love.entity.VisitedUser;
 import me.himi.love.entity.VisitorUser;
 import me.himi.love.ui.UserInfoTextActivity;
-import me.himi.love.ui.UserVisitorsActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.CacheUtils;
@@ -33,20 +19,19 @@ import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickListener {
     me.himi.love.view.list.XListView mListView;
     me.himi.love.adapter.UserVisitorsAdapter mAdapter;
+
+    public VisitorsWhoseeFragment() {
+	// TODO Auto-generated constructor stub
+    }
 
     int targetUserId;
 
@@ -105,7 +90,7 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 	mListView.setOnItemClickListener(this);
 
 	// 从缓存中加载数据
-	List<VisitorUser> users = CacheUtils.loadFromCache(cacheUsersPath);
+	List<VisitorUser> users = CacheUtils.loadFromCache(cacheUsersPath + targetUserId);
 	if (users != null) {
 	    mAdapter.setList(users);
 	} else {
@@ -116,10 +101,11 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
     public void setTargetUserId(int targetUserId) {
 	this.targetUserId = targetUserId;
 	//	loadUsers();
+
     }
 
     // 使用本地缓存
-    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/whosee_users_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+    private final String cacheUsersPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/whosee_users_";
 
     int pageNumber = 1;
 
@@ -147,7 +133,7 @@ public class VisitorsWhoseeFragment extends BaseFragment implements OnItemClickL
 		    mAdapter.addAll(users);
 
 		    // 缓存到本地
-		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
+		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath + targetUserId);
 
 		} else {
 

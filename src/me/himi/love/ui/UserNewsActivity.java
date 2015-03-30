@@ -19,10 +19,12 @@ import me.himi.love.entity.UserNews;
 import me.himi.love.im.util.FaceTextUtils;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.ActivityUtil;
+import me.himi.love.util.CacheUtils;
 import me.himi.love.util.ToastFactory;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -169,7 +171,23 @@ public class UserNewsActivity extends BaseActivity {
 		menu.add(0, 4, 3, "删除");
 	    }
 	});
-	loadUserNews();
+
+	loadFromCache();
+	//	loadUserNews();
+    }
+
+    // 使用本地缓存
+    private final String cachePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users_news_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+
+    private void loadFromCache() {
+	// TODO Auto-generated method stub
+	List<UserNews> userNews = CacheUtils.loadFromCache(cachePath);
+	if (userNews != null) {
+	    mUserNewsAdapter.setList(userNews);
+	} else {
+	    loadUserNews();
+	}
+
     }
 
     int pageNumber = 1;
@@ -196,6 +214,9 @@ public class UserNewsActivity extends BaseActivity {
 		    mUserNewsAdapter.addAll(news);
 		    // 隐藏
 		    tvLoading.setVisibility(View.GONE);
+
+		    CacheUtils.cacheToLocal(mUserNewsAdapter.getList(), cachePath);
+
 		} else {
 
 		    if (mUserNewsAdapter.getList().size() == 0) {

@@ -14,10 +14,12 @@ import me.himi.love.entity.UserNews;
 import me.himi.love.im.util.FaceTextUtils;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.ActivityUtil;
+import me.himi.love.util.CacheUtils;
 import me.himi.love.util.ToastFactory;
 import me.himi.love.view.list.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -138,7 +140,23 @@ public class FollowsNewsActivity extends BaseActivity {
 
 	    }
 	});
-	loadUserNews();
+	//	loadUserNews();
+	loadFromCache();
+    }
+
+    // 使用本地缓存
+    private final String cachePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/follow_users_news_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+
+    private void loadFromCache() {
+	// TODO Auto-generated method stub
+	List<UserNews> userNews = CacheUtils.loadFromCache(cachePath);
+	if (userNews != null) {
+	    mUserNewsAdapter.setList(userNews);
+	    pbLoading.setVisibility(View.GONE);
+	} else {
+	    loadUserNews();
+	}
+
     }
 
     int pageNumber = 1;
@@ -163,6 +181,8 @@ public class FollowsNewsActivity extends BaseActivity {
 			mUserNewsAdapter.getList().clear();
 		    }
 		    mUserNewsAdapter.addAll(news);
+
+		    CacheUtils.cacheToLocal(mUserNewsAdapter.getList(), cachePath);
 		} else {
 		    if (mUserNewsAdapter.getList().size() == 0) {
 			showEmptyView();
