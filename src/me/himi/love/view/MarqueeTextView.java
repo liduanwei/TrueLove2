@@ -4,6 +4,7 @@ import me.himi.love.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -75,8 +76,8 @@ public class MarqueeTextView extends TextView {
 
     private void init() {
 	// TODO Auto-generated method stub
-	mIsRunning = true;
-	mHandler.sendEmptyMessageDelayed(0, 100L);
+	//mIsRunning = true;
+	//mHandler.sendEmptyMessageDelayed(0, 100L);
     }
 
     @Override
@@ -118,6 +119,11 @@ public class MarqueeTextView extends TextView {
 	mTextWidth = getPaint().measureText(text.toString());
 	offsetX = (int) mWidth;
 	offsetY = (int) getPaint().getTextSize();
+	
+	
+	mIsRunning = true;
+	mHandler.sendEmptyMessageDelayed(0, 100L);
+	mLoopedCount = 0;
     }
 
     public void setMaxLoopCount(int count, OnLoopOverListener listener) {

@@ -194,6 +194,16 @@ public class MainActivity extends BaseActivity {
 		transAnimal.setDuration(700L);
 		transAnimal.setFillAfter(true);
 		noticeBroad.startAnimation(transAnimal);
+
+		// 指定间隔之后重新获取数据并显示
+		new Handler().postDelayed(new Runnable() {
+
+		    @Override
+		    public void run() {
+			// TODO Auto-generated method stub
+			loadSystemNotices();
+		    }
+		}, 1000 * 20); // 指定间隔后重新加载
 	    }
 	});
     }
