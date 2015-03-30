@@ -22,15 +22,29 @@ public class MarqueeTextView extends TextView {
 
     private float mWidth; // View最大宽度
 
+    private int mLoopedCount; // 当前已循环次数
+
+    private int mMaxCount; // 设定最大循环滚动次数, 默认0 为永久循环
+
+    private OnLoopOverListener onLoopOverListener; // 循环结束listener
+
     private final Handler mHandler = new Handler() {
 	public void handleMessage(android.os.Message msg) {
 	    switch (msg.what) {
 	    case 0:
 		if (mIsRunning) {
+		    if (mMaxCount != 0 && mLoopedCount >= mMaxCount) {
+			if (onLoopOverListener != null) {
+			    onLoopOverListener.onOver(MarqueeTextView.this);
+			}
+			return;
+		    }
+
 		    offsetX -= STEP;
 		    if (offsetX < -mTextWidth - 2) {
 			// 恢复到最右边,重新开始滚动
 			offsetX = (int) mWidth; // 位于父控件的最右边(宽度)的位置
+			mLoopedCount++;
 		    }
 		    //		    invalidate(); //刷新视图
 		    postInvalidate();
@@ -106,6 +120,11 @@ public class MarqueeTextView extends TextView {
 	offsetY = (int) getPaint().getTextSize();
     }
 
+    public void setMaxLoopCount(int count, OnLoopOverListener listener) {
+	mMaxCount = count;
+	this.onLoopOverListener = listener;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
 	// TODO Auto-generated method stub
@@ -116,6 +135,18 @@ public class MarqueeTextView extends TextView {
 	    canvas.drawText(mText, offsetX, offsetY, getPaint());
 	}
 
+    }
+
+    public OnLoopOverListener getOnLoopOverListener() {
+	return onLoopOverListener;
+    }
+
+    public void setOnLoopOverListener(OnLoopOverListener onLoopOverListener) {
+	this.onLoopOverListener = onLoopOverListener;
+    }
+
+    public static interface OnLoopOverListener {
+	void onOver(MarqueeTextView marqueeTextView);
     }
 
 }

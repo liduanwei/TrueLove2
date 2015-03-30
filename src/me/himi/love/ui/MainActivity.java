@@ -44,6 +44,7 @@ import me.himi.love.util.ImageLoaderOptions;
 import me.himi.love.util.StringUtils;
 import me.himi.love.util.ToastFactory;
 import me.himi.love.view.MarqueeTextView;
+import me.himi.love.view.MarqueeTextView.OnLoopOverListener;
 import net.youmi.android.offers.EarnPointsOrderList;
 import net.youmi.android.offers.PointsChangeNotify;
 import net.youmi.android.offers.PointsEarnNotify;
@@ -148,6 +149,8 @@ public class MainActivity extends BaseActivity {
     private void loadSystemNotices() {
 	// TODO Auto-generated method stub
 	// 系统公告
+	final View noticeBroad = findViewById(R.id.layout_notice);
+
 	final MarqueeTextView tvNotice = getViewById(R.id.tv_system_notice);
 	tvNotice.setTextColor(getResources().getColor(R.color.text_white));
 
@@ -158,11 +161,19 @@ public class MainActivity extends BaseActivity {
 	    @Override
 	    public void onSuccess(List<SystemNotice> notices) {
 		// TODO Auto-generated method stub
+		if (notices.size() == 0) {
+		    noticeBroad.setVisibility(View.GONE);
+		    return;
+		}
 		StringBuilder sb = new StringBuilder();
 		for (SystemNotice n : notices) {
-		    sb.append(n.getContent()).append("         ");
+		    sb.append(n.getContent()).append("               ");
 		}
-
+		TranslateAnimation transAnimal = new TranslateAnimation(0, 0, -300, 0);
+		transAnimal.setDuration(700L);
+		transAnimal.setFillAfter(true);
+		noticeBroad.startAnimation(transAnimal);
+		noticeBroad.setVisibility(View.VISIBLE);
 		tvNotice.setText(sb.toString());
 	    }
 
@@ -172,9 +183,19 @@ public class MainActivity extends BaseActivity {
 
 	    }
 	});
-	// 测试 公告, 
-//	tvNotice.setText("[系统公告] ID211163用户成功开通了12个月VIP会员");
-	// 加载系统消息
+	// 滚动循环次数
+	tvNotice.setMaxLoopCount(6, new OnLoopOverListener() {
+
+	    @Override
+	    public void onOver(MarqueeTextView marqueeTextView) {
+		// TODO Auto-generated method stub
+		// 隐藏
+		TranslateAnimation transAnimal = new TranslateAnimation(0, 0, 0, -200);
+		transAnimal.setDuration(700L);
+		transAnimal.setFillAfter(true);
+		noticeBroad.startAnimation(transAnimal);
+	    }
+	});
     }
 
     /**
