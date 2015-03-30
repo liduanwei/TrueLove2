@@ -135,6 +135,8 @@ public interface Constants {
     String URL_UPDATE_USER_MESSAGE_SYSTEM_TIME = HOST + "/index.php/index/message/updateSystemLastTime";
     // 通知更新当前登录用户最后收到的聊天消息
     String URL_UPDATE_USER_MESSAGE_CHAT_TIME = HOST + "/index.php/index/message/updateChatLastTime";
+    // 所有最新系统通知
+    String URL_MESSAGE_SYSTEM_NOTICES = HOST + "/index.php/index/message/notices";
 
     // 添加关注
     String URL_USER_FOLLOW_ADD = HOST + "/index.php/index/follow/addfollow";

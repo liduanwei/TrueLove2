@@ -15,6 +15,7 @@ import me.himi.love.entity.ReceivedQuestion;
 import me.himi.love.entity.ReceivedSayHi;
 import me.himi.love.entity.RecommendUser;
 import me.himi.love.entity.StrangeNews;
+import me.himi.love.entity.SystemNotice;
 import me.himi.love.entity.UserGift;
 import me.himi.love.entity.UserNews;
 import me.himi.love.entity.VisitedUser;
@@ -703,6 +704,24 @@ public interface IAppServiceExtend {
 
     public static interface OnFindGiftsByUserIdResponseListener {
 	void onSuccess(List<UserGift> gifts);
+
+	void onFailure(String errorMsg);
+    }
+
+    /**
+     * 加载系统通知
+     * @param postParams
+     * @param listener
+     */
+    void loadSystemNotices(LoadSystemNoticesPostParams postParams, OnLoadSystemNoticeResonpseListener listener);
+
+    public static class LoadSystemNoticesPostParams {
+	public int days;
+	public int page, pageSize;
+    }
+
+    public static interface OnLoadSystemNoticeResonpseListener {
+	void onSuccess(List<SystemNotice> notices);
 
 	void onFailure(String errorMsg);
     }

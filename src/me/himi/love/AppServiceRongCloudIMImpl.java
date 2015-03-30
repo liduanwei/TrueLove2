@@ -74,7 +74,7 @@ public class AppServiceRongCloudIMImpl implements IAppServiceRongCloudIM {
     public void connect(Context context, String token, ConnectCallback callback) {
 	// TODO Auto-generated method stub
 	// appKey
-//	RongIM.init(context);//, "6tnym1brn8ys7", R.drawable.ic_launcher);
+	//	RongIM.init(context);//, "6tnym1brn8ys7", R.drawable.ic_launcher);
 
 	try {
 	    // 连接 登录
@@ -99,6 +99,9 @@ public class AppServiceRongCloudIMImpl implements IAppServiceRongCloudIM {
 	}
     }
 
+    /**
+     * 刷新用户信息
+     */
     @Override
     public void refreshUserInfo() {
 	// TODO Auto-generated method stub
@@ -116,7 +119,7 @@ public class AppServiceRongCloudIMImpl implements IAppServiceRongCloudIM {
 
 	    @Override
 	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-		System.out.println("refresh RongCloud userInfo:error");
+		System.out.println("refresh RongCloud userInfo " + new String(arg2));
 	    }
 	};
 	HttpUtil.post(url, params, responseHandler);

@@ -13,20 +13,24 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.AppServiceRongCloudIMImpl;
-import me.himi.love.RongIMEvent;
 import me.himi.love.IAppService.CheckUpdateParams;
 import me.himi.love.IAppService.OnCheckUpdateListener;
+import me.himi.love.IAppServiceExtend.LoadSystemNoticesPostParams;
+import me.himi.love.IAppServiceExtend.OnLoadSystemNoticeResonpseListener;
 import me.himi.love.IAppServiceRongCloudIM.OnTokenResponseListener;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
+import me.himi.love.RongIMEvent;
 import me.himi.love.boost.androidservice.FloatShareService;
 import me.himi.love.boost.androidservice.MessagePollService;
 import me.himi.love.dao.DBHelper;
 import me.himi.love.entity.CheckUpdateVersion;
 import me.himi.love.entity.PrivateMessage;
 import me.himi.love.entity.PrivateMessage.MessageType;
+import me.himi.love.entity.SystemNotice;
 import me.himi.love.ui.CheckUpdateActivity.OnUpdateListener;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.ui.fragment.CommunityFragment;
@@ -117,12 +121,7 @@ public class MainActivity extends BaseActivity {
 	initServices();
 	initBroadcastReceiver();
 
-	// 系统公告
-	MarqueeTextView tvNotice = getViewById(R.id.tv_system_notice);
-	tvNotice.setTextColor(getResources().getColor(R.color.text_white));
-
-	// 测试 公告, 
-	tvNotice.setText("[系统公告] ID211163用户成功开通了12个月VIP会员");
+	loadSystemNotices(); // 加载系统公告
 
 	//检查更新
 	SharedPreferences pref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
@@ -141,6 +140,41 @@ public class MainActivity extends BaseActivity {
 
 	// 连接IM
 	connectRongCloudIM(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
+    }
+
+    /**
+     * 加载系统公告
+     */
+    private void loadSystemNotices() {
+	// TODO Auto-generated method stub
+	// 系统公告
+	final MarqueeTextView tvNotice = getViewById(R.id.tv_system_notice);
+	tvNotice.setTextColor(getResources().getColor(R.color.text_white));
+
+	LoadSystemNoticesPostParams postParams = new LoadSystemNoticesPostParams();
+
+	AppServiceExtendImpl.getInstance().loadSystemNotices(postParams, new OnLoadSystemNoticeResonpseListener() {
+
+	    @Override
+	    public void onSuccess(List<SystemNotice> notices) {
+		// TODO Auto-generated method stub
+		StringBuilder sb = new StringBuilder();
+		for (SystemNotice n : notices) {
+		    sb.append(n.getContent()).append("         ");
+		}
+
+		tvNotice.setText(sb.toString());
+	    }
+
+	    @Override
+	    public void onFailure(String errorMsg) {
+		// TODO Auto-generated method stub
+
+	    }
+	});
+	// 测试 公告, 
+//	tvNotice.setText("[系统公告] ID211163用户成功开通了12个月VIP会员");
+	// 加载系统消息
     }
 
     /**

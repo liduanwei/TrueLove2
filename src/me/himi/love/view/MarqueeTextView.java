@@ -17,7 +17,7 @@ public class MarqueeTextView extends TextView {
     private int offsetX, offsetY;
     private boolean mIsRunning;//
     private float mTextWidth;// 文本宽度
-    private String mText;// 文本
+    private String mText;// 当前文本
     private Context mContext;
 
     private float mWidth; // View最大宽度

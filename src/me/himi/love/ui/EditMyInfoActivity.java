@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
+import me.himi.love.AppServiceRongCloudIMImpl;
 import me.himi.love.IAppService.OnLoadDetailUserListener;
 import me.himi.love.IAppService.OnSimpleListener;
 import me.himi.love.IAppService.OnUploadFaceListener;
@@ -447,6 +449,9 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		progress.cancel();
 		ActivityUtil.show(EditMyInfoActivity.this, "保存成功");
 		//setResult(UserInfoActivity.EDIT_MY_INFO_RESULT_CODE);
+
+		// IM 即时刷新用户资料
+		AppServiceRongCloudIMImpl.getInstance().refreshUserInfo();// 刷新用户资料
 
 		LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
 		DetailInfoUser infoUser = loginedUser.getDetailInfoUser();
