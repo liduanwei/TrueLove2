@@ -1022,7 +1022,7 @@ public class MainActivity extends BaseActivity {
 
 			switch (arg0) {
 			case TOKEN_INCORRECT:
-			    if (tryReconnectCount-- >= 0) {
+			    if (tryReconnectCount-- >= 1) {
 				connectRongCloudIM(userId);
 				ToastFactory.getToast(MainActivity.this, "token 不正确,重试中(" + tryReconnectCount + ")").show();
 			    } else {
