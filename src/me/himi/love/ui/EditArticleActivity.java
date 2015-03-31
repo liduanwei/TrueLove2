@@ -464,7 +464,7 @@ public class EditArticleActivity extends BaseActivity implements OnClickListener
 	    @Override
 	    public void onSuccess() {
 		// TODO Auto-generated method stub
-		showToast("发布成功!\n内容审核中...");
+		showToast("发布成功!\n内容进入审核中...");
 		progress.dismiss();
 		mEtContent.setText("");
 		finish();
