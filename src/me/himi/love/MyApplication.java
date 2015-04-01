@@ -91,7 +91,6 @@ public class MyApplication extends Application {
 
 	initBaidu(); // 初始化百度地图
 
-
 	// 创建快捷方式
 	if (!"1".equals(PreferencesUtil.read(this, "shortcut_added"))) {
 	    ActivityUtil.addShortCut(this, FirstGuideActivity.class);

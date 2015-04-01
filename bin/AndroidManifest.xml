@@ -314,12 +314,6 @@
 
         <!-- Begin Rong Cloud -->
 
-        <meta-data
-            android:name="RONG_CLOUD_APP_KEY"
-            android:value="6tnym1brn8ys7" />
-
-        <service android:name="io.rong.imlib.RongService" />
-
         <activity
             android:name="io.rong.imkit.RongActivity"
             android:screenOrientation="portrait" >
@@ -420,40 +414,19 @@
             android:priority="1000" >
         </service>
         <service
-            android:name="io.rong.imlib.push.PushService"
-            android:process="io.rong.push" >
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="io.rong.push" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="io.rong.imlib.push.CommandService"
-            android:process="io.rong.push" >
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="io.rong.command" />
-            </intent-filter>
-        </service>
+            android:name="io.rong.imlib.PushService"
+            android:process="io.rong.push.service" />
+        <service android:name="io.rong.imlib.RongService" />
 
         <receiver
-            android:name="io.rong.imlib.push.PushReceiver"
-            android:process="io.rong.push" >
+            android:name="io.rong.imlib.PushReceiver"
+            android:process="io.rong.push.service" >
             <intent-filter>
                 <action android:name="io.rong.imlib.action.push.heartbeat" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="io.rong.imlib.push.PushMessageReceiver" >
-            <intent-filter>
-                <action android:name="io.rong.push.message" />
             </intent-filter>
         </receiver>
         <!-- End Rong Cloud -->
