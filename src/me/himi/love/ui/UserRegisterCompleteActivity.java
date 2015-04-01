@@ -192,7 +192,7 @@ public class UserRegisterCompleteActivity extends BaseActivity {
 
 	// 完善资料需要的字段
 	PerfectCompleetePostParams postParams = new PerfectCompleetePostParams();
-	postParams.nickname = mEtNickname.getText().toString();
+	postParams.nickname = mEtNickname.getText().toString().trim();
 	// 月份 -1 , 因为是从0表示1月
 	postParams.brithday = (int) (ActivityUtil.getTimemillis(mYear, mMonth - 1, mDay) / 1000L);
 	postParams.gender = rbMale.isChecked() ? 1 : 0;

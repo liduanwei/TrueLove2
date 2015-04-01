@@ -10,6 +10,7 @@
         android:layout_centerVertical="true"
         android:drawableLeft="@drawable/yuanfen"
         android:paddingLeft="8dp"
+        android:singleLine="true"
         android:text="标题"
         android:textColor="@color/base_color_text_white"
         android:textSize="@dimen/text_size_large" />
@@ -21,7 +22,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-      
         android:clickable="true"
         android:gravity="fill_horizontal"
         android:paddingBottom="2dp"

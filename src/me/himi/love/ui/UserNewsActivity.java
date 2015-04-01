@@ -90,7 +90,7 @@ public class UserNewsActivity extends BaseActivity {
 
 	    tvTopTitle.setText("我的留言");
 	    tvTopAction.setVisibility(View.VISIBLE);
-	    tvTopAction.setText("+");
+	    tvTopAction.setText("++");
 	    tvTopAction.setOnClickListener(new View.OnClickListener() {
 
 		@Override
@@ -177,11 +177,11 @@ public class UserNewsActivity extends BaseActivity {
     }
 
     // 使用本地缓存
-    private final String cachePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users_news_" + MyApplication.getInstance().getCurrentLoginedUser().getUserId();
+    private final String cachePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/users_news_";
 
     private void loadFromCache() {
 	// TODO Auto-generated method stub
-	List<UserNews> userNews = CacheUtils.loadFromCache(cachePath);
+	List<UserNews> userNews = CacheUtils.loadFromCache(cachePath + targetUser.getUserId());
 	if (userNews != null) {
 	    mUserNewsAdapter.setList(userNews);
 	} else {
@@ -215,7 +215,7 @@ public class UserNewsActivity extends BaseActivity {
 		    // 隐藏
 		    tvLoading.setVisibility(View.GONE);
 
-		    CacheUtils.cacheToLocal(mUserNewsAdapter.getList(), cachePath);
+		    CacheUtils.cacheToLocal(mUserNewsAdapter.getList(), cachePath + targetUser.getUserId());
 
 		} else {
 
