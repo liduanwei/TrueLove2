@@ -275,7 +275,7 @@
                 android:visibility="gone" >
 
                 <ImageView
-                    android:id="@+id/iv_line1_icon"
+                    android:id="@+id/iv_line2_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -285,7 +285,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/iv_line1_icon"
+                    android:layout_toRightOf="@id/iv_line2_icon"
                     android:paddingLeft="20dp"
                     android:text="金币兑换"
                     android:textColor="@color/c_f98800"
@@ -312,7 +312,7 @@
                 android:padding="6dp" >
 
                 <ImageView
-                    android:id="@+id/iv_line1_icon"
+                    android:id="@+id/iv_line3_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -322,7 +322,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/iv_line1_icon"
+                    android:layout_toRightOf="@id/iv_line3_icon"
                     android:paddingLeft="20dp"
                     android:text="会员中心"
                     android:textColor="@color/c_f98800"
@@ -349,7 +349,7 @@
                 android:padding="6dp" >
 
                 <ImageView
-                    android:id="@+id/iv_line1_icon"
+                    android:id="@+id/iv_line4_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -359,7 +359,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/iv_line1_icon"
+                    android:layout_toRightOf="@id/iv_line4_icon"
                     android:paddingLeft="20dp"
                     android:text="心情动态"
                     android:textSize="@dimen/text_size_medium" />
@@ -374,7 +374,7 @@
                 android:padding="6dp" >
 
                 <ImageView
-                    android:id="@+id/iv_line1_icon"
+                    android:id="@+id/iv_line5_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -385,7 +385,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/iv_line1_icon"
+                    android:layout_toRightOf="@id/iv_line5_icon"
                     android:paddingLeft="20dp"
                     android:text="访客足迹"
                     android:textSize="@dimen/text_size_medium" />
@@ -513,7 +513,7 @@
                 android:padding="6dp" >
 
                 <ImageView
-                    android:id="@+id/iv_line1_icon"
+                    android:id="@+id/iv_line100_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -524,7 +524,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/iv_line1_icon"
+                    android:layout_toRightOf="@id/iv_line100_icon"
                     android:text="设置"
                     android:textSize="@dimen/text_size_medium" />
             </RelativeLayout>

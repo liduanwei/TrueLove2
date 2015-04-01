@@ -120,6 +120,16 @@
                     android:paddingLeft="20dp"
                     android:text="检查更新"
                     android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tv_current_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="20dp"
+                    android:text="当前版本"
+                    android:textSize="@dimen/text_size_10" />
             </RelativeLayout>
 
             <RelativeLayout

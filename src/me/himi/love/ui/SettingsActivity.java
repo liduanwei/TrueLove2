@@ -78,6 +78,9 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 	tvTopAction.setText("");
 	tvTopAction.setVisibility(View.GONE);
 
+	TextView tvCurrentVersion = getViewById(R.id.tv_current_version); // 当前版本
+	tvCurrentVersion.setText("v" + ActivityUtil.getVersionName(this));
+
 	// 立即检查更新
 	getViewById(R.id.layout_checkupdate).setOnClickListener(new OnClickListener() {
 
@@ -252,7 +255,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 	// 缓存文件size
 	mTvCacheSize = getViewById(R.id.tv_cache_size);
 
-	mTvCacheSize.setText(FileUtil.getDirSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2") / 1024.0f + "kb");
+	mTvCacheSize.setText(String.format("%.2f", (FileUtil.getDirSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2") / 1024.0f / 1024)) + "mb");
 
 	// 退出登录
 	Button btnLogout = (Button) findViewById(R.id.btn_logout);
@@ -273,8 +276,11 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 
 	case R.id.layout_cache_clear:
 	    boolean isDeleted = FileUtil.deleteDirFromSD(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2");
-	    showToast("缓存已清除");
-	    mTvCacheSize.setText(FileUtil.getDirSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2") / 1024.0f + "kb");
+	    if (isDeleted) {
+		showToast("缓存已清除");
+		//	    mTvCacheSize.setText((int) (FileUtil.getDirSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2") / 1024.0f) + "kb");
+		mTvCacheSize.setText(String.format("%.2f", (FileUtil.getDirSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2") / 1024.0f / 1024)) + "mb");
+	    }
 	    break;
 	}
     }

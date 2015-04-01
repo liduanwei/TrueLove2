@@ -133,6 +133,9 @@
             android:name="me.himi.love.ui.GiftChooseActivity"
             android:theme="@style/Theme.CustomDialog" >
         </activity>
+        <!-- 用户搜索 -->
+        <activity android:name="me.himi.love.ui.UsersSearchActivity" >
+        </activity>
         <activity android:name="me.himi.love.ui.MyReceivedSystemMessageActivity" >
         </activity>
         <activity android:name="me.himi.love.ui.MyFriendsActivity" >

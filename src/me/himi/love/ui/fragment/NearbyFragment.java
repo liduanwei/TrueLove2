@@ -1,13 +1,5 @@
 package me.himi.love.ui.fragment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +22,11 @@ import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.ui.sound.SoundPlayer;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.CacheUtils;
+import me.himi.love.view.SelectProvinceCityPopupWindow;
 import me.himi.love.view.list.XListView.IXListViewListener;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -44,11 +37,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -60,7 +54,7 @@ import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
  * @author sparklee liduanwei_911@163.com
  * @date Nov 2, 2014 10:52:08 PM
  */
-public class NearbyFragment extends BaseFragment implements OnItemClickListener {
+public class NearbyFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
     me.himi.love.view.list.XListView mListView;
     UserNearbyAdapter mAdapter;
     List<NearbyUser> mUsers = new ArrayList<NearbyUser>();
@@ -68,6 +62,8 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
     View mContainerView;
 
     IRecommendUserLoader recommendUserLoader = new NearbyUserLoaderImpl();
+
+    View mLayoutSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -227,6 +223,57 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
 	}
 	// 广告初始化
 	initAds();
+
+	initSearchView();
+
+    }
+
+    TextView mTvSearchHomeplace;
+
+    /**
+     * 初始化搜索 view
+     */
+    private void initSearchView() {
+	// TODO Auto-generated method stub
+	// 筛选view
+	mLayoutSearch = mContainerView.findViewById(R.id.layout_search);
+	mLayoutSearch.setVisibility(View.GONE); // 默认不显示
+
+	// 搜索家乡
+	mTvSearchHomeplace = (TextView) mLayoutSearch.findViewById(R.id.tv_homeplace);
+
+	mLayoutSearch.findViewById(R.id.tv_search_confirm).setOnClickListener(new View.OnClickListener() {
+
+	    @Override
+	    public void onClick(View v) {
+
+		mLayoutSearch.setVisibility(View.GONE);
+		// 提交搜索
+
+		AnimationSet as = new AnimationSet(true);
+		TranslateAnimation translateAnmation = new TranslateAnimation(0, 0, 100, -1000);
+		translateAnmation.setFillAfter(true);
+		translateAnmation.setDuration(200L);
+		as.addAnimation(translateAnmation);
+		mLayoutSearch.startAnimation(as);
+	    }
+	});
+	mLayoutSearch.findViewById(R.id.tv_search_cancle).setOnClickListener(new View.OnClickListener() {
+
+	    @Override
+	    public void onClick(View v) {
+		mLayoutSearch.setVisibility(View.GONE);
+		AnimationSet as = new AnimationSet(true);
+		TranslateAnimation translateAnmation = new TranslateAnimation(0, 0, 100, -1000);
+		translateAnmation.setFillAfter(true);
+		translateAnmation.setDuration(200L);
+		as.addAnimation(translateAnmation);
+		mLayoutSearch.startAnimation(as);
+	    }
+	});
+
+	// 家乡
+	mLayoutSearch.findViewById(R.id.layout_search_homeplace).setOnClickListener(this);
 
     }
 
@@ -508,44 +555,56 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
      * 
      */
 
-    AlertDialog searchDialog = null;
-
     private void showSearch() {
-
-	if (null == searchDialog) {
-	    searchDialog = new AlertDialog.Builder(this.getActivity()).create();
-	    searchDialog.show();
-
-	    View view = LayoutInflater.from(getActivity()).inflate(R.layout.search_dialog, null);
-	    view.setBackgroundResource(R.drawable.rounder_corners);
-	    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	    searchDialog.addContentView(view, params);
-	    searchDialog.getWindow().setGravity(Gravity.CENTER);
-
-	    // 默认全部性别
-	    RadioButton rbAllsex = (RadioButton) view.findViewById(R.id.rbn_search_allsex);
-	    rbAllsex.setChecked(true);
-
-	    view.findViewById(R.id.tv_search_confirm).setOnClickListener(new View.OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-		    searchDialog.cancel();
-		    // 提交搜索
-		}
-	    });
-	    view.findViewById(R.id.tv_search_cancle).setOnClickListener(new View.OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-		    searchDialog.cancel();
-		}
-	    });
-	} else {
-	    if (!searchDialog.isShowing()) {
-		searchDialog.show();
-	    }
+	//	Intent intent = new Intent(this.getActivity(), UsersSearchActivity.class);
+	//	int requestCode = 2;
+	//	startActivityForResult(intent, requestCode);
+	if (mLayoutSearch.getVisibility() == View.VISIBLE) {
+	    return;
 	}
+	AnimationSet as = new AnimationSet(true);
+	TranslateAnimation translateAnmation = new TranslateAnimation(0, 0, -1000, 100);
+	translateAnmation.setFillAfter(true);
+	translateAnmation.setDuration(200L);
+	as.addAnimation(translateAnmation);
+
+	mLayoutSearch.startAnimation(as);
+
+	mLayoutSearch.setVisibility(View.VISIBLE);
+	//	if (null == searchDialog) {
+	//	    searchDialog = new AlertDialog.Builder(this.getActivity()).create();
+	//	    searchDialog.show();
+	//
+	//	    View view = LayoutInflater.from(getActivity()).inflate(R.layout.search_dialog, null);
+	//	    view.setBackgroundResource(R.drawable.rounder_corners);
+	//	    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+	//	    searchDialog.addContentView(view, params);
+	//	    searchDialog.getWindow().setGravity(Gravity.CENTER);
+	//
+	//	    // 默认全部性别
+	//	    RadioButton rbAllsex = (RadioButton) view.findViewById(R.id.rbn_search_allsex);
+	//	    rbAllsex.setChecked(true);
+	//
+	//	    view.findViewById(R.id.tv_search_confirm).setOnClickListener(new View.OnClickListener() {
+	//
+	//		@Override
+	//		public void onClick(View v) {
+	//		    searchDialog.cancel();
+	//		    // 提交搜索
+	//		}
+	//	    });
+	//	    view.findViewById(R.id.tv_search_cancle).setOnClickListener(new View.OnClickListener() {
+	//
+	//		@Override
+	//		public void onClick(View v) {
+	//		    searchDialog.cancel();
+	//		}
+	//	    });
+	//	} else {
+	//	    if (!searchDialog.isShowing()) {
+	//		searchDialog.show();
+	//	    }
+	//	}
     }
 
     @Override
@@ -596,4 +655,43 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener 
 	//	RongIM.getInstance().startPrivateChat(getActivity(), user.getUserId() + "", user.getNickname());
     }
 
+    @Override
+    public void onClick(View arg0) {
+	// TODO Auto-generated method stub
+	switch (arg0.getId()) {
+	case R.id.layout_search_homeplace:
+	    selectHomeplace();
+	    break;
+	}
+    }
+
+    SelectProvinceCityPopupWindow cityPopupWindow;
+
+    private void selectHomeplace() {
+
+	//	
+	if (null == cityPopupWindow) {
+	    cityPopupWindow = new SelectProvinceCityPopupWindow(this.getActivity(), mTvSearchHomeplace.getText().toString());
+
+	    cityPopupWindow.setOutsideTouchable(false);
+
+	    cityPopupWindow.setFocusable(true);
+	    cityPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+	    cityPopupWindow.setWidth(ActivityUtil.getScreenSize()[0]);
+
+	    cityPopupWindow.setHeight(ActivityUtil.getScreenSize()[1]);
+	    cityPopupWindow.setOnSubmitListener(new SelectProvinceCityPopupWindow.OnSubmitListener() {
+
+		@Override
+		public void onSubmit(String selectedCity) {
+		    // TODO Auto-generated method stub
+		    mTvSearchHomeplace.setText(selectedCity);
+		}
+	    });
+	}
+	if (!cityPopupWindow.isShowing()) {
+	    cityPopupWindow.showAtLocation(this.mContainerView, Gravity.CENTER, 0, 0);
+	}
+    }
 }
