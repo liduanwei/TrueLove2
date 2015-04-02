@@ -219,6 +219,10 @@ public interface IAppServiceExtend {
 	public int page, pageSize;
 	public String longtitude, latitude;
 
+	public int gender; // 性别 , 0: 女 1:男 2: 不限
+	public String maritalStatus; // 情感状况 
+	public String homeplace, address;
+	public String house;
     }
 
     public interface OnPostNearbyUsersResponseListener {
@@ -725,4 +729,5 @@ public interface IAppServiceExtend {
 
 	void onFailure(String errorMsg);
     }
+
 }

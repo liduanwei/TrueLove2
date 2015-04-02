@@ -777,8 +777,7 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 	ListMenuDialog dialog = new ListMenuDialog(this, false); // 单选模式
 	dialog.setTitle("月薪");
 
-	dialog.addMenuItem(dialog.new MenuItem("低于800"));
-	dialog.addMenuItem(dialog.new MenuItem("低于2000"));
+	dialog.addMenuItem(dialog.new MenuItem("2000以下"));
 	dialog.addMenuItem(dialog.new MenuItem("2000-5000"));// 只有添加的第一个是选中状态
 	dialog.addMenuItem(dialog.new MenuItem("5000-10000"));
 	dialog.addMenuItem(dialog.new MenuItem("10000-20000"));
@@ -1409,10 +1408,9 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 	dialog.setTitle("情感状态");
 
 	dialog.addMenuItem(dialog.new MenuItem("保密"));
-	dialog.addMenuItem(dialog.new MenuItem("单身"));
-	dialog.addMenuItem(dialog.new MenuItem("恋爱中"));// 只有添加的第一个是选中状态
-	dialog.addMenuItem(dialog.new MenuItem("已婚"));
+	dialog.addMenuItem(dialog.new MenuItem("未婚"));
 	dialog.addMenuItem(dialog.new MenuItem("离异"));
+	dialog.addMenuItem(dialog.new MenuItem("丧偶"));
 
 	dialog.setChecked(tvMaritalStatus.getText().toString());
 	dialog.setInputContent(tvMaritalStatus.getText().toString());

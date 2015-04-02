@@ -31,9 +31,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -48,6 +46,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -64,7 +63,7 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
     UserNearbyAdapter mAdapter;
     List<NearbyUser> mUsers = new ArrayList<NearbyUser>();
 
-    View mContainerView;
+    RelativeLayout mContainerView;
 
     IRecommendUserLoader recommendUserLoader = new NearbyUserLoaderImpl();
 
@@ -74,7 +73,7 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	Log.e(getClass().getSimpleName(), "->onCreateView");
-	mContainerView = inflater.inflate(R.layout.fragment_nearby, container, false);
+	mContainerView = (RelativeLayout) inflater.inflate(R.layout.fragment_nearby, container, false);
 	init();
 	return mContainerView;
     }
@@ -86,8 +85,6 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	//	init();
     }
 
-    private int pageNumber = 1;
-
     private View.OnClickListener searchOnClickListener = new View.OnClickListener() {
 
 	@Override
@@ -98,7 +95,22 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 
     TextView tvTopAction;
 
+    PostNearbyUsersParams mPostParams = new PostNearbyUsersParams() {
+	{
+	    page = 1;
+	    pageSize = 20;
+	    gender = 2; // 默认全部性别的人
+	    maritalStatus = null; // 默认不限情感状态
+	    homeplace = null;
+	    address = null;
+	    house = null;
+	    longtitude = MyApplication.getInstance().getLongtitude();
+	    latitude = MyApplication.getInstance().getLatitude();
+	}
+    }; // 查询需提交的参数
+
     private void init() {
+
 	tvTopAction = (TextView) getActivity().findViewById(R.id.tv_top_action);
 
 	// 搜索过滤的结果 临时
@@ -193,7 +205,7 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	    @Override
 	    public void onRefresh() {
 		// TODO Auto-generated method stub
-		pageNumber = 1;
+		mPostParams.page = 1;
 		loadRecommendUsers();
 	    }
 
@@ -252,65 +264,15 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
      * 初始化搜索 view
      */
     private void initSearchView() {
-	// TODO Auto-generated method stub
-	//	View viewGender = getActivity().getLayoutInflater().inflate(R.layout.layout_users_search_gender, null);
-	//	View viewHomeplace = getActivity().getLayoutInflater().inflate(R.layout.layout_users_search_homeplace, null);
-	//	searchItemViews.add(viewGender);
-	//	searchItemViews.add(viewHomeplace);
 
 	// 筛选view
 	mLayoutSearch = mContainerView.findViewById(R.id.layout_search);
-	//	mViewPagerSearch = (ViewPager) mLayoutSearch.findViewById(R.id.viewpager);
-	//	mViewPagerSearch.setAdapter(new PagerAdapter() {
-	//
-	//	    @Override
-	//	    public void destroyItem(ViewGroup container, int position, Object object) {
-	//		// TODO Auto-generated method stub
-	//		container.removeView(searchItemViews.get(position));
-	//	    }
-	//
-	//	    @Override
-	//	    public Object instantiateItem(ViewGroup container, int position) {
-	//		// TODO Auto-generated method stub
-	//		View view = searchItemViews.get(position);
-	//		container.addView(view);
-	//		return view;
-	//	    }
-	//
-	//	    @Override
-	//	    public boolean isViewFromObject(View arg0, Object arg1) {
-	//		// TODO Auto-generated method stub
-	//		return arg0 == arg1;
-	//	    }
-	//
-	//	    @Override
-	//	    public int getCount() {
-	//		// TODO Auto-generated method stub
-	//		return searchItemViews.size();
-	//	    }
-	//	});
-	//	mViewPagerSearch.setOnPageChangeListener(new OnPageChangeListener() {
-	//	    
-	//	    @Override
-	//	    public void onPageSelected(int arg0) {
-	//		// TODO Auto-generated method stub
-	//		
-	//	    }
-	//	    
-	//	    @Override
-	//	    public void onPageScrolled(int arg0, float arg1, int arg2) {
-	//		// TODO Auto-generated method stub
-	//		
-	//	    }
-	//	    
-	//	    @Override
-	//	    public void onPageScrollStateChanged(int arg0) {
-	//		// TODO Auto-generated method stub
-	//		
-	//	    }
-	//	});
 
 	mLayoutSearch.setVisibility(View.GONE); // 默认不显示
+
+	final RadioButton rbGenderAll = (RadioButton) mLayoutSearch.findViewById(R.id.rgroup_genders).findViewById(R.id.rbn_search_allsex);
+	final RadioButton rbGenderMale = (RadioButton) mLayoutSearch.findViewById(R.id.rgroup_genders).findViewById(R.id.rbn_search_male);
+	final RadioButton rbGenderFemale = (RadioButton) mLayoutSearch.findViewById(R.id.rgroup_genders).findViewById(R.id.rbn_search_female);
 
 	// 家乡
 	mTvSearchHomeplace = (TextView) mLayoutSearch.findViewById(R.id.tv_homeplace);
@@ -345,6 +307,25 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 		translateAnmation.setDuration(200L);
 		as.addAnimation(translateAnmation);
 		mLayoutSearch.startAnimation(as);
+
+		mPostParams.page = 1;
+		mPostParams.pageSize = 20;
+		mPostParams.gender = rbGenderAll.isChecked() ? 2 : (rbGenderMale.isChecked() ? 1 : 0); // 默认全部性别的人
+
+		String status = mTvSearchSatus.getText().toString().trim();
+		String home = mTvSearchHomeplace.getText().toString().trim();
+		String addr = mTvSearchAddress.getText().toString().trim();
+		String house = mTvSearchHouse.getText().toString().trim();
+
+		mPostParams.maritalStatus = status.equals("不限") ? null : status;
+		mPostParams.homeplace = home.equals("不限") ? null : home;
+		mPostParams.address = addr.equals("不限") ? null : addr;
+		mPostParams.house = house.equals("不限") ? null : house;
+
+		mPostParams.longtitude = MyApplication.getInstance().getLongtitude();
+		mPostParams.latitude = MyApplication.getInstance().getLatitude();
+
+		loadRecommendUsers();
 	    }
 	});
 	mLayoutSearch.findViewById(R.id.tv_search_cancle).setOnClickListener(new View.OnClickListener() {
@@ -416,6 +397,8 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 
     private boolean isRefreshing;// 刷新中...
 
+    View mLoadingView;
+
     private void loadRecommendUsers() {
 
 	if (isRefreshing) { // 防止数据未加载页面号却增加了
@@ -428,6 +411,26 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	    //	    mListView.onRefreshComplete();
 	    return;
 	}
+
+	if (mLoadingView == null) {
+	    mLoadingView = getActivity().getLayoutInflater().inflate(R.layout.layout_loading_retry, null);
+	    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+	    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+	    mContainerView.addView(mLoadingView, params);
+	    mLoadingView.findViewById(R.id.tv_load_retry).setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+		    // TODO Auto-generated method stub
+		    loadRecommendUsers();
+		}
+	    });
+	}
+
+	// 可见
+	mLoadingView.setVisibility(View.VISIBLE);
+	// 重试按钮隐藏
+	mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.GONE);
 
 	//	Map<String, String> nameAndValues = new HashMap<String, String>();
 	//	nameAndValues.put("page", pageNumber + "");
@@ -471,28 +474,26 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	//	    }
 	//	});
 
-	PostNearbyUsersParams postParams = new PostNearbyUsersParams();
-	postParams.page = pageNumber;
-	postParams.pageSize = 20;
-
-	postParams.longtitude = MyApplication.getInstance().getLongtitude();
-	postParams.latitude = MyApplication.getInstance().getLatitude();
-
-	AppServiceExtendImpl.getInstance().loadNearbyUsers(postParams, new OnPostNearbyUsersResponseListener() {
+	AppServiceExtendImpl.getInstance().loadNearbyUsers(mPostParams, new OnPostNearbyUsersResponseListener() {
 
 	    @Override
 	    public void onSuccess(List<NearbyUser> users) {
 		// TODO Auto-generated method stub
 
 		if (users.size() != 0) {
-		    if (pageNumber == 1) {
+		    if (mPostParams.page == 1) {
 			mAdapter.getList().clear();
 
 			// 刷新加载到数据时播放音乐
 			SoundPlayer.getInstance(getActivity()).playOk();
+			// 滚动到第一个item处
+			mListView.setSelection(0);
+			mListView.setSelected(true);
+			//			mListView.scrollTo(0, 0);
+			mAdapter.notifyDataSetChanged(); //刷新
 		    }
 		    mAdapter.addAll(users);
-		    pageNumber++;
+		    mPostParams.page++;
 
 		    // 缓存到本地,下次启动首先从缓存加载
 		    CacheUtils.cacheToLocal(mAdapter.getList(), cacheUsersPath);
@@ -510,6 +511,9 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 		if (mListView.getPullRefreshing()) {
 		    mListView.stopRefresh();
 		}
+
+		// 隐藏
+		mLoadingView.setVisibility(View.GONE);
 	    }
 
 	    @Override
@@ -524,6 +528,9 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 		    mListView.stopRefresh();
 		}
 		showToast(errorMsg);
+
+		// 重试按钮可见
+		mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 	    }
 	});
 
@@ -871,13 +878,12 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	dialog.setTitle("年龄");
 
 	dialog.addMenuItem(dialog.new MenuItem("不限"));
-	dialog.addMenuItem(dialog.new MenuItem("20-23"));
-	dialog.addMenuItem(dialog.new MenuItem("24-26"));// 只有添加的第一个是选中状态
-	dialog.addMenuItem(dialog.new MenuItem("27-29"));
-	dialog.addMenuItem(dialog.new MenuItem("30-32"));
-	dialog.addMenuItem(dialog.new MenuItem("33-35"));
-	dialog.addMenuItem(dialog.new MenuItem("36-40"));
-	dialog.addMenuItem(dialog.new MenuItem("41-45"));
+	dialog.addMenuItem(dialog.new MenuItem("18-23"));
+	dialog.addMenuItem(dialog.new MenuItem("24-27"));// 只有添加的第一个是选中状态
+	dialog.addMenuItem(dialog.new MenuItem("28-30"));
+	dialog.addMenuItem(dialog.new MenuItem("31-35"));
+	dialog.addMenuItem(dialog.new MenuItem("36-39"));
+	dialog.addMenuItem(dialog.new MenuItem("40-45"));
 	dialog.addMenuItem(dialog.new MenuItem("46-50"));
 	dialog.addMenuItem(dialog.new MenuItem("51-60"));
 
@@ -907,10 +913,9 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	dialog.setTitle("情感状态");
 
 	dialog.addMenuItem(dialog.new MenuItem("不限"));
-	dialog.addMenuItem(dialog.new MenuItem("单身"));
-	dialog.addMenuItem(dialog.new MenuItem("恋爱中"));
-	dialog.addMenuItem(dialog.new MenuItem("已婚"));// 只有添加的第一个是选中状态
+	dialog.addMenuItem(dialog.new MenuItem("未婚"));
 	dialog.addMenuItem(dialog.new MenuItem("离异"));// 
+	dialog.addMenuItem(dialog.new MenuItem("丧偶"));// 
 
 	dialog.setChecked(mTvSearchSatus.getText().toString());
 	dialog.setInputContent(mTvSearchSatus.getText().toString());
@@ -938,7 +943,6 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	dialog.setTitle("月薪");
 
 	dialog.addMenuItem(dialog.new MenuItem("不限"));
-	dialog.addMenuItem(dialog.new MenuItem("2000以内"));
 	dialog.addMenuItem(dialog.new MenuItem("2000-5000"));// 只有添加的第一个是选中状态
 	dialog.addMenuItem(dialog.new MenuItem("5000-10000"));
 	dialog.addMenuItem(dialog.new MenuItem("10000-20000"));
@@ -972,8 +976,7 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	dialog.setTitle("住房");
 
 	dialog.addMenuItem(dialog.new MenuItem("不限"));
-	dialog.addMenuItem(dialog.new MenuItem("已购房"));
-	dialog.addMenuItem(dialog.new MenuItem("租房"));// 只有添加的第一个是选中状态
+	dialog.addMenuItem(dialog.new MenuItem("已购房"));// 只有添加的第一个是选中状态
 
 	dialog.setChecked(mTvSearchHouse.getText().toString());
 	dialog.setInputContent(mTvSearchHouse.getText().toString());
@@ -1001,12 +1004,13 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 	dialog.setTitle("身高");
 
 	dialog.addMenuItem(dialog.new MenuItem("不限"));
-	dialog.addMenuItem(dialog.new MenuItem("150-165"));
-	dialog.addMenuItem(dialog.new MenuItem("165-170"));
-	dialog.addMenuItem(dialog.new MenuItem("170-175"));// 只有添加的第一个是选中状态
-	dialog.addMenuItem(dialog.new MenuItem("175-180"));// 只有添加的第一个是选中状态
-	dialog.addMenuItem(dialog.new MenuItem("180-190"));
-	dialog.addMenuItem(dialog.new MenuItem("190以上"));
+	dialog.addMenuItem(dialog.new MenuItem("130-139"));
+	dialog.addMenuItem(dialog.new MenuItem("140-149"));
+	dialog.addMenuItem(dialog.new MenuItem("150-159"));
+	dialog.addMenuItem(dialog.new MenuItem("160-169"));
+	dialog.addMenuItem(dialog.new MenuItem("170-179"));// 只有添加的第一个是选中状态
+	dialog.addMenuItem(dialog.new MenuItem("180-189"));// 只有添加的第一个是选中状态
+	dialog.addMenuItem(dialog.new MenuItem("190-200"));
 
 	dialog.setChecked(mTvSearchHeight.getText().toString());
 	dialog.setInputContent(mTvSearchHeight.getText().toString());

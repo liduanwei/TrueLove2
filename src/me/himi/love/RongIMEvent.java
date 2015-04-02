@@ -4,6 +4,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imkit.RongIM.ConnectionStatusListener;
 import io.rong.imkit.RongIM.GetFriendsProvider;
 import io.rong.imkit.RongIM.GetUserInfoProvider;
+import io.rong.imkit.RongIM.OnSendMessageListener;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.RongIMClient.UserInfo;
 import io.rong.message.ImageMessage;
@@ -20,6 +21,7 @@ import me.himi.love.IAppServiceExtend.LoadFriendsPostParams;
 import me.himi.love.IAppServiceExtend.OnLoadFriendsResponseListener;
 import me.himi.love.entity.FriendUser;
 import me.himi.love.ui.MainActivity;
+import me.himi.love.ui.UserInfoTextActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -42,7 +44,7 @@ import android.util.Log;
  * 7、连接状态监听器，以获取连接相关状态：ConnectionStatusListener。
  * 8、地理位置提供者：LocationProvider。
  */
-public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongIM.GetUserInfoProvider, RongIM.GetFriendsProvider, RongIM.GetGroupInfoProvider, RongIM.ConversationBehaviorListener, RongIM.ConnectionStatusListener, RongIM.LocationProvider/*, OnSendMessageListener*/{
+public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongIM.GetUserInfoProvider, RongIM.GetFriendsProvider, RongIM.GetGroupInfoProvider, RongIM.ConversationBehaviorListener, RongIM.ConnectionStatusListener, RongIM.LocationProvider, OnSendMessageListener {
 
     private static final String TAG = RongIMEvent.class.getSimpleName();
 
@@ -119,6 +121,44 @@ public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongI
 		}
 	    });
 	}
+
+	// 点击头像事件
+	RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
+
+	    @Override
+	    public boolean onClickUserPortrait(Context context, RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
+
+		//在这里处理你想要跳转的activity，示例代码为YourAcitivy
+
+		Intent intent = new Intent(context, UserInfoTextActivity.class);
+		intent.putExtra("user_id", Integer.parseInt(user.getUserId()));
+		//		intent.putExtra("is_vip", user.getVip() == 1);
+		intent.putExtra("user_nickname", user.getName());
+		intent.putExtra("user_face_url", user.getPortraitUri());
+		context.startActivity(intent);
+		return false;
+	    }
+
+	    @Override
+	    public boolean onClickMessage(Context context, RongIMClient.Message message) {
+
+		//点击消息处理事件，示例代码展示了如何获得消息内容
+		//                if (message.getContent() instanceof LocationMessage) {
+		//                    Intent intent = new Intent(context, LocationActivity.class);
+		//                    intent.putExtra("location", message.getContent());
+		//                    context.startActivity(intent);
+		//
+		//                }else  if(message.getContent() instanceof RichContentMessage){
+		//                    RichContentMessage  mRichContentMessage = (RichContentMessage) message.getContent();
+		//                    Log.d("Begavior",  "extra:"+mRichContentMessage.getExtra());
+		//
+		//                }
+
+		Log.d("Begavior", message.getObjectName() + ":" + message.getMessageId());
+
+		return false;
+	    }
+	});
     }
 
     private void initGetUserInfoProvider(final Map<String, UserInfo> users) {
@@ -205,9 +245,8 @@ public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongI
      */
     public void setOtherListener() {
 	RongIM.getInstance().setReceiveMessageListener(this);//设置消息接收监听器。
-	//	    RongIM.getInstance().setSendMessageListener(this);//设置发出消息接收监听器.
+	RongIM.getInstance().setSendMessageListener(this);//设置发出消息接收监听器.
 	RongIM.getInstance().setConnectionStatusListener(this);//设置连接状态监听器。    
-
     }
 
     /**
@@ -240,7 +279,7 @@ public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongI
 	} else if (messageContent instanceof ImageMessage) {//图片消息
 	    ImageMessage imageMessage = (ImageMessage) messageContent;
 	    String s = new String(imageMessage.encode());
-//	    content = s + imageMessage.getRemoteUri();
+	    //	    content = s + imageMessage.getRemoteUri();
 	    content = "[ 新图片消息 ]";
 	    Log.d(TAG, "onReceived-ImageMessage:" + imageMessage.getRemoteUri());
 	} else if (messageContent instanceof VoiceMessage) {//语音消息
@@ -276,13 +315,14 @@ public final class RongIMEvent implements RongIM.OnReceiveMessageListener, RongI
      *
      * @param message 消息。
      */
-    //    @Override
+    @Override
     public RongIMClient.Message onSent(RongIMClient.Message message) {
 
 	RongIMClient.MessageContent messageContent = message.getContent();
 
 	if (messageContent instanceof TextMessage) {//文本消息
 	    TextMessage textMessage = (TextMessage) messageContent;
+//	    textMessage.setContent("[开通VIP会员尽情与她畅聊]");
 	    Log.d(TAG, "onSent-TextMessage:" + textMessage.getContent());
 	} else if (messageContent instanceof ImageMessage) {//图片消息
 	    ImageMessage imageMessage = (ImageMessage) messageContent;
