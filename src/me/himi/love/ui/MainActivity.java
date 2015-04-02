@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity {
 	tvNotice.setTextColor(getResources().getColor(R.color.text_white));
 
 	LoadSystemNoticesPostParams postParams = new LoadSystemNoticesPostParams();
-
+	android.support.v4.content.WakefulBroadcastReceiver v;
 	AppServiceExtendImpl.getInstance().loadSystemNotices(postParams, new OnLoadSystemNoticeResonpseListener() {
 
 	    @Override

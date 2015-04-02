@@ -98,6 +98,7 @@
     <string name="voice_dialog_collect">"手指上滑，取消发送"</string>
     <string name="voice_dialog_cancel_send">"松开手指，取消发送"</string>
     <string name="voice_dialog_time_short">"说话时间太短"</string>
+    <string name="rc_voice_unauthorized">"没有录音权限，请查看设置"</string>
 
     <!-- connect state -->
     <string name="conntect_state_prompt_disconnect">"服务尚未连接"</string>
@@ -114,7 +115,7 @@
     <!-- notification  -->
     <string name="notification_new_message">"您有了一条新消息"</string>
     <string name="notification_new_message_one_p">"发来了%1$s条消息"</string>
-    <string name="notification_new_message_mang_p">"%1$s个联系人发来%2$s条消息"</string>
+    <string name="notification_new_message_many_p">"%1$s个联系人发来%2$s条消息"</string>
     <string name="notification_new_message_one_p_one">"%1$s发来一条消息"</string>
     <string name="notification_custom_service">"客服"</string>
     <string name="new_message_more">"···"</string>
@@ -133,7 +134,6 @@
     <string name="notification_message_discussion_removed">"你被%1$s移出了讨论组"</string>
     <string name="notification_message_discussion_who_removed">"%1$s被%2$s 移出了讨论组"</string>
     <string name="notification_message_discussion_is_open_invite">"%1$s%2$s了成员邀请"</string>
-    <!--<string name="notification_message_discussion_n_add">"%1$s位成员被 %2$s 加入了讨论组"</string>-->
 
     <!-- location handler -->
     <string name="rc_location_handler">"处理中"</string>

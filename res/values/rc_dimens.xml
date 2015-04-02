@@ -860,5 +860,7 @@
     <dimen name="px_to_sp_24">16sp</dimen>
     <dimen name="px_to_sp_26">17.33sp</dimen>
 
+    <dimen name="rc_rich_text_icon_margin">15.00dp</dimen>
+
 
 </resources>

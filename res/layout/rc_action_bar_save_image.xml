@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rc_actionbar_save_image_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:gravity="center"
+    android:textColor="#ffffff"
+    android:layout_marginRight="10dp"
+    android:text="@string/show_image_save"
+    android:background="@drawable/rc_send_selector"
+    />
+

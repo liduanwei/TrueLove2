@@ -343,7 +343,7 @@ public class MyApplication extends Application {
     private void initRongCloudIM() {
 
 	//List<Conversation> conversations = RongIM.getInstance().getConversationList();
-	RongIM.init(this, "6tnym1brn8ys7", R.drawable.icon);
+	RongIM.init(this);//, "6tnym1brn8ys7", R.drawable.icon);
     }
 
     LocationClient mLocationClient;

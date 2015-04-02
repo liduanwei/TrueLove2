@@ -109,28 +109,28 @@ public final class R {
 		public static final int visibility = 0x7f010013;
 	}
 	public static final class drawable {
-		public static final int default_ptr_flip_bottom = 0x7f020032;
-		public static final int ic_launcher = 0x7f02013e;
-		public static final int image_1 = 0x7f020149;
-		public static final int image_10 = 0x7f02014a;
-		public static final int image_11 = 0x7f02014b;
-		public static final int image_12 = 0x7f02014c;
-		public static final int image_13 = 0x7f02014d;
-		public static final int image_14 = 0x7f02014e;
-		public static final int image_15 = 0x7f02014f;
-		public static final int image_16 = 0x7f020150;
-		public static final int image_17 = 0x7f020151;
-		public static final int image_18 = 0x7f020152;
-		public static final int image_19 = 0x7f020153;
-		public static final int image_2 = 0x7f020154;
-		public static final int image_20 = 0x7f020155;
-		public static final int image_3 = 0x7f020156;
-		public static final int image_4 = 0x7f020157;
-		public static final int image_5 = 0x7f020158;
-		public static final int image_6 = 0x7f020159;
-		public static final int image_7 = 0x7f02015a;
-		public static final int image_8 = 0x7f02015b;
-		public static final int image_9 = 0x7f02015c;
+		public static final int default_ptr_flip_bottom = 0x7f020033;
+		public static final int ic_launcher = 0x7f02013f;
+		public static final int image_1 = 0x7f02014a;
+		public static final int image_10 = 0x7f02014b;
+		public static final int image_11 = 0x7f02014c;
+		public static final int image_12 = 0x7f02014d;
+		public static final int image_13 = 0x7f02014e;
+		public static final int image_14 = 0x7f02014f;
+		public static final int image_15 = 0x7f020150;
+		public static final int image_16 = 0x7f020151;
+		public static final int image_17 = 0x7f020152;
+		public static final int image_18 = 0x7f020153;
+		public static final int image_19 = 0x7f020154;
+		public static final int image_2 = 0x7f020155;
+		public static final int image_20 = 0x7f020156;
+		public static final int image_3 = 0x7f020157;
+		public static final int image_4 = 0x7f020158;
+		public static final int image_5 = 0x7f020159;
+		public static final int image_6 = 0x7f02015a;
+		public static final int image_7 = 0x7f02015b;
+		public static final int image_8 = 0x7f02015c;
+		public static final int image_9 = 0x7f02015d;
 	}
 	public static final class id {
 		public static final int afterDescendants = 0x7f060028;

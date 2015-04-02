@@ -33,6 +33,7 @@
             android:layout_marginBottom="@dimen/px_to_dip_16"
             android:layout_marginLeft="@dimen/px_to_dip_10"
             android:layout_marginTop="@dimen/px_to_dip_16"
+            android:src="@drawable/rc_default_portrait"
             app:defDrawable="@drawable/rc_default_portrait" />
     </LinearLayout>
 

@@ -27,7 +27,6 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/px_to_dip_480"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/px_to_dip_30"
         android:gravity="left"
         android:paddingBottom="@dimen/px_to_dip_44"
         android:paddingTop="@dimen/px_to_dip_44"
@@ -37,13 +36,14 @@
             android:id="@+id/imagetRichIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/rc_rich_text_icon_margin"
             android:clickable="true" />
 
         <io.rong.imkit.view.RichIconTextView
             android:id="@+id/camertRichIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px_to_dip_50"
+            android:layout_marginLeft="@dimen/rc_rich_text_icon_margin"
             android:layout_toRightOf="@id/imagetRichIcon"
             android:clickable="true" />
 
@@ -51,14 +51,14 @@
             android:id="@+id/voipRichIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px_to_dip_50"
+            android:layout_marginLeft="@dimen/rc_rich_text_icon_margin"
             android:layout_toRightOf="@id/camertRichIcon" />
 
         <io.rong.imkit.view.RichIconTextView
             android:id="@+id/locationRichIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px_to_dip_50"
+            android:layout_marginLeft="@dimen/rc_rich_text_icon_margin"
             android:layout_toRightOf="@id/voipRichIcon" />
 
     </RelativeLayout>
