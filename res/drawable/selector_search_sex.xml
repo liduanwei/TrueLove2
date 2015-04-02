@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/c_f98800" android:state_checked="true"></item>
-    <item android:drawable="@color/c_aaaaff" android:state_checked="false"></item>
+    <item android:drawable="@drawable/base_edit_input" android:state_checked="true"></item>
+    <item android:drawable="@color/c_ffffffff" android:state_checked="false"></item>
 
 </selector>

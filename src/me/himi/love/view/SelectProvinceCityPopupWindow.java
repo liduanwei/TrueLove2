@@ -46,7 +46,8 @@ public class SelectProvinceCityPopupWindow extends PopupWindow implements OnClic
 		    if (!TextUtils.isEmpty(etInput.getText())) {
 			city = etInput.getText().toString();
 		    } else {
-			city = cityPicker.getSelectedCity();
+			//city = cityPicker.getSelectedCity();
+			city = null;//
 		    }
 		    onSubmitListener.onSubmit(city);
 		}

@@ -160,9 +160,11 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 
 	// 身高
 	etHeight = (EditText) findViewById(R.id.et_user_height);
+	etHeight.setOnClickListener(this);
 
 	// 体重
 	etWeight = (EditText) findViewById(R.id.et_user_weight);
+	etWeight.setOnClickListener(this);
 
 	// 真爱独白
 	etMonologue = (EditText) findViewById(R.id.et_monologue);
@@ -520,6 +522,12 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
     @Override
     public void onClick(View v) {
 	switch (v.getId()) {
+	case R.id.et_user_height:
+	    selectHeight();
+	    break;
+	case R.id.et_user_weight:
+	    selectWeight();
+	    break;
 	case R.id.tv_user_birthday: // 
 	    inputMyBirthday();
 	    break;
@@ -535,6 +543,7 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 	case R.id.layout_user_face:
 	    selectAvatarPhoto();
 	    break;
+
 	case R.id.layout_user_background:
 	    selectSpaceBackground();
 	    //...
@@ -597,6 +606,170 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 	    inputWantedExtends();
 	    break;
 	}
+    }
+
+    /**
+     * 选择身高
+     */
+    private void selectHeight() {
+	// TODO Auto-generated method stub
+
+	ListMenuDialog dialog = new ListMenuDialog(this, false); // 单选模式
+	dialog.setTitle("身高");
+
+	dialog.addMenuItem(dialog.new MenuItem("145cm"));
+	dialog.addMenuItem(dialog.new MenuItem("146cm"));
+	dialog.addMenuItem(dialog.new MenuItem("147cm"));
+	dialog.addMenuItem(dialog.new MenuItem("148cm"));
+	dialog.addMenuItem(dialog.new MenuItem("149cm"));
+	dialog.addMenuItem(dialog.new MenuItem("150cm"));
+	dialog.addMenuItem(dialog.new MenuItem("151cm"));
+	dialog.addMenuItem(dialog.new MenuItem("152cm"));
+	dialog.addMenuItem(dialog.new MenuItem("153cm"));
+	dialog.addMenuItem(dialog.new MenuItem("154cm"));
+	dialog.addMenuItem(dialog.new MenuItem("155cm"));
+	dialog.addMenuItem(dialog.new MenuItem("156cm"));
+	dialog.addMenuItem(dialog.new MenuItem("157cm"));
+	dialog.addMenuItem(dialog.new MenuItem("158cm"));
+	dialog.addMenuItem(dialog.new MenuItem("159cm"));
+	dialog.addMenuItem(dialog.new MenuItem("160cm"));
+	dialog.addMenuItem(dialog.new MenuItem("161cm"));
+	dialog.addMenuItem(dialog.new MenuItem("162cm"));
+	dialog.addMenuItem(dialog.new MenuItem("163cm"));
+	dialog.addMenuItem(dialog.new MenuItem("164cm"));
+	dialog.addMenuItem(dialog.new MenuItem("165cm"));
+	dialog.addMenuItem(dialog.new MenuItem("166cm"));
+	dialog.addMenuItem(dialog.new MenuItem("167cm"));
+	dialog.addMenuItem(dialog.new MenuItem("168cm"));
+	dialog.addMenuItem(dialog.new MenuItem("169cm"));
+	dialog.addMenuItem(dialog.new MenuItem("170cm"));
+	dialog.addMenuItem(dialog.new MenuItem("171cm"));
+	dialog.addMenuItem(dialog.new MenuItem("172cm"));
+	dialog.addMenuItem(dialog.new MenuItem("173cm"));
+	dialog.addMenuItem(dialog.new MenuItem("174cm"));
+	dialog.addMenuItem(dialog.new MenuItem("175cm"));
+	dialog.addMenuItem(dialog.new MenuItem("176cm"));
+	dialog.addMenuItem(dialog.new MenuItem("177cm"));
+	dialog.addMenuItem(dialog.new MenuItem("178cm"));
+	dialog.addMenuItem(dialog.new MenuItem("179cm"));
+	dialog.addMenuItem(dialog.new MenuItem("180cm"));
+	dialog.addMenuItem(dialog.new MenuItem("181cm"));
+	dialog.addMenuItem(dialog.new MenuItem("182cm"));
+	dialog.addMenuItem(dialog.new MenuItem("183cm"));
+	dialog.addMenuItem(dialog.new MenuItem("184cm"));
+	dialog.addMenuItem(dialog.new MenuItem("185cm"));
+	dialog.addMenuItem(dialog.new MenuItem("186cm"));
+	dialog.addMenuItem(dialog.new MenuItem("187cm"));
+	dialog.addMenuItem(dialog.new MenuItem("189cm"));
+	dialog.addMenuItem(dialog.new MenuItem("190cm"));
+	dialog.addMenuItem(dialog.new MenuItem("191cm"));
+	dialog.addMenuItem(dialog.new MenuItem("192cm"));
+	dialog.addMenuItem(dialog.new MenuItem("193cm"));
+	dialog.addMenuItem(dialog.new MenuItem("194cm"));
+	dialog.addMenuItem(dialog.new MenuItem("195cm"));
+	dialog.addMenuItem(dialog.new MenuItem("196cm"));
+	dialog.addMenuItem(dialog.new MenuItem("197cm"));
+	dialog.addMenuItem(dialog.new MenuItem("198cm"));// 只有添加的第一个是选中状态
+
+	dialog.setChecked(etHeight.getText().toString());
+	dialog.setInputContent(etHeight.getText().toString());
+	dialog.show();
+	dialog.setOnSubmitListener(new ListMenuDialog.OnSubmitListener() {
+
+	    @Override
+	    public void onSubmit(List<MenuItem> checkedItems, String input) {
+		if (!TextUtils.isEmpty(input)) {
+		    etHeight.setText(input);
+		} else {
+		    if (checkedItems.size() != 0) {
+			etHeight.setText(checkedItems.get(0).getName());
+		    }
+		}
+	    }
+	});
+
+    }
+
+    /**
+     * 选择体重
+     */
+    private void selectWeight() {
+	// TODO Auto-generated method stub
+
+	ListMenuDialog dialog = new ListMenuDialog(this, false); // 单选模式
+	dialog.setTitle("体重");
+
+	dialog.addMenuItem(dialog.new MenuItem("40kg"));
+	dialog.addMenuItem(dialog.new MenuItem("41kg"));
+	dialog.addMenuItem(dialog.new MenuItem("42kg"));
+	dialog.addMenuItem(dialog.new MenuItem("43kg"));
+	dialog.addMenuItem(dialog.new MenuItem("44kg"));
+	dialog.addMenuItem(dialog.new MenuItem("45kg"));
+	dialog.addMenuItem(dialog.new MenuItem("46kg"));
+	dialog.addMenuItem(dialog.new MenuItem("47kg"));
+	dialog.addMenuItem(dialog.new MenuItem("48kg"));
+	dialog.addMenuItem(dialog.new MenuItem("49kg"));
+	dialog.addMenuItem(dialog.new MenuItem("50kg"));
+	dialog.addMenuItem(dialog.new MenuItem("51kg"));
+	dialog.addMenuItem(dialog.new MenuItem("52kg"));
+	dialog.addMenuItem(dialog.new MenuItem("53kg"));
+	dialog.addMenuItem(dialog.new MenuItem("54kg"));
+	dialog.addMenuItem(dialog.new MenuItem("55kg"));
+	dialog.addMenuItem(dialog.new MenuItem("56kg"));
+	dialog.addMenuItem(dialog.new MenuItem("57kg"));
+	dialog.addMenuItem(dialog.new MenuItem("58kg"));
+	dialog.addMenuItem(dialog.new MenuItem("59kg"));
+	dialog.addMenuItem(dialog.new MenuItem("60kg"));
+	dialog.addMenuItem(dialog.new MenuItem("61kg"));
+	dialog.addMenuItem(dialog.new MenuItem("62kg"));
+	dialog.addMenuItem(dialog.new MenuItem("63kg"));
+	dialog.addMenuItem(dialog.new MenuItem("64kg"));
+	dialog.addMenuItem(dialog.new MenuItem("65kg"));
+	dialog.addMenuItem(dialog.new MenuItem("66kg"));
+	dialog.addMenuItem(dialog.new MenuItem("67kg"));
+	dialog.addMenuItem(dialog.new MenuItem("68kg"));
+	dialog.addMenuItem(dialog.new MenuItem("69kg"));
+	dialog.addMenuItem(dialog.new MenuItem("70kg"));
+	dialog.addMenuItem(dialog.new MenuItem("71kg"));
+	dialog.addMenuItem(dialog.new MenuItem("72kg"));
+	dialog.addMenuItem(dialog.new MenuItem("73kg"));
+	dialog.addMenuItem(dialog.new MenuItem("74kg"));
+	dialog.addMenuItem(dialog.new MenuItem("75kg"));
+	dialog.addMenuItem(dialog.new MenuItem("76kg"));
+	dialog.addMenuItem(dialog.new MenuItem("77kg"));
+	dialog.addMenuItem(dialog.new MenuItem("78kg"));
+	dialog.addMenuItem(dialog.new MenuItem("78kg"));
+	dialog.addMenuItem(dialog.new MenuItem("79kg"));
+	dialog.addMenuItem(dialog.new MenuItem("80kg"));
+	dialog.addMenuItem(dialog.new MenuItem("80kg"));
+	dialog.addMenuItem(dialog.new MenuItem("81kg"));
+	dialog.addMenuItem(dialog.new MenuItem("82kg"));
+	dialog.addMenuItem(dialog.new MenuItem("83kg"));
+	dialog.addMenuItem(dialog.new MenuItem("84kg"));
+	dialog.addMenuItem(dialog.new MenuItem("85kg"));
+	dialog.addMenuItem(dialog.new MenuItem("86kg"));
+	dialog.addMenuItem(dialog.new MenuItem("87kg"));
+	dialog.addMenuItem(dialog.new MenuItem("88kg"));
+	dialog.addMenuItem(dialog.new MenuItem("89kg"));
+	dialog.addMenuItem(dialog.new MenuItem("90kg"));
+
+	dialog.setChecked(etWeight.getText().toString());
+	dialog.setInputContent(etWeight.getText().toString());
+	dialog.show();
+	dialog.setOnSubmitListener(new ListMenuDialog.OnSubmitListener() {
+
+	    @Override
+	    public void onSubmit(List<MenuItem> checkedItems, String input) {
+		if (!TextUtils.isEmpty(input)) {
+		    etWeight.setText(input);
+		} else {
+		    if (checkedItems.size() != 0) {
+			etWeight.setText(checkedItems.get(0).getName());
+		    }
+		}
+	    }
+	});
+
     }
 
     private void selectSalary() {
@@ -1306,7 +1479,11 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		@Override
 		public void onSubmit(String selectedCity) {
 		    // TODO Auto-generated method stub
-		    tvHomeplace.setText(selectedCity);
+		    if (null == selectedCity) {
+			tvHomeplace.setText("中国");
+		    } else {
+			tvHomeplace.setText(selectedCity);
+		    }
 		}
 	    });
 	}
@@ -1337,7 +1514,11 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		@Override
 		public void onSubmit(String selectedCity) {
 		    // TODO Auto-generated method stub
-		    tvAddress.setText(selectedCity);
+		    if (null == selectedCity) {
+			tvAddress.setText("中国");
+		    } else {
+			tvAddress.setText(selectedCity);
+		    }
 		}
 	    });
 	}
@@ -1369,7 +1550,11 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		@Override
 		public void onSubmit(String selectedCity) {
 		    // TODO Auto-generated method stub
-		    tvWantedHomeplace.setText(selectedCity);
+		    if (null == selectedCity) {
+			tvWantedHomeplace.setText("不限");
+		    } else {
+			tvWantedHomeplace.setText(selectedCity);
+		    }
 		}
 	    });
 	}
@@ -1401,7 +1586,11 @@ public class EditMyInfoActivity extends BaseActivity implements OnClickListener 
 		@Override
 		public void onSubmit(String selectedCity) {
 		    // TODO Auto-generated method stub
-		    tvWantedAddress.setText(selectedCity);
+		    if (null == selectedCity) {
+			tvWantedAddress.setText("不限");
+		    } else {
+			tvWantedAddress.setText(selectedCity);
+		    }
 		}
 	    });
 	}

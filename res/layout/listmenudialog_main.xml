@@ -31,6 +31,7 @@
         android:id="@+id/et_listmenu_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:editable="false"
         android:layout_below="@id/tv_title"
         android:layout_margin="6dp"
         android:background="@drawable/selector_edittext"

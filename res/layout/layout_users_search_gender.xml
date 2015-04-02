@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eeffffff"
+    android:orientation="horizontal" >
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip" >
+
+        <RadioButton
+            android:id="@+id/rbn_search_allsex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_search_sex"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="全部" />
+
+        <RadioButton
+            android:id="@+id/rbn_serarch_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_search_sex"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="男" />
+
+        <RadioButton
+            android:id="@+id/rbn_search_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_search_sex"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="女" />
+    </RadioGroup>
+
+</LinearLayout>

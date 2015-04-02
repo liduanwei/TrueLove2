@@ -1,299 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:background="@color/base_color_text_white"
+    android:gravity="center"
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/layout_search_sex"
+        android:id="@+id/layout_filter_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+    </LinearLayout>
 
-        <RadioGroup
-            android:layout_width="match_parent"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        android:layout_gravity="center" >
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewpager"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_dot1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dip"
-            android:paddingTop="10dip" >
+            android:layout_margin="5dp"
+            android:background="@drawable/selector_dot" />
 
-            <RadioButton
-                android:id="@+id/rbn_search_allsex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector_search_sex"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="全部" />
+        <ImageView
+            android:id="@+id/iv_dot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/selector_dot" />
 
-            <RadioButton
-                android:id="@+id/rbn_serarch_male"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector_search_sex"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="男" />
-
-            <RadioButton
-                android:id="@+id/rbn_search_female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector_search_sex"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="女" />
-        </RadioGroup>
+        <ImageView
+            android:id="@+id/iv_dot3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/selector_dot" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
+        android:layout_below="@id/layout_buttons"
         android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_homeplace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="家乡" />
-
-        <TextView
-            android:id="@+id/tv_homeplace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="现居地" />
-
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="年龄" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="月薪" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="有房" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="情感状况" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="未婚" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="身高" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="体重" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_my_visitor"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
-
-        <TextView
-            android:id="@+id/tv_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="星座" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="不限" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip" >
+        android:paddingBottom="1dip"
+        android:paddingTop="1dip" >
 
         <TextView
             android:id="@+id/tv_search_cancle"
@@ -320,4 +86,4 @@
             android:text="确定" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
