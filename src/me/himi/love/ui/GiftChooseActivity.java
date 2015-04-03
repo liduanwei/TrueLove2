@@ -128,8 +128,8 @@ public class GiftChooseActivity extends BaseActivity {
 	    @Override
 	    public void onClick(View v) {
 		// TODO Auto-generated method stub
-//		startActivity(new Intent(GiftChooseActivity.this, BuyLoveMoneyActivity.class));
-		net.youmi.android.offers.OffersManager.getInstance(GiftChooseActivity.this).showOffersWall();
+		startActivity(new Intent(GiftChooseActivity.this, BuyLoveMoneyActivity.class));
+//		net.youmi.android.offers.OffersManager.getInstance(GiftChooseActivity.this).showOffersWall();
 	    }
 	});
 
