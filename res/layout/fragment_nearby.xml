@@ -131,6 +131,8 @@
 
     <include
         android:id="@+id/layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         layout="@layout/search_dialog"
         android:visibility="visible" />

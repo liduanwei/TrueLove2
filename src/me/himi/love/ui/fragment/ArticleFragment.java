@@ -79,7 +79,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
     private void init() {
 	tvTopAction = (TextView) getActivity().findViewById(R.id.tv_top_action);
-	tvTopAction.setText("发糗事");
+	tvTopAction.setText("发帖");
 
 	mListView = (XListView) mContainerView.findViewById(R.id.listview_article);
 	mAdapter = new ArticleAdapter(getActivity(), datas);
@@ -87,7 +87,6 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
 	// 使用代理 设置ImageLoader  在 ListView 滚动时不加载图片
 	mListView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
-
 	// 首先允许加载更多
 	mListView.setPullLoadEnable(true);
 	// 允许下拉
@@ -113,6 +112,17 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 	mListView.setDividerHeight(0);
 
 	mListView.setOnItemClickListener(this);
+
+	// 进入发布新内容
+	mContainerView.findViewById(R.id.tv_start_publish_article).setOnClickListener(new View.OnClickListener() {
+
+	    @Override
+	    public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(getActivity(), EditArticleActivity.class);
+		startActivity(intent);
+	    }
+	});
 
 	//loadArticles();
 	loadFromCache();
@@ -274,14 +284,12 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 	if (!hidden) {
 	    if (tvTopAction != null) {
 		tvTopAction.setVisibility(View.VISIBLE);
-//		tvTopAction.setText("发吐槽");
-//		tvTopAction.setOnClickListener(editArticleOnClickListener);
+		tvTopAction.setText("发吐槽");
+		tvTopAction.setOnClickListener(editArticleOnClickListener);
 	    }
 	}
 	super.onHiddenChanged(hidden);
     }
-    
-    
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

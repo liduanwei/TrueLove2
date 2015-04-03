@@ -146,8 +146,8 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 		tmpUsers.clear();
 
 		List<NearbyUser> users = mUsers;
-		for (NearbyUser u : users) {
-		    if (u.getNickname().toLowerCase().contains(input.toLowerCase())) {
+		for (NearbyUser u : users) { // ID 或 昵称
+		    if ((u.getUserId() + "").equals(input) || u.getNickname().toLowerCase().contains(input.toLowerCase())) {
 			tmpUsers.add(u);
 		    }
 		}

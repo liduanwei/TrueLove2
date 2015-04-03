@@ -21,4 +21,15 @@
         android:focusable="false"
         android:listSelector="@drawable/list_selector_cover" />
 
+    <TextView
+        android:id="@+id/tv_start_publish_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="20dip"
+        android:background="@drawable/edit_article_selector"
+        android:clickable="true" />
+
 </RelativeLayout>

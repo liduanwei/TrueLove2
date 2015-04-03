@@ -33,6 +33,7 @@ import me.himi.love.entity.PrivateMessage.MessageType;
 import me.himi.love.entity.SystemNotice;
 import me.himi.love.ui.CheckUpdateActivity.OnUpdateListener;
 import me.himi.love.ui.base.BaseActivity;
+import me.himi.love.ui.fragment.ArticleFragment;
 import me.himi.love.ui.fragment.CommunityFragment;
 import me.himi.love.ui.fragment.NearbyFragment;
 import me.himi.love.ui.fragment.PersonalFragment;
@@ -91,7 +92,8 @@ public class MainActivity extends BaseActivity {
 
     //    ConversationFragment conversationsFragment;
 
-    CommunityFragment shareFragment;
+    //    CommunityFragment shareFragment;
+    ArticleFragment articleFragment;
     UserWallFragment userWallFragment; //
 
     //    MessagesFragment messagesFragment;
@@ -608,7 +610,8 @@ public class MainActivity extends BaseActivity {
 
 	personalFragment = new PersonalFragment();
 	//	conversationsFragment = new ConversationFragment();
-	shareFragment = new CommunityFragment(); // 分享
+	//	shareFragment = new CommunityFragment(); // 分享
+	articleFragment = new ArticleFragment(); // 分享
 	//	messageFragment = new PrivateMessageFragment();
 	nearPeopleFragment = new NearbyFragment();
 
@@ -617,7 +620,7 @@ public class MainActivity extends BaseActivity {
 
 	strangenewsFragment = new StrangeNewsAndIntriguingStoryFragment();
 
-	fragments = new Fragment[] { personalFragment, /*conversationsFragment,*/shareFragment, /*messageFragment,*/nearPeopleFragment, userWallFragment, strangenewsFragment };
+	fragments = new Fragment[] { personalFragment, /*conversationsFragment,*/articleFragment, /*messageFragment,*/nearPeopleFragment, userWallFragment, strangenewsFragment };
 
 	mTabs[0].setSelected(true);
 	mTvTopTitle.setText("我");
@@ -629,14 +632,14 @@ public class MainActivity extends BaseActivity {
 	transaction.add(R.id.fragment_container, personalFragment);
 	// 为了接收消息 所以得先创建
 	//	transaction.add(R.id.fragment_container, messageFragment);
-	transaction.add(R.id.fragment_container, shareFragment);
+	transaction.add(R.id.fragment_container, articleFragment);
 	transaction.add(R.id.fragment_container, userWallFragment);
 	transaction.add(R.id.fragment_container, nearPeopleFragment);
 	transaction.add(R.id.fragment_container, strangenewsFragment);
 
 	transaction.show(personalFragment);
 	transaction.hide(userWallFragment);
-	transaction.hide(shareFragment);
+	transaction.hide(articleFragment);
 	transaction.hide(nearPeopleFragment);
 	transaction.hide(strangenewsFragment);
 
@@ -1068,7 +1071,8 @@ public class MainActivity extends BaseActivity {
 			    break;
 			case UNKNOWN:
 			    showToast("IM 未知错误");
-			    mLoadingView.setVisibility(View.GONE);
+			    // 重试按钮可用
+			    mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 			    break;
 			}
 		    }
