@@ -316,16 +316,63 @@ public class NearbyFragment extends BaseFragment implements OnItemClickListener,
 		String home = mTvSearchHomeplace.getText().toString().trim();
 		String addr = mTvSearchAddress.getText().toString().trim();
 		String house = mTvSearchHouse.getText().toString().trim();
+		String age = mTvSearchAge.getText().toString().trim();
+		String height = mTvSearchHeight.getText().toString().trim();
 
 		mPostParams.maritalStatus = status.equals("不限") ? null : status;
 		mPostParams.homeplace = home.equals("不限") ? null : home;
 		mPostParams.address = addr.equals("不限") ? null : addr;
 		mPostParams.house = house.equals("不限") ? null : house;
+		mPostParams.age = getAgeType(age);
+		mPostParams.height = getHeightType(height);
 
 		mPostParams.longtitude = MyApplication.getInstance().getLongtitude();
 		mPostParams.latitude = MyApplication.getInstance().getLatitude();
 
 		loadRecommendUsers();
+	    }
+
+	    private int getHeightType(String height) {
+		int type = 0;
+		if ("130-139".equals(height)) {
+		    type = 1;
+		} else if ("140-149".equals(height)) {
+		    type = 2;
+		} else if ("150-159".equals(height)) {
+		    type = 3;
+		} else if ("160-169".equals(height)) {
+		    type = 4;
+		} else if ("170-179".equals(height)) {
+		    type = 5;
+		} else if ("180-189".equals(height)) {
+		    type = 6;
+		} else if ("190-200".equals(height)) {
+		    type = 7;
+		}
+		return type;
+	    }
+
+	    private int getAgeType(String age) {
+		// TODO Auto-generated method stub
+		int type = 0;
+		if ("18-23".equals(age)) {
+		    type = 1;
+		} else if ("24-27".equals(age)) {
+		    type = 2;
+		} else if ("28-30".equals(age)) {
+		    type = 3;
+		} else if ("31-35".equals(age)) {
+		    type = 4;
+		} else if ("36-39".equals(age)) {
+		    type = 5;
+		} else if ("40-45".equals(age)) {
+		    type = 6;
+		} else if ("46-50".equals(age)) {
+		    type = 7;
+		} else if ("51-60".equals(age)) {
+		    type = 8;
+		}
+		return type;
 	    }
 	});
 	mLayoutSearch.findViewById(R.id.tv_search_cancle).setOnClickListener(new View.OnClickListener() {

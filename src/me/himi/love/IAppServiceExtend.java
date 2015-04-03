@@ -223,6 +223,8 @@ public interface IAppServiceExtend {
 	public String maritalStatus; // 情感状况 
 	public String homeplace, address;
 	public String house;
+	public int age; // 年龄
+	public int height; // 身高
     }
 
     public interface OnPostNearbyUsersResponseListener {

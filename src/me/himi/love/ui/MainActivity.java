@@ -142,10 +142,10 @@ public class MainActivity extends BaseActivity {
 	// 连接IM
 	connectRongCloudIM(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
 
-//	boolean isFromRegister = getIntent().getBooleanExtra("is_from_register", false);
-//	if (isFromRegister) { // 首次注册需要完善资料
-//	    startActivity(new Intent(this, UserRegisterCompleteActivity.class));
-//	}
+	//	boolean isFromRegister = getIntent().getBooleanExtra("is_from_register", false);
+	//	if (isFromRegister) { // 首次注册需要完善资料
+	//	    startActivity(new Intent(this, UserRegisterCompleteActivity.class));
+	//	}
 
     }
 
@@ -535,12 +535,16 @@ public class MainActivity extends BaseActivity {
 		    int msgType = intent.getIntExtra("message_type", -1);
 		    if (msgType == MessageType.VISITOR.ordinal()) { // 新访客消息
 			findViewById(R.id.tv_vistors_message_tips).setVisibility(View.VISIBLE);
+			showToast("你有新的访客了!");
 		    } else if (msgType == MessageType.SAYHI.ordinal()) { // 新打招呼
 			findViewById(R.id.tv_sayhi_message_tips).setVisibility(View.VISIBLE);
+			showToast("你收到新的招呼了!");
 		    } else if (msgType == MessageType.FOLLOW.ordinal()) { //新关注消息
 			findViewById(R.id.tv_newfans_message_tips).setVisibility(View.VISIBLE);
+			showToast("你有新的粉丝了!");
 		    } else if (msgType == MessageType.GIFTS.ordinal()) { // 新礼物消息
 			findViewById(R.id.tv_newgifts_message_tips).setVisibility(View.VISIBLE);
+			showToast("你收到新的礼物了!");
 		    }
 
 		    // 声音提示

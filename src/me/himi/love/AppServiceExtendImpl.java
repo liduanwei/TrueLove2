@@ -516,6 +516,8 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 	nameAndValues.put("homeplace", postParams.homeplace);
 	nameAndValues.put("address", postParams.address);
 	nameAndValues.put("house", postParams.house);
+	nameAndValues.put("age", postParams.age + "");
+	nameAndValues.put("height", postParams.height + "");
 
 	RequestParams params = new RequestParams(nameAndValues);
 

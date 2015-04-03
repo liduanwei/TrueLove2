@@ -1,13 +1,5 @@
 package me.himi.love.ui;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +12,6 @@ import me.himi.love.R;
 import me.himi.love.adapter.GiftChooseAdapter;
 import me.himi.love.adapter.GiftChooseAdapter.GiftOnClickListener;
 import me.himi.love.entity.Gift;
-import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.UserGift;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.CacheUtils;
@@ -137,7 +128,8 @@ public class GiftChooseActivity extends BaseActivity {
 	    @Override
 	    public void onClick(View v) {
 		// TODO Auto-generated method stub
-		startActivity(new Intent(GiftChooseActivity.this, BuyLoveMoneyActivity.class));
+//		startActivity(new Intent(GiftChooseActivity.this, BuyLoveMoneyActivity.class));
+		net.youmi.android.offers.OffersManager.getInstance(GiftChooseActivity.this).showOffersWall();
 	    }
 	});
 
