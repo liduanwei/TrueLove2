@@ -34,7 +34,6 @@ import me.himi.love.entity.SystemNotice;
 import me.himi.love.ui.CheckUpdateActivity.OnUpdateListener;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.ui.fragment.ArticleFragment;
-import me.himi.love.ui.fragment.CommunityFragment;
 import me.himi.love.ui.fragment.NearbyFragment;
 import me.himi.love.ui.fragment.PersonalFragment;
 import me.himi.love.ui.fragment.StrangeNewsAndIntriguingStoryFragment;
@@ -61,6 +60,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -551,6 +551,13 @@ public class MainActivity extends BaseActivity {
 
 		    // 声音提示
 		    SoundPlayer.getInstance(MainActivity.this).playNotify();
+
+		    // 震动提示
+		    boolean useVibrator = SettingsActivity.getVibrator(MainActivity.this);
+		    if (useVibrator) {
+			Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+			vibrator.vibrate(200);
+		    }
 		    queryPrivateMessages(); // 收到通知即查询数据库
 		}
 
@@ -603,7 +610,7 @@ public class MainActivity extends BaseActivity {
 	//	mTabs[1] = (Button) findViewById(R.id.btn_contact); // 联系人
 	mTabs[1] = (Button) findViewById(R.id.btn_share); // 社区
 	//	mTabs[3] = (Button) findViewById(R.id.btn_message); // 消息
-	mTabs[2] = (Button) findViewById(R.id.btn_nearby); // 发现
+	mTabs[2] = (Button) findViewById(R.id.btn_nearby); // 附近
 	//	mTabs[3] = (Button) findViewById(R.id.btn_message); // 消息
 	mTabs[3] = (Button) findViewById(R.id.btn_userwall); // 推荐vip用户墙
 	mTabs[4] = (Button) findViewById(R.id.btn_strangenews); // 

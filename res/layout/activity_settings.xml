@@ -6,6 +6,8 @@
 
     <include
         android:id="@+id/layout_nav_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         layout="@layout/layout_top" />
 
@@ -94,6 +96,38 @@
                     android:paddingLeft="20dp"
                     android:text="配置导航栏颜色"
                     android:textSize="@dimen/text_size_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_settings_vibrator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/iv_vibrator_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_vibrator_icon"
+                    android:paddingLeft="20dp"
+                    android:text="新提醒时震动"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <CheckBox
+                    android:id="@+id/cb_vibrator_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -242,7 +276,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/iv_line7_icon"
                     android:paddingLeft="20dp"
-                    android:text="捐助我"
+                    android:text="捐助我们"
                     android:textSize="@dimen/text_size_medium" />
 
                 <LinearLayout

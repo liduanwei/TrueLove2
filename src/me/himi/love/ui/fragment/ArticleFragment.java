@@ -54,7 +54,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
     List<Article> datas = new ArrayList<Article>();
 
-    private static final String cahceArticlesPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/articles";
+    private static final String cacheArticlesPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/articles";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -155,7 +155,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
     private void loadFromCache() {
 	// TODO Auto-generated method stub
-	File f = new File(cahceArticlesPath);
+	File f = new File(cacheArticlesPath);
 	if (!f.exists()) {
 	    loadArticles();
 	    return;
@@ -232,7 +232,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
 	    private void cacheToLocal(List<Article> secrets) {
 		// TODO Auto-generated method stub
-		File f = new File(cahceArticlesPath);
+		File f = new File(cacheArticlesPath);
 		if (!f.getParentFile().exists()) {
 		    f.getParentFile().mkdirs();
 		}

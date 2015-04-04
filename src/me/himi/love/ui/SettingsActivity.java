@@ -40,6 +40,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -56,6 +57,8 @@ import com.wanpu.pay.PayResultListener;
 public class SettingsActivity extends BaseActivity implements OnClickListener {
 
     TextView mTvCacheSize; // 缓存大小
+
+    public static final String USE_VIBRATOR_WHEN_NEWMSG = "use_vibrator_when_newmsg";
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -140,6 +143,20 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 		startActivity(intent);
 	    }
 	});
+	final SharedPreferences sp = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+	final CheckBox cbVibrator = (CheckBox) findViewById(R.id.cb_vibrator_switch);
+	cbVibrator.setChecked(sp.getBoolean(USE_VIBRATOR_WHEN_NEWMSG, true));
+	// 新提醒时震动
+	findViewById(R.id.layout_settings_vibrator).setOnClickListener(new OnClickListener() {
+
+	    @Override
+	    public void onClick(View v) {
+		// TODO Auto-generated method stub
+		cbVibrator.setChecked(!cbVibrator.isChecked());
+		sp.edit().putBoolean(USE_VIBRATOR_WHEN_NEWMSG, cbVibrator.isChecked()).commit();
+	    }
+	});
+	
 
 	// 捐助我
 	findViewById(R.id.layout_offerme).setOnClickListener(new OnClickListener() {
@@ -540,4 +557,8 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 	void onFailure(String msg);
     }
 
+    public static boolean getVibrator(Context ctx) {
+	SharedPreferences sp = ctx.getSharedPreferences(ctx.getPackageName(), Context.MODE_PRIVATE);
+	return sp.getBoolean(USE_VIBRATOR_WHEN_NEWMSG, true);
+    }
 }

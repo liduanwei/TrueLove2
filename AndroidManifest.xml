@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.himi.love"
-    android:versionCode="14"
-    android:versionName="1.0.2" >
+    android:versionCode="15"
+    android:versionName="1.0.3" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <!-- normal permission -->
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> <!-- 创建桌面快捷方式 -->
