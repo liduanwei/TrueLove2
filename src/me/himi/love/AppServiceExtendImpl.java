@@ -1614,6 +1614,149 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 	HttpUtil.post(url, params, responseHandler);
     }
 
+    /**
+     * 加载指定用户的帖子
+     */
+    @Override
+    public void loadArticlesByUserId(LoadArticlesByUserIdPostParams postParams, final OnLoadArticlesResponseListener listener) {
+	String url = Constants.URL_ARTICLES_BY_USERID;
+
+	Map<String, String> nameAndValues = new HashMap<String, String>();
+	nameAndValues.put("page", postParams.page + "");
+	nameAndValues.put("page_size", postParams.pageSize + "");
+	nameAndValues.put("order", postParams.order);
+	nameAndValues.put("user_id", postParams.userId);
+
+	RequestParams params = new RequestParams(nameAndValues);
+	AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
+
+	    @Override
+	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		String res = new String(arg2);
+		System.out.println("指定用户文章: " + res);
+		List<Article> secrets = new ArrayList<Article>();
+		try {
+		    JSONArray jsonArr = new JSONArray(res);
+		    for (int i = 0, n = jsonArr.length(); i < n; ++i) {
+			JSONObject rowObj = jsonArr.getJSONObject(i);
+
+			JSONObject secretJsonObj = rowObj.getJSONObject("data");
+
+			int id = secretJsonObj.getInt("id");
+			int love = secretJsonObj.getInt("love");
+			int hate = secretJsonObj.getInt("hate");
+			int comments = secretJsonObj.getInt("comments");
+
+			boolean isPublic = secretJsonObj.getInt("is_public") == 1;
+			String content = secretJsonObj.getString("content");
+
+			// 内容 大小配图
+			String contentImageUrl = null;
+			String contentSmallImageUrl = null;
+			if (!secretJsonObj.isNull("back")) {
+			    contentImageUrl = secretJsonObj.getString("back");
+			    if (contentImageUrl.startsWith(".")) { // 本服务器上的图片
+				contentImageUrl = Constants.HOST + contentImageUrl.substring(1);
+				contentSmallImageUrl = UserNewsLoaderImpl.getSmallImageUrl(contentImageUrl);
+			    } else { // 图片url,其他网络服务器上的图片
+				contentSmallImageUrl = contentImageUrl; // 小图和大图一样
+			    }
+			}
+
+			String tag = secretJsonObj.getString("tag");
+			int createTime = secretJsonObj.getInt("time");
+
+			JSONObject userJsonObj = rowObj.getJSONObject("user");
+
+			int userId = userJsonObj.getInt("user_id");
+			int gender = userJsonObj.getInt("gender");
+			int birthday = userJsonObj.getInt("birthday"); // 秒时间
+
+			// vip类型, 主要两大类: 包月(1个月,3个月,6个月),包年
+			int isVip = userJsonObj.getInt("is_vip");
+
+			String nickname = userJsonObj.getString("nickname");
+			int height = userJsonObj.getInt("height");
+			int weight = userJsonObj.getInt("weight");
+			String monthlySalary = userJsonObj.getString("monthly_salary");
+
+			String homeplace = userJsonObj.getString("homeplace");
+			String address = userJsonObj.getString("address");
+
+			// 兴趣,个性
+			String interests = userJsonObj.getString("interests");
+			String peronality = userJsonObj.getString("personality");
+
+			String faceUrl = !userJsonObj.isNull("face_url") ? userJsonObj.getString("face_url") : "http://love.leavtechintl.com/Public/USERS_UPLOAD_FILES/liduanwei_911@163.com/nophoto.gif";
+
+			Article secret = new Article();
+			secrets.add(secret);
+
+			if (contentImageUrl.startsWith(".")) {
+			    contentImageUrl = Constants.HOST + contentImageUrl.substring(1);
+			}
+
+			secret.setId(id);
+			secret.setLove(love);
+			secret.setHate(hate);
+			secret.setComments(comments);
+
+			secret.setContentImageUrl(new BSImageUrl(contentImageUrl, contentSmallImageUrl));
+			secret.setContent(content);
+			secret.setCreateTime(createTime);
+			secret.setPublic(isPublic);
+			secret.setTag(tag);
+
+			GregorianCalendar birthdayCalendar = ActivityUtil.newGregorianCalendar(birthday);
+
+			GregorianCalendar nowCalendar = ActivityUtil.newGregorianCalendar(System.currentTimeMillis());
+
+			int age = nowCalendar.get(Calendar.YEAR) - birthdayCalendar.get(Calendar.YEAR);
+
+			// 当前月份小于出生月份则表示未满,再-1,不考虑天
+			age -= nowCalendar.get(Calendar.MONTH) >= birthdayCalendar.get(Calendar.MONTH) ? 0 : 1;
+
+			secret.setUserId(userId);
+			secret.setGender(gender);
+			secret.setAge(age);
+
+			secret.setVip(isVip);
+
+			secret.setNickname(nickname);
+			secret.setHeight(height);
+			secret.setWeight(weight);
+			secret.setMonthlySalary(monthlySalary);
+			secret.setHomeplace(homeplace);
+			secret.setAddress(address);
+
+			secret.setInterests(interests);
+			secret.setPersonality(peronality);
+
+			if (faceUrl.startsWith(".")) { // 加上 http://主机地址/Public/...
+			    faceUrl = Constants.HOST + faceUrl.substring(1);
+			}
+
+			BSImageUrl bsImageUrl = new BSImageUrl();
+			bsImageUrl.setBigImageUrl(faceUrl);
+			bsImageUrl.setSmallImageUrl(getSmallImageUrl(faceUrl));
+			secret.setFaceUrl(bsImageUrl);
+		    }
+		    listener.onSuccess(secrets);
+
+		} catch (JSONException e) {
+		    e.printStackTrace();
+		    listener.onFailure("参数错误");
+		}
+	    }
+
+	    @Override
+	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		listener.onFailure("连接超时");
+	    }
+	};
+	HttpUtil.post(url, params, responseHandler);
+    }
+
     @Override
     public void loadVisitedUsers(LoadVisitedUsersPostParams postParams, final OnLoadVisitedUsersResponseListener listener) {
 	// TODO Auto-generated method stub
@@ -1901,6 +2044,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 		    int fansCount = jsonObj.getInt("fans_count");
 
 		    int giftsCount = jsonObj.getInt("gifts_count"); // 礼物数量
+		    int articlesCount = jsonObj.getInt("articles_count"); // 帖子数量
 
 		    String nickname = jsonObj.getString("nickname");
 		    String faceUrl = jsonObj.getString("face_url");
@@ -1921,6 +2065,7 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 		    homeInfo.follows = followsCount;
 
 		    homeInfo.gifts = giftsCount;
+		    homeInfo.articles = articlesCount;
 
 		    homeInfo.nickname = nickname;
 		    homeInfo.faceUrl = faceUrl;

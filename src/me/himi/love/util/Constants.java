@@ -180,6 +180,8 @@ public interface Constants {
     String URL_ARTICLE_PUBLISH = HOST + "/index.php/index/article/publish";
     // 加载文章
     String URL_ARTICLES = HOST + "/index.php/index/article/selectSecrets";
+    // 加载指定用户的文章
+    String URL_ARTICLES_BY_USERID = HOST + "/index.php/index/article/selectSecretsByUserId";
     // 发表文章评论
     String URL_ARTICLE_COMMENT_PUBLISH = HOST + "/index.php/index/articleComment/publish";
     // 加载文章评论

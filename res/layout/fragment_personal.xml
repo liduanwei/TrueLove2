@@ -125,7 +125,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="5" />
+                        android:text="5"
+                        android:textSize="@dimen/text_size_small" />
 
                     <TextView
                         android:id="@+id/tv_my_friends"
@@ -149,7 +150,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="1" />
+                        android:text="1"
+                        android:textSize="@dimen/text_size_small" />
 
                     <TextView
                         android:id="@+id/tv_my_follows"
@@ -187,7 +189,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="2" />
+                            android:text="2"
+                            android:textSize="@dimen/text_size_small" />
 
                         <TextView
                             android:id="@+id/tv_my_fans"
@@ -204,7 +207,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/home_no_layout_selector" >
+                    android:background="@drawable/home_no_layout_selector"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/tv_newgifts_message_tips"
@@ -226,7 +230,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="0" />
+                            android:text="0"
+                            android:textSize="@dimen/text_size_small" />
 
                         <TextView
                             android:id="@+id/tv_my_gifts"
@@ -234,6 +239,46 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="礼物"
+                            android:textSize="@dimen/text_size_medium" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_to_myarticles"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_no_layout_selector" >
+
+                    <TextView
+                        android:id="@+id/tv_newarticles_message_tips"
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/rounder_corners"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_my_articles_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textSize="@dimen/text_size_small" />
+
+                        <TextView
+                            android:id="@+id/tv_my_articles"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="帖子"
                             android:textSize="@dimen/text_size_medium" />
                     </LinearLayout>
                 </RelativeLayout>
@@ -463,7 +508,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/iv_line11_icon"
                     android:paddingLeft="20dp"
-                    android:text="我的招呼"
+                    android:text="收到问候"
                     android:textSize="@dimen/text_size_medium" />
 
                 <TextView

@@ -138,6 +138,8 @@
         </activity>
         <activity android:name="me.himi.love.ui.MyReceivedSystemMessageActivity" >
         </activity>
+        <activity android:name="me.himi.love.ui.MyArticlesActivity" >
+        </activity>
         <activity android:name="me.himi.love.ui.MyFriendsActivity" >
         </activity>
         <activity android:name="me.himi.love.ui.MyFollowsActivity" >

@@ -24,6 +24,7 @@ import me.himi.love.ui.BuyVIPActivity;
 import me.himi.love.ui.EditNewsActivity;
 import me.himi.love.ui.FollowsNewsActivity;
 import me.himi.love.ui.MainActivity;
+import me.himi.love.ui.MyArticlesActivity;
 import me.himi.love.ui.MyFansActivity;
 import me.himi.love.ui.MyFollowsActivity;
 import me.himi.love.ui.MyFriendsActivity;
@@ -73,11 +74,11 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
     TextView tvSignin; // 签到
     TextView tvLoveMoney; //
 
-    TextView tvFriendsCount, tvFollowsCount, tvFansCount, tvMyGiftsCount; //  好友,关注,粉丝,礼物
+    TextView tvFriendsCount, tvFollowsCount, tvFansCount, tvMyGiftsCount, tvMyArticlesCount; //  好友,关注,粉丝,礼物,帖子
 
     TextView tvMyVip, tvVipExpireTime;
 
-    TextView tvVisitorsTips, tvFansTips, tvSayhiTips, tvConversationTips, tvGiftsTips; // 访客提醒,粉丝提醒,打招呼提醒,会话消息提醒,礼物提醒
+    TextView tvVisitorsTips, tvFansTips, tvSayhiTips, tvConversationTips, tvGiftsTips, tvArticlesTips; // 访客提醒,粉丝提醒,打招呼提醒,会话消息提醒,礼物提醒,新帖子(审核通过,新评论)提醒
 
     // 首次启动从服务器加载当前登录用户的一些基本资料
     IUserDetailLoader userLoader = new UserDetailLoaderImpl();
@@ -133,11 +134,13 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	mContainerView.findViewById(R.id.layout_to_myfollows).setOnClickListener(this); // 查看我的关注
 	mContainerView.findViewById(R.id.layout_to_myfans).setOnClickListener(this); // 查看我的粉丝
 	mContainerView.findViewById(R.id.layout_to_mygifts).setOnClickListener(this); // 查看我的礼物
+	mContainerView.findViewById(R.id.layout_to_myarticles).setOnClickListener(this); // 查看我的帖子
 
 	tvFriendsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_friends_no)); // 好友
 	tvFollowsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_follows_no));//关注
 	tvFansCount = (TextView) (mContainerView.findViewById(R.id.tv_my_fans_no)); //粉丝
 	tvMyGiftsCount = (TextView) (mContainerView.findViewById(R.id.tv_my_gifts_no)); //礼物
+	tvMyArticlesCount = (TextView) (mContainerView.findViewById(R.id.tv_my_articles_no)); //帖子
 
 	LoginedUser loginedUser = MyApplication.getInstance().getCurrentLoginedUser();
 	tvFriendsCount.setText(loginedUser.getFriendsCount() + "");
@@ -186,12 +189,15 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	tvSayhiTips = (TextView) mContainerView.findViewById(R.id.tv_sayhi_message_tips);
 	// 礼物消息 提示
 	tvGiftsTips = (TextView) mContainerView.findViewById(R.id.tv_newgifts_message_tips);
+	// 新帖子消息 提示
+	tvArticlesTips = (TextView) mContainerView.findViewById(R.id.tv_newarticles_message_tips);
 
-	//  默认都是隐藏的
+	//  默认提示圆点都是隐藏的
 	tvVisitorsTips.setVisibility(View.GONE);
 	tvFansTips.setVisibility(View.GONE);
 	tvSayhiTips.setVisibility(View.GONE);
 	tvGiftsTips.setVisibility(View.GONE);
+	tvArticlesTips.setVisibility(View.GONE);
 	//
 	// 加载是否存在未读聊天消息
 	if (RongIM.getInstance() != null) {
@@ -395,6 +401,10 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	case R.id.layout_to_mygifts: // 我的礼物
 	    mContainerView.findViewById(R.id.tv_newgifts_message_tips).setVisibility(View.GONE);
 	    break;
+	case R.id.layout_to_myarticles: // 我的帖子
+	    mContainerView.findViewById(R.id.tv_newarticles_message_tips).setVisibility(View.GONE);
+	    startActivity(new Intent(getActivity(), MyArticlesActivity.class));
+	    break;
 	}
     }
 
@@ -528,6 +538,8 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 		tvFollowsCount.setText(homeInfo.follows + "");
 
 		tvMyGiftsCount.setText(homeInfo.gifts + "");
+
+		tvMyArticlesCount.setText(homeInfo.articles + "");
 
 		// 更新 loginedUser中的数据
 		user.setFansCount(homeInfo.fans);

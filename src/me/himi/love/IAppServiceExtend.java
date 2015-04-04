@@ -541,6 +541,18 @@ public interface IAppServiceExtend {
     }
 
     /**
+     * 加载指定用户的帖子
+     */
+
+    void loadArticlesByUserId(LoadArticlesByUserIdPostParams postParams, OnLoadArticlesResponseListener listener);
+
+    public static class LoadArticlesByUserIdPostParams {
+	public int page, pageSize;
+	public String userId;
+	public String order;
+    }
+
+    /**
      * 加载帖子评论
      */
 
@@ -617,7 +629,7 @@ public interface IAppServiceExtend {
 	public int loveMoney;
 
 	public String nickname, faceUrl;
-	public int friends, follows, fans, gifts;
+	public int friends, follows, fans, gifts, articles;
     }
 
     /**

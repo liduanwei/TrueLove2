@@ -86,7 +86,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 	mListView.setAdapter(mAdapter);
 
 	// 使用代理 设置ImageLoader  在 ListView 滚动时不加载图片
-	mListView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
+	//mListView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
 	// 首先允许加载更多
 	mListView.setPullLoadEnable(true);
 	// 允许下拉

@@ -64,7 +64,7 @@ public class MyReceivedSayhiActivity extends BaseActivity implements OnItemClick
 
     private void init() {
 	tvTopTitle = (TextView) findViewById(R.id.tv_top_title);
-	tvTopTitle.setText("打招呼");
+	tvTopTitle.setText("收到问候");
 	tvTopAction = (TextView) findViewById(R.id.tv_top_action);
 	tvTopAction.setText("");
 
