@@ -69,7 +69,7 @@ public class EditArticleActivity extends BaseActivity implements OnClickListener
     private void init() {
 
 	TextView tvTopTitle = (TextView) findViewById(R.id.layout_nav_top).findViewById(R.id.tv_top_title);
-	tvTopTitle.setText("发布新吐槽");
+	tvTopTitle.setText("发布新帖子");
 
 	TextView tvTopAction = (TextView) findViewById(R.id.layout_nav_top).findViewById(R.id.tv_top_action);
 	tvTopAction.setText("发布");

@@ -267,7 +267,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
     }
 
     /**
-     * 发吐槽
+     * 发贴
      */
     private View.OnClickListener editArticleOnClickListener = new View.OnClickListener() {
 
@@ -284,7 +284,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 	if (!hidden) {
 	    if (tvTopAction != null) {
 		tvTopAction.setVisibility(View.VISIBLE);
-		tvTopAction.setText("发吐槽");
+		tvTopAction.setText("发贴");
 		tvTopAction.setOnClickListener(editArticleOnClickListener);
 	    }
 	}
