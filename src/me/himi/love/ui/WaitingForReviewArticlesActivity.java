@@ -184,7 +184,7 @@ public class WaitingForReviewArticlesActivity extends BaseActivity implements On
 	LoadWaitingForReviewArticlesPostParams postParams = new LoadWaitingForReviewArticlesPostParams();
 	postParams.page = pageNumber;
 	postParams.pageSize = 20;
-	postParams.order = "create_time DESC";
+	postParams.order = "create_time ASC"; // 时间升序
 	postParams.reviewStatus = 0; // 未审核状态
 
 	AppServiceExtendImpl.getInstance().loadWaitingForReviewArticles(postParams, new OnLoadArticlesResponseListener() {

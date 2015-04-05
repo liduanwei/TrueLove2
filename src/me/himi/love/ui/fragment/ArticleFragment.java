@@ -10,8 +10,6 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.IAppServiceExtend.LoadArticlesPostParams;
@@ -55,7 +53,7 @@ import com.loopj.android.http.RequestParams;
  */
 public class ArticleFragment extends BaseFragment implements OnItemClickListener {
 
-    View mContainerView;
+    RelativeLayout mContainerView;
 
     XListView mListView;
 
@@ -71,7 +69,7 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	mContainerView = inflater.inflate(R.layout.fragment_article, container, false);
+	mContainerView = (RelativeLayout) inflater.inflate(R.layout.fragment_article, container, false);
 	init();
 	return mContainerView;
     }
@@ -139,9 +137,14 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 	    @Override
 	    public void onClick(View arg0) {
 		// TODO Auto-generated method stub
+		pageNumber = 1;
 		loadArticles(); //  
 	    }
 	});
+
+	//
+	mLayoutNewArticlesTips.setVisibility(View.GONE);
+	loadNewestCount(); // 立即获取未加载帖子数量
 
 	//loadArticles();
 	loadFromCache();
@@ -214,55 +217,57 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 		break;
 	    }
 	}
+    };
 
-	private void loadNewestCount() {
-	    // TODO Auto-generated method stub
-	    String url = Constants.URL_NEWARTICLE_COUNT;
-	    RequestParams params = new RequestParams();
-	    int lastTime = 0;
-	    if (mAdapter.getList().size() != 0) {
-		lastTime = mAdapter.getList().get(0).getCreateTime(); // 获取当前第一个帖子的时间
-	    }
-	    params.put("last_time", lastTime); // 当前最新帖子时间, 获取该时间之后的帖子
-	    AsyncHttpResponseHandler resHandler = new AsyncHttpResponseHandler() {
+    private void loadNewestCount() {
+	// TODO Auto-generated method stub
+	String url = Constants.URL_NEWARTICLE_COUNT;
+	RequestParams params = new RequestParams();
+	int lastTime = Integer.MAX_VALUE;
+	if (mAdapter.getList().size() != 0) {
+	    lastTime = mAdapter.getList().get(0).getCreateTime(); // 获取当前第一个帖子的时间
+	}
+	params.put("last_time", lastTime); // 当前最新帖子时间, 获取该时间之后的帖子
+	AsyncHttpResponseHandler resHandler = new AsyncHttpResponseHandler() {
 
-		@Override
-		public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
-		    // TODO Auto-generated method stub
-		    String data = new String(arg2);
-		    try {
-			JSONObject jsonObj = new JSONObject(data);
-			int msgCount = jsonObj.getInt("count");
-			//			if (msgCount == 0) {
-			//			    return;
-			//			}
-
-			if (mLayoutNewArticlesTips.getVisibility() == View.GONE) {
-			    mLayoutNewArticlesTips.setVisibility(View.VISIBLE);
-			    TranslateAnimation transAnim = new TranslateAnimation(0, 0, -100, 0);
-			    transAnim.setDuration(200L);
-			    mLayoutNewArticlesTips.startAnimation(transAnim);
-			}
-
-			TextView tvCounts = (TextView) mLayoutNewArticlesTips.findViewById(R.id.tv_unload_articles_count);
-			tvCounts.setText("有" + msgCount + "篇新帖子,下拉获取");
-		    } catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	    @Override
+	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		// TODO Auto-generated method stub
+		String data = new String(arg2);
+		try {
+		    JSONObject jsonObj = new JSONObject(data);
+		    int msgCount = jsonObj.getInt("count");
+		    if (msgCount == 0) {
+			return;
 		    }
 
-		    mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 20s 后再次加载
+		    if (mLayoutNewArticlesTips.getVisibility() == View.GONE) {
+			mLayoutNewArticlesTips.setVisibility(View.VISIBLE);
+			TranslateAnimation transAnim = new TranslateAnimation(0, 0, -100, 0);
+			transAnim.setDuration(200L);
+			mLayoutNewArticlesTips.startAnimation(transAnim);
+		    }
+
+		    TextView tvCounts = (TextView) mLayoutNewArticlesTips.findViewById(R.id.tv_unload_articles_count);
+		    tvCounts.setText("有" + msgCount + "篇新帖子,点击加载");
+		} catch (JSONException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
 		}
 
-		@Override
-		public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-		    // TODO Auto-generated method stub
-		    mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 20s 后再次加载
-		}
-	    };
-	    HttpUtil.post(url, params, resHandler);
+		mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 20s 后再次加载
+	    }
+
+	    @Override
+	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		// TODO Auto-generated method stub
+		mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 20s 后再次加载
+	    }
 	};
+	HttpUtil.post(url, params, resHandler);
     };
+
+    View mLoadingView;
 
     private void loadArticles() {
 	if (isRefreshing) {
@@ -270,6 +275,27 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 	}
 
 	isRefreshing = true;
+
+	if (mLoadingView == null) {
+	    mLoadingView = getActivity().getLayoutInflater().inflate(R.layout.layout_loading_retry, null);
+	    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+	    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+	    mContainerView.addView(mLoadingView, params);
+	    mLoadingView.findViewById(R.id.tv_load_retry).setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+		    // TODO Auto-generated method stub
+		    pageNumber = 1;
+		    loadArticles();
+		}
+	    });
+	}
+
+	// 可见
+	mLoadingView.setVisibility(View.VISIBLE);
+	// 重试按钮隐藏
+	mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.GONE);
 
 	LoadArticlesPostParams postParams = new LoadArticlesPostParams();
 	postParams.page = pageNumber;
@@ -286,9 +312,10 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 		if (secrets.size() != 0) {
 		    if (pageNumber == 1) {
 			mAdapter.getList().clear();
+			mAdapter.setList(secrets);
+		    } else {
+			mAdapter.addAll(secrets);
 		    }
-		    mAdapter.addAll(secrets);
-
 		    // 缓存到本地
 		    cacheToLocal(secrets);
 		} else {
@@ -308,6 +335,9 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 		}
 
 		pageNumber++;
+
+		// 隐藏
+		mLoadingView.setVisibility(View.GONE);
 
 		mHandler.removeMessages(0);
 		mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 开始轮询最新帖子的数量
@@ -344,6 +374,9 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 		    mListView.stopRefresh();
 		}
 		showToast(errorMsg);
+
+		// 重试按钮可见
+		mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 	    }
 	});
 
