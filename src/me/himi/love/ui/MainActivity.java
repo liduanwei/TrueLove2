@@ -540,7 +540,7 @@ public class MainActivity extends BaseActivity {
 			showToast("你有新的访客了!");
 		    } else if (msgType == MessageType.SAYHI.ordinal()) { // 新打招呼
 			findViewById(R.id.tv_sayhi_message_tips).setVisibility(View.VISIBLE);
-			showToast("你收到新的招呼了!");
+			showToast("你收到新的问候了!");
 		    } else if (msgType == MessageType.FOLLOW.ordinal()) { //新关注消息
 			findViewById(R.id.tv_newfans_message_tips).setVisibility(View.VISIBLE);
 			showToast("你有新的粉丝了!");

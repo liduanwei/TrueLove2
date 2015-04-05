@@ -190,6 +190,8 @@ public interface Constants {
     String URL_ARTICLE_COMMENT_PUBLISH = HOST + "/index.php/index/articleComment/publish";
     // 加载文章评论
     String URL_ARTICLE_COMMENTS = HOST + "/index.php/index/articleComment/selectComments";
+    // 加载新文章数量
+    String URL_NEWARTICLE_COUNT = HOST + "/index.php/index/article/lastCount";
 
     // 顶文章
     String URL_ARTICLE_LOVE = HOST + "/index.php/index/article/love";

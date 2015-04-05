@@ -32,4 +32,22 @@
         android:background="@drawable/edit_article_selector"
         android:clickable="true" />
 
+    <LinearLayout
+        android:id="@+id/layout_top_unload_articles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#eeee9922"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="6dp" >
+
+        <TextView
+            android:id="@+id/tv_unload_articles_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="有0篇新帖子,点击加载"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
 </RelativeLayout>

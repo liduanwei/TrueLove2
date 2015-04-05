@@ -10,32 +10,43 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import me.himi.love.AppServiceExtendImpl;
-import me.himi.love.MyApplication;
 import me.himi.love.IAppServiceExtend.LoadArticlesPostParams;
 import me.himi.love.IAppServiceExtend.OnLoadArticlesResponseListener;
+import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.ArticleAdapter;
 import me.himi.love.entity.Article;
 import me.himi.love.ui.ArticleCommentsActivity;
 import me.himi.love.ui.EditArticleActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
+import me.himi.love.util.Constants;
+import me.himi.love.util.HttpUtil;
 import me.himi.love.view.list.XListView;
 import me.himi.love.view.list.XListView.IXListViewListener;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /**
  * @ClassName:SecretFragment
@@ -54,17 +65,13 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
     List<Article> datas = new ArrayList<Article>();
 
+    View mLayoutNewArticlesTips; // 新贴提示
+
     private static final String cacheArticlesPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.truelove2/articles";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	mContainerView = inflater.inflate(R.layout.fragment_article, container, false);
-	//	if(mContainerView !=null) {
-	//	   ViewGroup parent = (ViewGroup) mContainerView.getParent();
-	//	   if(parent!=null) {
-	//	       parent.removeView(mContainerView);
-	//	   }
-	//	}
 	init();
 	return mContainerView;
     }
@@ -121,6 +128,18 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(getActivity(), EditArticleActivity.class);
 		startActivity(intent);
+	    }
+	});
+
+	// 顶部提示新帖数量
+	mLayoutNewArticlesTips = mContainerView.findViewById(R.id.layout_top_unload_articles);
+	// 点击加载新帖
+	mLayoutNewArticlesTips.setOnClickListener(new View.OnClickListener() {
+
+	    @Override
+	    public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		loadArticles(); //  
 	    }
 	});
 
@@ -187,6 +206,64 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 
     private boolean isRefreshing;// 刷新中...
 
+    private Handler mHandler = new Handler() {
+	public void handleMessage(android.os.Message msg) {
+	    switch (msg.what) {
+	    case 0:
+		loadNewestCount();
+		break;
+	    }
+	}
+
+	private void loadNewestCount() {
+	    // TODO Auto-generated method stub
+	    String url = Constants.URL_NEWARTICLE_COUNT;
+	    RequestParams params = new RequestParams();
+	    int lastTime = 0;
+	    if (mAdapter.getList().size() != 0) {
+		lastTime = mAdapter.getList().get(0).getCreateTime(); // 获取当前第一个帖子的时间
+	    }
+	    params.put("last_time", lastTime); // 当前最新帖子时间, 获取该时间之后的帖子
+	    AsyncHttpResponseHandler resHandler = new AsyncHttpResponseHandler() {
+
+		@Override
+		public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		    // TODO Auto-generated method stub
+		    String data = new String(arg2);
+		    try {
+			JSONObject jsonObj = new JSONObject(data);
+			int msgCount = jsonObj.getInt("count");
+			//			if (msgCount == 0) {
+			//			    return;
+			//			}
+
+			if (mLayoutNewArticlesTips.getVisibility() == View.GONE) {
+			    mLayoutNewArticlesTips.setVisibility(View.VISIBLE);
+			    TranslateAnimation transAnim = new TranslateAnimation(0, 0, -100, 0);
+			    transAnim.setDuration(200L);
+			    mLayoutNewArticlesTips.startAnimation(transAnim);
+			}
+
+			TextView tvCounts = (TextView) mLayoutNewArticlesTips.findViewById(R.id.tv_unload_articles_count);
+			tvCounts.setText("有" + msgCount + "篇新帖子,下拉获取");
+		    } catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+
+		    mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 20s 后再次加载
+		}
+
+		@Override
+		public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		    // TODO Auto-generated method stub
+		    mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 20s 后再次加载
+		}
+	    };
+	    HttpUtil.post(url, params, resHandler);
+	};
+    };
+
     private void loadArticles() {
 	if (isRefreshing) {
 	    return;
@@ -204,6 +281,8 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 	    @Override
 	    public void onSuccess(List<Article> secrets) {
 		// TODO Auto-generated method stub
+		mLayoutNewArticlesTips.setVisibility(View.GONE); // 隐藏新帖提示
+
 		if (secrets.size() != 0) {
 		    if (pageNumber == 1) {
 			mAdapter.getList().clear();
@@ -227,7 +306,11 @@ public class ArticleFragment extends BaseFragment implements OnItemClickListener
 		if (mListView.getPullRefreshing()) {
 		    mListView.stopRefresh();
 		}
+
 		pageNumber++;
+
+		mHandler.removeMessages(0);
+		mHandler.sendEmptyMessageDelayed(0, 1000 * 20);// 开始轮询最新帖子的数量
 	    }
 
 	    private void cacheToLocal(List<Article> secrets) {

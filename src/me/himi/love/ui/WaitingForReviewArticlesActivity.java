@@ -281,7 +281,7 @@ public class WaitingForReviewArticlesActivity extends BaseActivity implements On
 	    pwMenuWin.dismiss();
 	}
 
-	pwMenuWin.showAtLocation(mListView, Gravity.LEFT | Gravity.CENTER, (int) touchedX, (int) touchedY);
+	pwMenuWin.showAtLocation(v, Gravity.LEFT | Gravity.CENTER, (int) touchedX, (int) touchedY);
 	//	pwMenuWin.showAsDropDown(mListView.getChildAt(pos), 0, 0, Gravity.CENTER);
 	//	pwMenuWin.showAsDropDown(v);
 
