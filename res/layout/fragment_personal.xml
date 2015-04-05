@@ -550,6 +550,31 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_review_articles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_visitor"
+                android:clickable="true"
+                android:padding="6dp" >
+
+                <ImageView
+                    android:id="@+id/iv_review_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/ic_setting_vip_year" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_review_icon"
+                    android:paddingLeft="20dp"
+                    android:text="审核帖子"
+                    android:textSize="@dimen/text_size_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/layout_start_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

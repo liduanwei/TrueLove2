@@ -553,6 +553,18 @@ public interface IAppServiceExtend {
     }
 
     /**
+     * 加载待审核的帖子
+     */
+
+    void loadWaitingForReviewArticles(LoadWaitingForReviewArticlesPostParams postParams, OnLoadArticlesResponseListener listener);
+
+    public static class LoadWaitingForReviewArticlesPostParams {
+	public int page, pageSize;
+	public String order;
+	public int reviewStatus;
+    }
+
+    /**
      * 加载帖子评论
      */
 

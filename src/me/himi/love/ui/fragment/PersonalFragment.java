@@ -14,7 +14,6 @@ import me.himi.love.IAppServiceExtend.SigninPostParams;
 import me.himi.love.IAppServiceRongCloudIM.OnTokenResponseListener;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
-import me.himi.love.RongIMEvent;
 import me.himi.love.entity.DetailInfoUser;
 import me.himi.love.entity.LoginedUser;
 import me.himi.love.entity.loader.IUserDetailLoader;
@@ -23,7 +22,6 @@ import me.himi.love.ui.BuyLoveMoneyActivity;
 import me.himi.love.ui.BuyVIPActivity;
 import me.himi.love.ui.EditNewsActivity;
 import me.himi.love.ui.FollowsNewsActivity;
-import me.himi.love.ui.MainActivity;
 import me.himi.love.ui.MyArticlesActivity;
 import me.himi.love.ui.MyFansActivity;
 import me.himi.love.ui.MyFollowsActivity;
@@ -32,6 +30,7 @@ import me.himi.love.ui.MyReceivedSayhiActivity;
 import me.himi.love.ui.SettingsActivity;
 import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.VisitorsAndVisitwhoActivity;
+import me.himi.love.ui.WaitingForReviewArticlesActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.ImageLoaderOptions;
@@ -40,9 +39,7 @@ import me.himi.love.util.ToastFactory;
 import me.himi.love.view.EmojiTextView;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -124,6 +121,12 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
 	mContainerView.findViewById(R.id.layout_writen_news).setOnClickListener(this); // 发布心情
 
+	if (MyApplication.getInstance().getCurrentLoginedUser().getUserId() == 211111) {
+	    mContainerView.findViewById(R.id.layout_review_articles).setVisibility(View.VISIBLE);
+	    mContainerView.findViewById(R.id.layout_review_articles).setOnClickListener(this); // 审核帖子
+	} else {
+	    mContainerView.findViewById(R.id.layout_review_articles).setVisibility(View.GONE);
+	}
 	//	mContainerView.findViewById(R.id.layout_my_vistors).setOnClickListener(this); // 查看访客
 
 	mContainerView.findViewById(R.id.layout_buy_lovemoney).setOnClickListener(this); // 兑换恋恋币
@@ -404,6 +407,10 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	case R.id.layout_to_myarticles: // 我的帖子
 	    mContainerView.findViewById(R.id.tv_newarticles_message_tips).setVisibility(View.GONE);
 	    startActivity(new Intent(getActivity(), MyArticlesActivity.class));
+	    break;
+	    
+	case R.id.layout_review_articles:// 审核帖子
+	    startActivity(new Intent(getActivity(), WaitingForReviewArticlesActivity.class));
 	    break;
 	}
     }

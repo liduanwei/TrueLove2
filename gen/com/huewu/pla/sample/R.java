@@ -142,7 +142,7 @@ public final class R {
 		public static final int auto = 0x7f06000b;
 		public static final int beforeDescendants = 0x7f060027;
 		public static final int blocksDescendants = 0x7f060029;
-		public static final int card_list = 0x7f060283;
+		public static final int card_list = 0x7f060285;
 		public static final int center = 0x7f06001f;
 		public static final int defaultPosition = 0x7f060011;
 		public static final int disabled = 0x7f06002a;
@@ -169,24 +169,24 @@ public final class R {
 		public static final int normal = 0x7f06002b;
 		public static final int outsideInset = 0x7f06000a;
 		public static final int outsideOverlay = 0x7f060009;
-		public static final int pb_load = 0x7f06026a;
-		public static final int ptr_id_header = 0x7f060378;
-		public static final int ptr_id_image = 0x7f060379;
-		public static final int ptr_id_last_updated = 0x7f06037d;
-		public static final int ptr_id_spinner = 0x7f06037a;
-		public static final int ptr_id_text = 0x7f06037c;
-		public static final int ptr_id_textwrapper = 0x7f06037b;
+		public static final int pb_load = 0x7f06026c;
+		public static final int ptr_id_header = 0x7f06037e;
+		public static final int ptr_id_image = 0x7f06037f;
+		public static final int ptr_id_last_updated = 0x7f060383;
+		public static final int ptr_id_spinner = 0x7f060380;
+		public static final int ptr_id_text = 0x7f060382;
+		public static final int ptr_id_textwrapper = 0x7f060381;
 		public static final int right = 0x7f060013;
-		public static final int row_icon = 0x7f060269;
+		public static final int row_icon = 0x7f06026b;
 		public static final int rtl = 0x7f060017;
 		public static final int scrapped_view = 0x7f060000;
 		public static final int scrolling = 0x7f060025;
 		public static final int singleChoice = 0x7f06002d;
 		public static final int software = 0x7f060014;
-		public static final int text = 0x7f060285;
+		public static final int text = 0x7f060287;
 		public static final int textEnd = 0x7f06001e;
 		public static final int textStart = 0x7f06001d;
-		public static final int thumbnail = 0x7f060284;
+		public static final int thumbnail = 0x7f060286;
 		public static final int vertical = 0x7f060006;
 		public static final int viewEnd = 0x7f060021;
 		public static final int viewStart = 0x7f060020;
@@ -195,9 +195,9 @@ public final class R {
 	}
 	public static final class layout {
 		public static final int activity_main = 0x7f030014;
-		public static final int image_item = 0x7f030061;
-		public static final int item_sample = 0x7f030073;
-		public static final int ptr_header = 0x7f03009b;
+		public static final int image_item = 0x7f030062;
+		public static final int item_sample = 0x7f030074;
+		public static final int ptr_header = 0x7f03009d;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f080000;

@@ -182,6 +182,10 @@ public interface Constants {
     String URL_ARTICLES = HOST + "/index.php/index/article/selectSecrets";
     // 加载指定用户的文章
     String URL_ARTICLES_BY_USERID = HOST + "/index.php/index/article/selectSecretsByUserId";
+    // 加载待审核的文章
+    String URL_ARTICLES_BY_WAITINGFOR_REVIEW = HOST + "/index.php/index/article/selectSecretsByWaitingReview";
+    // 更新审核状态
+    String URL_ARTICLE_REVIEW = HOST + "/index.php/index/article/review";
     // 发表文章评论
     String URL_ARTICLE_COMMENT_PUBLISH = HOST + "/index.php/index/articleComment/publish";
     // 加载文章评论

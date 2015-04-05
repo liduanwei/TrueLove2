@@ -140,6 +140,8 @@
         </activity>
         <activity android:name="me.himi.love.ui.MyArticlesActivity" >
         </activity>
+        <activity android:name="me.himi.love.ui.WaitingForReviewArticlesActivity" >
+        </activity>
         <activity android:name="me.himi.love.ui.MyFriendsActivity" >
         </activity>
         <activity android:name="me.himi.love.ui.MyFollowsActivity" >
