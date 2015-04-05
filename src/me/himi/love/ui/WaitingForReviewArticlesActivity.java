@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.SyncStateContract.Constants;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -63,6 +64,8 @@ public class WaitingForReviewArticlesActivity extends BaseActivity implements On
 	setContentView(R.layout.activity_waitingforreview_articles);
 	init();
     }
+
+    private float touchedX, touchedY; // x,y
 
     private void init() {
 	final TextView tvTopTitle = (TextView) findViewById(R.id.tv_top_title);
@@ -110,6 +113,17 @@ public class WaitingForReviewArticlesActivity extends BaseActivity implements On
 	mListView.setDividerHeight(0);
 
 	mListView.setOnItemClickListener(this);
+	mListView.setOnTouchListener(new View.OnTouchListener() {
+
+	    @Override
+	    public boolean onTouch(View arg0, MotionEvent arg1) {
+		// TODO Auto-generated method stub
+		touchedX = arg1.getX();
+		touchedY = arg1.getY();
+		return false;
+	    }
+
+	});
 
 	// 进入发布新内容
 	findViewById(R.id.tv_start_publish_article).setOnClickListener(new View.OnClickListener() {
@@ -263,10 +277,13 @@ public class WaitingForReviewArticlesActivity extends BaseActivity implements On
 
 	    pwMenuWin.setContentView(menuView);
 	}
+	if (pwMenuWin.isShowing()) {
+	    pwMenuWin.dismiss();
+	}
 
-	//	pwMenuWin.showAtLocation(v, Gravity.TOP, 0, 0);
+	pwMenuWin.showAtLocation(mListView, Gravity.LEFT | Gravity.CENTER, (int) touchedX, (int) touchedY);
 	//	pwMenuWin.showAsDropDown(mListView.getChildAt(pos), 0, 0, Gravity.CENTER);
-	pwMenuWin.showAsDropDown(v);
+	//	pwMenuWin.showAsDropDown(v);
 
 	final String url = me.himi.love.util.Constants.URL_ARTICLE_REVIEW;
 	final RequestParams params = new RequestParams();
