@@ -141,8 +141,8 @@ public class MainActivity extends BaseActivity {
 	// 初始化广告
 	initAd();
 
-	// 连接IM
-	connectRongCloudIM(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
+	// 连接IM 改为在 personalFragment 中处理
+	//connectRongCloudIM(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
 
 	//	boolean isFromRegister = getIntent().getBooleanExtra("is_from_register", false);
 	//	if (isFromRegister) { // 首次注册需要完善资料

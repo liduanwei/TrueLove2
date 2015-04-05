@@ -69,10 +69,10 @@ public class EditArticleActivity extends BaseActivity implements OnClickListener
     private void init() {
 
 	TextView tvTopTitle = (TextView) findViewById(R.id.layout_nav_top).findViewById(R.id.tv_top_title);
-	tvTopTitle.setText("发布新帖子");
+	tvTopTitle.setText("发表新帖子");
 
 	TextView tvTopAction = (TextView) findViewById(R.id.layout_nav_top).findViewById(R.id.tv_top_action);
-	tvTopAction.setText("发布");
+	tvTopAction.setText("发表");
 	tvTopAction.setOnClickListener(this);
 
 	mEtContent = (me.himi.love.im.ui.customview.EmoticonsEditText) findViewById(R.id.emoet_news_content);

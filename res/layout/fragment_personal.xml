@@ -291,7 +291,8 @@
                 android:layout_marginTop="2dp"
                 android:background="@drawable/selector_my_visitor"
                 android:clickable="true"
-                android:padding="6dp" >
+                android:padding="6dp"
+                android:visibility="gone" >
 
                 <ImageView
                     android:id="@+id/iv_line1_icon"
@@ -600,5 +601,16 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_start_publish_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dip"
+        android:layout_marginRight="20dip"
+        android:background="@drawable/edit_article_selector"
+        android:clickable="true" />
 
 </RelativeLayout>

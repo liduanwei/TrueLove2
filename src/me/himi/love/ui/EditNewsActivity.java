@@ -87,10 +87,10 @@ public class EditNewsActivity extends BaseActivity implements OnClickListener {
     private void init() {
 
 	TextView tvTopTitle = (TextView) findViewById(R.id.layout_nav_top).findViewById(R.id.tv_top_title);
-	tvTopTitle.setText("留言");
+	tvTopTitle.setText("发表新留言");
 
 	TextView tvTopAction = (TextView) findViewById(R.id.layout_nav_top).findViewById(R.id.tv_top_action);
-	tvTopAction.setText("发布");
+	tvTopAction.setText("发表");
 	tvTopAction.setOnClickListener(this);
 
 	findViewById(R.id.tv_publish_news).setOnClickListener(this);

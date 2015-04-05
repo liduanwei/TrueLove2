@@ -6,6 +6,8 @@
 
     <include
         android:id="@+id/layout_nav_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         layout="@layout/layout_top" />
 
@@ -162,7 +164,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/button_sayhello_selector"
                 android:padding="10dp"
-                android:text="发布" />
+                android:text="发表" />
         </RelativeLayout>
     </LinearLayout>
 

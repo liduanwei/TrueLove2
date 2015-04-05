@@ -2,9 +2,11 @@ package me.himi.love.ui.fragment;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient.ConnectCallback;
+import io.rong.imlib.RongIMClient.ConnectCallback.ErrorCode;
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.AppServiceRongCloudIMImpl;
+import me.himi.love.RongIMEvent;
 import me.himi.love.IAppService.OnLoadDetailUserListener;
 import me.himi.love.IAppServiceExtend.HomeInfo;
 import me.himi.love.IAppServiceExtend.LoadHomeInfoPostParams;
@@ -22,6 +24,7 @@ import me.himi.love.ui.BuyLoveMoneyActivity;
 import me.himi.love.ui.BuyVIPActivity;
 import me.himi.love.ui.EditNewsActivity;
 import me.himi.love.ui.FollowsNewsActivity;
+import me.himi.love.ui.MainActivity;
 import me.himi.love.ui.MyArticlesActivity;
 import me.himi.love.ui.MyFansActivity;
 import me.himi.love.ui.MyFollowsActivity;
@@ -120,6 +123,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	mContainerView.findViewById(R.id.layout_start_settings).setOnClickListener(this); // 设置
 
 	mContainerView.findViewById(R.id.layout_writen_news).setOnClickListener(this); // 发布心情
+	mContainerView.findViewById(R.id.tv_start_publish_news).setOnClickListener(this); // 发布心情
 
 	if (MyApplication.getInstance().getCurrentLoginedUser().getUserId() == 211111) {
 	    mContainerView.findViewById(R.id.layout_review_articles).setVisibility(View.VISIBLE);
@@ -220,7 +224,8 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	//	if (imEvent != null) {
 	//	    imEvent.setOtherListener();
 	//	}
-
+	// 连接IM
+	connectRongCloudIM(MyApplication.getInstance().getCurrentLoginedUser().getUserId() + "");
 	// 广告
 	initAds();
     }
@@ -365,6 +370,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	    startActivity(new Intent(this.getActivity(), SettingsActivity.class));
 	    break;
 	case R.id.layout_writen_news: // 开始发布留言
+	case R.id.tv_start_publish_news:
 	    startActivity(new Intent(getActivity(), EditNewsActivity.class));
 	    break;
 	//	case R.id.layout_my_vistors: // 我的访客
@@ -408,7 +414,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	    mContainerView.findViewById(R.id.tv_newarticles_message_tips).setVisibility(View.GONE);
 	    startActivity(new Intent(getActivity(), MyArticlesActivity.class));
 	    break;
-	    
+
 	case R.id.layout_review_articles:// 审核帖子
 	    startActivity(new Intent(getActivity(), WaitingForReviewArticlesActivity.class));
 	    break;
@@ -568,6 +574,9 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 		if (homeInfo.signed) {
 		    tvSignin.setText("已签到");
 		    tvSignin.setEnabled(false);
+		} else {
+		    tvSignin.setText("签到");
+		    tvSignin.setEnabled(true);
 		}
 
 		if (user.getIsVip() == 1) {
@@ -589,10 +598,96 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	});
     }
 
+    //    private void connectRongCloudIM(final String userId) {
+    //	final ProgressDialog progress = new ProgressDialog(getActivity());
+    //	progress.setMessage("登录IM...");
+    //	progress.show();
+    //
+    //	AppServiceRongCloudIMImpl.getInstance().getTokenFromServer(userId, new OnTokenResponseListener() {
+    //
+    //	    @Override
+    //	    public void onSuccess(String token) {
+    //		// TODO Auto-generated method stub
+    //		AppServiceRongCloudIMImpl.getInstance().connect(getActivity(), token, new ConnectCallback() {
+    //
+    //		    @Override
+    //		    public void onError(ErrorCode arg0) {
+    //			//			progress.dismiss();
+    //			switch (arg0) {
+    //			case TOKEN_INCORRECT:
+    //			    connectRongCloudIM(userId);
+    //			    break;
+    //			case TIMEOUT:
+    //			    connectRongCloudIM(userId);
+    //			    break;
+    //			case APP_KEY_UNAVAILABLE:
+    //			    break;
+    //			case PACKAGE_BROKEN:
+    //			    break;
+    //			case DATABASE_ERROR:
+    //			    break;
+    //			case SERVER_UNAVAILABLE:
+    //			    break;
+    //			case UNKNOWN:
+    //			    break;
+    //			}
+    //		    }
+    //
+    //		    @Override
+    //		    public void onSuccess(String arg0) {
+    //			// 刷新用户资料
+    //			AppServiceRongCloudIMImpl.getInstance().refreshUserInfo();
+    //			progress.dismiss();
+    //			//进入主页, 清除所有Activity,避免回退
+    //		    }
+    //		});
+    //	    }
+    //
+    //	    @Override
+    //	    public void onFailure(String errorMsg) {
+    //		// TODO Auto-generated method stub
+    //		ToastFactory.getToast(getActivity(), "获取token失败,连接超时,请重试").show();
+    //		progress.dismiss();
+    //	    }
+    //	});
+    //    }
+
+    private int tryReconnectCount = 3; // 最大失败尝试次数
+
+    View mLoadingView;
+
+    /**
+     * 连接到融云IM
+     * @param userId
+     */
     private void connectRongCloudIM(final String userId) {
-	final ProgressDialog progress = new ProgressDialog(getActivity());
-	progress.setMessage("登录IM...");
-	progress.show();
+	//	final ProgressDialog progress = new ProgressDialog(MainActivity.this);
+	//	progress.setMessage("连接IM...");
+	//	progress.setTitle("");
+	//	progress.show();
+	if (mLoadingView == null) {
+	    mLoadingView = getActivity().getLayoutInflater().inflate(R.layout.layout_loading_retry, null);
+	    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+	    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+	    mContainerView.addView(mLoadingView, params);
+
+	    // 重试
+	    mLoadingView.findViewById(R.id.tv_load_retry).setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+		    // TODO Auto-generated method stub
+		    tryReconnectCount = 3;
+		    connectRongCloudIM(userId);
+
+		}
+	    });
+	}
+
+	// 可见
+	mLoadingView.setVisibility(View.VISIBLE);
+	// 重试按钮隐藏
+	mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.GONE);
 
 	AppServiceRongCloudIMImpl.getInstance().getTokenFromServer(userId, new OnTokenResponseListener() {
 
@@ -603,33 +698,69 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
 		    @Override
 		    public void onError(ErrorCode arg0) {
-			//			progress.dismiss();
+			// TODO Auto-generated method stub
+
 			switch (arg0) {
 			case TOKEN_INCORRECT:
-			    connectRongCloudIM(userId);
+			    if (tryReconnectCount-- >= 1) {
+				connectRongCloudIM(userId);
+				ToastFactory.getToast(getActivity(), "token 不正确,重试中(" + tryReconnectCount + ")").show();
+			    } else {
+				ToastFactory.getToast(getActivity(), "token 错误").show();
+				// 登录失败则进入 登录页面
+				// 隐藏
+				mLoadingView.setVisibility(View.GONE);
+			    }
 			    break;
 			case TIMEOUT:
-			    connectRongCloudIM(userId);
+			    if (tryReconnectCount-- >= 0) {
+				connectRongCloudIM(userId);
+				ToastFactory.getToast(getActivity(), "登录IM超时,重试中(" + tryReconnectCount + ")").show();
+			    } else {
+				// 登录失败则进入 登录页面
+				// 隐藏
+				mLoadingView.setVisibility(View.GONE);
+			    }
 			    break;
 			case APP_KEY_UNAVAILABLE:
+			    showToast("IM appKey不可用");
+			    // 重试按钮可用
+			    mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 			    break;
 			case PACKAGE_BROKEN:
+			    showToast("IM package Broken");
+			    // 重试按钮可用
+			    mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 			    break;
 			case DATABASE_ERROR:
+			    showToast("数据库出错");
+			    // 重试按钮可用
+			    mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 			    break;
 			case SERVER_UNAVAILABLE:
+			    showToast("IM服务器不可用!");
+			    // 重试按钮可用
+			    mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 			    break;
 			case UNKNOWN:
+			    showToast("IM 未知错误");
+			    // 重试按钮可用
+			    mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 			    break;
 			}
 		    }
 
 		    @Override
 		    public void onSuccess(String arg0) {
+			// TODO Auto-generated method stub
 			// 刷新用户资料
+			// 隐藏
+			mLoadingView.setVisibility(View.GONE);
 			AppServiceRongCloudIMImpl.getInstance().refreshUserInfo();
-			progress.dismiss();
-			//进入主页, 清除所有Activity,避免回退
+
+			// 注册新消息监听器
+			RongIMEvent.getInstance(getActivity()).setOtherListener();
+
 		    }
 		});
 	    }
@@ -637,8 +768,9 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	    @Override
 	    public void onFailure(String errorMsg) {
 		// TODO Auto-generated method stub
-		ToastFactory.getToast(getActivity(), "获取token失败,连接超时,请重试").show();
-		progress.dismiss();
+		ToastFactory.getToast(getActivity(), "获取token失败,请重试").show();
+		// 重试按钮可见
+		mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 	    }
 	});
     }
