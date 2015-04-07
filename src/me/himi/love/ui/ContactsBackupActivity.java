@@ -1,8 +1,12 @@
 package me.himi.love.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import me.himi.love.AppServiceExtendImpl;
+import me.himi.love.IAppServiceExtend.BackupContactsPostParams;
+import me.himi.love.IAppServiceExtend.OnBackupContactsResponseListener;
+import me.himi.love.IAppServiceExtend.OnRestoreContactsResponseListener;
+import me.himi.love.IAppServiceExtend.RestoreContactsPostParams;
 import me.himi.love.R;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.ActivityUtil;
@@ -213,56 +217,39 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 	    showToast("备份失败, 无法读取联系人数据");
 	    return;
 	}
-	System.out.println(jsonStr);
 
-	String url = Constants.URL_CONTACTS_BACKUP;
-	RequestParams params = new RequestParams();
-	params.add("contacts", jsonStr);
-	params.add("count", contacts.size() + "");
+	BackupContactsPostParams postParams = new BackupContactsPostParams();
+	postParams.contacts = jsonStr;
+	postParams.size = contacts.size();
 
-	HttpUtil.post(url, params, new AsyncHttpResponseHandler() {
+	AppServiceExtendImpl.getInstance().backupContacts(postParams, new OnBackupContactsResponseListener() {
 
 	    @Override
-	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
-		// TODO Auto-generated method stub
+	    public void onSuccess(int time, int size) {
+
 		progressDialog.dismiss();
-		String data = new String(arg2);
-		try {
-		    JSONObject jsonObj = new JSONObject(data);
-		    int status = jsonObj.getInt("status");
-		    if (1 != status) {
-			String msg = jsonObj.getString("msg");
-			showToast(msg);
-			return;
-		    }
-		    int time = jsonObj.getInt("time");
-		    int size = jsonObj.getInt("size");
-		    if (time == 0 || size == 0) {
-			mTvLastTime.setTextColor(getResources().getColor(R.color.c_f98800));
-			mTvLastTime.setText("您还没有进行过备份,建议立即备份以防止数据意外丢失");
 
-			isBackupExists = false;
-			return;
-		    }
-		    String timeStr = ActivityUtil.getTimeStr("yyyy年MM月dd日 HH:mm:ss", time);
-		    mTvLastTime.setTextColor(getResources().getColor(R.color.text_gray));
-		    mTvLastTime.setText("上次备份时间:" + timeStr);
-		    mTvLastServerSize.setText(size + " 联系人");
-		    isBackupExists = true;
-		    showToast("备份成功!");
-		} catch (JSONException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		    showToast("参数错误");
+		// TODO Auto-generated method stub
+		if (time == 0 || size == 0) {
+		    mTvLastTime.setTextColor(getResources().getColor(R.color.c_f98800));
+		    mTvLastTime.setText("您还没有进行过备份,建议立即备份以防止数据意外丢失");
 
+		    isBackupExists = false;
+		    return;
 		}
+		String timeStr = ActivityUtil.getTimeStr("yyyy年MM月dd日 HH:mm:ss", time);
+		mTvLastTime.setTextColor(getResources().getColor(R.color.text_gray));
+		mTvLastTime.setText("上次备份时间:" + timeStr);
+		mTvLastServerSize.setText(size + " 联系人");
+		isBackupExists = true;
+		showToast("备份成功!");
 	    }
 
 	    @Override
-	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+	    public void onFailure(String errorMsg) {
 		// TODO Auto-generated method stub
 		progressDialog.dismiss();
-		showToast("连接出错");
+		showToast(errorMsg);
 	    }
 	});
     }
@@ -284,38 +271,33 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
     }
 
     private void restore() {
-	// TODO Auto-generated method stub
-
 	if (null == progressDialog) {
 	    progressDialog = new ProgressDialog(this);
 	}
 	progressDialog.setMessage("下载数据中...");
 	progressDialog.show();
 
-	String url = Constants.URL_CONTACTS_RESTORE;
-	RequestParams params = new RequestParams();
-	//	params.add("backup_id", '1'); // 指定恢复记录的ID
+	RestoreContactsPostParams postParams = new RestoreContactsPostParams();
 
-	HttpUtil.post(url, params, new AsyncHttpResponseHandler() {
+	AppServiceExtendImpl.getInstance().restoreContacts(postParams, new OnRestoreContactsResponseListener() {
 
 	    @Override
-	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+	    public void onSuccess(List<Contact> contacts) {
 		// TODO Auto-generated method stub
-		String data = new String(arg2);
-		List<Contact> contacts = jsonToContacts(data);
-		System.out.println("服务器端联系人数据:" + data);
+		progressDialog.dismiss();
+
 		if (contacts != null) {
 		    if (contacts.size() == 0) {
 			showToast("未备份过");
 			return;
 		    }
-		    showToast("json还原contact:" + contacts.size());
 		    ContactsHelper.getInstance(ContactsBackupActivity.this).insertToPhone(contacts, new OpCallback() {
 
 			@Override
 			public void onSuccess(int count) {
 			    // TODO Auto-generated method stub
 			    progressDialog.dismiss();
+			    showToast("联系人已恢复成功!");
 			}
 
 			@Override
@@ -324,41 +306,18 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 			    progressDialog.dismiss();
 			}
 		    });
-		} else {
-		    showToast("数据格式错误");
 		}
-
 	    }
 
 	    @Override
-	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+	    public void onFailure(String errorMsg) {
 		// TODO Auto-generated method stub
 		progressDialog.dismiss();
-		showToast("连接出错");
+		showToast(errorMsg);
 	    }
 	});
+
 	// 下载联系人数据,插入到本地手机联系人数据库中
 
     }
-
-    private List<Contact> jsonToContacts(String data) {
-	// TODO Auto-generated method stub
-	try {
-	    JSONArray jsonArr = new JSONArray(data);
-	    List<Contact> contacts = new ArrayList<Contact>();
-	    for (int i = 0, n = jsonArr.length(); i < n; ++i) {
-		JSONObject jsonObj = jsonArr.getJSONObject(i);
-		Contact contact = new Contact();
-		contacts.add(contact);
-		contact.setDisplayName(jsonObj.getString("name"));
-		contact.setNumber(jsonObj.getString("number"));
-	    }
-	    return contacts;
-	} catch (JSONException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-	return null;
-    }
-
 }

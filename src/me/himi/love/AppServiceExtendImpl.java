@@ -28,9 +28,13 @@ import me.himi.love.entity.loader.impl.NearbyUserLoaderImpl;
 import me.himi.love.entity.loader.impl.ReceivedFansLoaderImpl;
 import me.himi.love.entity.loader.impl.SayHiResponseLoaderImpl;
 import me.himi.love.entity.loader.impl.UserNewsLoaderImpl;
+import me.himi.love.ui.ContactsBackupActivity;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
+import me.himi.love.util.ContactsHelper;
 import me.himi.love.util.HttpUtil;
+import me.himi.love.util.ContactsHelper.Contact;
+import me.himi.love.util.ContactsHelper.OpCallback;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -2668,6 +2672,93 @@ public class AppServiceExtendImpl implements IAppServiceExtend {
 	};
 
 	HttpUtil.post(url, params, responseHandler);
+    }
+
+    @Override
+    public void backupContacts(BackupContactsPostParams postParams, final OnBackupContactsResponseListener listener) {
+	// TODO Auto-generated method stub
+
+	String url = Constants.URL_CONTACTS_BACKUP;
+	RequestParams params = new RequestParams();
+	params.add("contacts", postParams.contacts);
+	params.add("count", postParams.size + "");
+
+	HttpUtil.post(url, params, new AsyncHttpResponseHandler() {
+
+	    @Override
+	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		// TODO Auto-generated method stub
+		String data = new String(arg2);
+		try {
+		    JSONObject jsonObj = new JSONObject(data);
+		    int status = jsonObj.getInt("status");
+		    if (1 != status) {
+			String msg = jsonObj.getString("msg");
+			listener.onFailure(msg);
+			return;
+		    }
+		    int time = jsonObj.getInt("time");
+		    int size = jsonObj.getInt("size");
+		    listener.onSuccess(time, size);
+
+		} catch (JSONException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		    listener.onFailure("参数错误");
+		}
+	    }
+
+	    @Override
+	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		// TODO Auto-generated method stub
+		listener.onFailure("连接出错");
+	    }
+	});
+    }
+
+    /**
+     * 恢复联系人
+     */
+    @Override
+    public void restoreContacts(RestoreContactsPostParams postParams, final OnRestoreContactsResponseListener listener) {
+	// TODO Auto-generated method stub
+	String url = Constants.URL_CONTACTS_RESTORE;
+	RequestParams params = new RequestParams();
+	//	params.add("backup_id", '1'); // 指定恢复记录的ID
+
+	HttpUtil.post(url, params, new AsyncHttpResponseHandler() {
+
+	    @Override
+	    public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+		// TODO Auto-generated method stub
+		String data = new String(arg2);
+		System.out.println("服务器端联系人数据:" + data);
+		List<Contact> contacts = new ArrayList<Contact>();
+		try {
+		    JSONArray jsonArr = new JSONArray(data);
+
+		    for (int i = 0, n = jsonArr.length(); i < n; ++i) {
+			JSONObject jsonObj = jsonArr.getJSONObject(i);
+			Contact contact = new Contact();
+			contacts.add(contact);
+			contact.setDisplayName(jsonObj.getString("name"));
+			contact.setNumber(jsonObj.getString("number"));
+		    }
+
+		    listener.onSuccess(contacts);
+		} catch (JSONException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		    listener.onFailure("参数错误");
+		}
+	    }
+
+	    @Override
+	    public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+		// TODO Auto-generated method stub
+		listener.onFailure("连接出错");
+	    }
+	});
     }
 
 }

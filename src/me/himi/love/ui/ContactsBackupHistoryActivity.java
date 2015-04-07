@@ -6,7 +6,6 @@ import java.util.List;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.ContactsBackupAdapter;
-import me.himi.love.entity.Article;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.CacheUtils;
@@ -28,9 +27,10 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -47,11 +47,15 @@ public class ContactsBackupHistoryActivity extends BaseActivity implements OnCli
 
     ContactsBackupAdapter mAdapter;
 
+    RelativeLayout mContainerView;
+
     @Override
     protected void onCreate(Bundle arg0) {
 	super.onCreate(arg0);
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_contacts_backup_history);
+
+	mContainerView = (RelativeLayout) getLayoutInflater().inflate(R.layout.activity_contacts_backup_history, null);
+	setContentView(mContainerView);
 
 	init();
     }
@@ -125,7 +129,29 @@ public class ContactsBackupHistoryActivity extends BaseActivity implements OnCli
 
     int pageNumber = 1;
 
+    View mLoadingView;
+
     private void loadBackupHistories() {
+	if (mLoadingView == null) {
+	    mLoadingView = getLayoutInflater().inflate(R.layout.layout_loading_retry, null);
+	    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+	    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+	    mContainerView.addView(mLoadingView, params);
+	    mLoadingView.findViewById(R.id.tv_load_retry).setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+		    // TODO Auto-generated method stub
+		    loadBackupHistories();
+		}
+	    });
+	}
+
+	// 可见
+	mLoadingView.setVisibility(View.VISIBLE);
+	// 重试按钮隐藏
+	mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.GONE);
+
 	// TODO Auto-generated method stub
 	String url = Constants.URL_CONTACTS_BACKUP_HISTORIES;
 	RequestParams params = new RequestParams();
@@ -178,7 +204,7 @@ public class ContactsBackupHistoryActivity extends BaseActivity implements OnCli
 		mListView.stopLoadMore();
 		mListView.stopRefresh();
 
-		//		pbLoading.setVisibility(View.GONE);
+		mLoadingView.setVisibility(View.GONE);
 	    }
 
 	    @Override
@@ -188,6 +214,9 @@ public class ContactsBackupHistoryActivity extends BaseActivity implements OnCli
 		//
 		mListView.stopLoadMore();
 		mListView.stopRefresh();
+
+		// 重试按钮可见
+		mLoadingView.findViewById(R.id.tv_load_retry).setVisibility(View.VISIBLE);
 	    }
 	});
     }

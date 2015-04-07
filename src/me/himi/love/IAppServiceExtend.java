@@ -19,6 +19,7 @@ import me.himi.love.entity.SystemNotice;
 import me.himi.love.entity.UserGift;
 import me.himi.love.entity.UserNews;
 import me.himi.love.entity.VisitedUser;
+import me.himi.love.util.ContactsHelper.Contact;
 
 /**
  * @ClassName:IAppServiceExtend
@@ -756,4 +757,37 @@ public interface IAppServiceExtend {
 	void onFailure(String errorMsg);
     }
 
+    /**
+     * 备份联系人
+     * @param postParams
+     * @param listener
+     */
+    void backupContacts(BackupContactsPostParams postParams, OnBackupContactsResponseListener listener);
+
+    public static class BackupContactsPostParams {
+	public String contacts;
+	public int size;
+    }
+
+    public static interface OnBackupContactsResponseListener {
+	void onSuccess(int time, int size);
+
+	void onFailure(String errorMsg);
+    }
+
+    /**
+     * 下载已备份联系人
+     * @param postParams
+     * @param listener
+     */
+    void restoreContacts(RestoreContactsPostParams postParams, OnRestoreContactsResponseListener listener);
+
+    public static class RestoreContactsPostParams {
+    }
+
+    public static interface OnRestoreContactsResponseListener {
+	void onSuccess(List<Contact> contacts);
+
+	void onFailure(String errorMsg);
+    }
 }
