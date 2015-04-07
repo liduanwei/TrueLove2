@@ -8,17 +8,16 @@
 
 package cn.sharesdk.onekeyshare;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.text.TextUtils;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.HashMap;
-
 import cn.sharesdk.framework.CustomPlatform;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;

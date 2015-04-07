@@ -7,8 +7,6 @@ import me.himi.love.util.Constants;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-
 /**
  * @ClassName:LoginedUserLoaderImpl
  * @author sparklee liduanwei_911@163.com

@@ -5,16 +5,15 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import me.himi.love.entity.BSImageUrl;
 import me.himi.love.entity.ReceivedFans;
-import me.himi.love.entity.NearbyUser;
 import me.himi.love.entity.loader.IReceivedFansLoader;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @ClassName:ReceivedFansLoaderImpl

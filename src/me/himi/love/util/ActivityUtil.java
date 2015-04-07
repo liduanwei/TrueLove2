@@ -18,7 +18,6 @@ import java.util.List;
 
 import me.himi.love.MyApplication;
 import me.himi.love.R;
-import me.himi.love.ui.base.BaseActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -692,6 +691,17 @@ public final class ActivityUtil {
 	    e.printStackTrace();
 	}
 	return 0;
+    }
+
+    /**
+     * 
+     * @param pattern
+     * @param seconds
+     * @return
+     */
+    public static String getTimeStr(String pattern, int seconds) {
+	SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+	return sdf.format(new Date(seconds * 1000L));
     }
 
     /**

@@ -10,7 +10,6 @@ import me.himi.love.R;
 import me.himi.love.adapter.MyReceivedChatMessagesAdapter;
 import me.himi.love.entity.FriendUser;
 import me.himi.love.entity.ReceivedChat;
-import me.himi.love.entity.ReceivedFans;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.view.list.XListView;
 import me.himi.love.view.list.XListView.IXListViewListener;

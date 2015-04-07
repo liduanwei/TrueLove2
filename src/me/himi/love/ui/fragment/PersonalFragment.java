@@ -2,11 +2,9 @@ package me.himi.love.ui.fragment;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient.ConnectCallback;
-import io.rong.imlib.RongIMClient.ConnectCallback.ErrorCode;
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.AppServiceRongCloudIMImpl;
-import me.himi.love.RongIMEvent;
 import me.himi.love.IAppService.OnLoadDetailUserListener;
 import me.himi.love.IAppServiceExtend.HomeInfo;
 import me.himi.love.IAppServiceExtend.LoadHomeInfoPostParams;
@@ -16,15 +14,16 @@ import me.himi.love.IAppServiceExtend.SigninPostParams;
 import me.himi.love.IAppServiceRongCloudIM.OnTokenResponseListener;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
+import me.himi.love.RongIMEvent;
 import me.himi.love.entity.DetailInfoUser;
 import me.himi.love.entity.LoginedUser;
 import me.himi.love.entity.loader.IUserDetailLoader;
 import me.himi.love.entity.loader.impl.UserDetailLoaderImpl;
 import me.himi.love.ui.BuyLoveMoneyActivity;
 import me.himi.love.ui.BuyVIPActivity;
+import me.himi.love.ui.ContactsBackupActivity;
 import me.himi.love.ui.EditNewsActivity;
 import me.himi.love.ui.FollowsNewsActivity;
-import me.himi.love.ui.MainActivity;
 import me.himi.love.ui.MyArticlesActivity;
 import me.himi.love.ui.MyFansActivity;
 import me.himi.love.ui.MyFollowsActivity;
@@ -132,6 +131,7 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 	    mContainerView.findViewById(R.id.layout_review_articles).setVisibility(View.GONE);
 	}
 	//	mContainerView.findViewById(R.id.layout_my_vistors).setOnClickListener(this); // 查看访客
+	mContainerView.findViewById(R.id.layout_backup_contacts).setOnClickListener(this); // 备份/恢复 联系人
 
 	mContainerView.findViewById(R.id.layout_buy_lovemoney).setOnClickListener(this); // 兑换恋恋币
 
@@ -417,6 +417,9 @@ public class PersonalFragment extends BaseFragment implements OnClickListener {
 
 	case R.id.layout_review_articles:// 审核帖子
 	    startActivity(new Intent(getActivity(), WaitingForReviewArticlesActivity.class));
+	    break;
+	case R.id.layout_backup_contacts: // 备份/恢复 联系人
+	    startActivity(new Intent(getActivity(), ContactsBackupActivity.class));
 	    break;
 	}
     }

@@ -5,6 +5,8 @@
 
     <include
         android:id="@+id/layout_nav_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         layout="@layout/layout_top" />
 
@@ -72,11 +74,30 @@
             android:textSize="12sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layout_bottom_menu_self"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_bottom_menu"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/register_button_selector"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_edit_myinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="编辑" />
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/sv_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/layout_bottom_menu"
+        android:layout_above="@id/layout_bottom_menu_self"
         android:layout_below="@id/layout_nav_top"
         android:scrollbars="none" >
 

@@ -14,10 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
-import android.R.integer;
-import android.R.string;
 import android.content.Context;
-import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
 

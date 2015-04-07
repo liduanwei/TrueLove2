@@ -10,8 +10,6 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.List;
 
-import me.himi.love.entity.FriendUser;
-
 /**
  * @ClassName:CacheUtils
  * @author sparklee liduanwei_911@163.com

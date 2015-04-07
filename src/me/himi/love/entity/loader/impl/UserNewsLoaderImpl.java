@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import me.himi.love.entity.UserNews;
 import me.himi.love.entity.BSImageUrl;
+import me.himi.love.entity.UserNews;
 import me.himi.love.entity.loader.IUserNewsLoader;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;

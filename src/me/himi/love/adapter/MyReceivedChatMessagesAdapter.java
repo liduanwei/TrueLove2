@@ -5,7 +5,6 @@ import java.util.List;
 import me.himi.love.R;
 import me.himi.love.adapter.base.BaseListAdapter;
 import me.himi.love.adapter.base.ViewHolder;
-import me.himi.love.entity.ChatMessage;
 import me.himi.love.entity.ReceivedChat;
 import me.himi.love.util.ImageLoaderOptions;
 import android.content.Context;

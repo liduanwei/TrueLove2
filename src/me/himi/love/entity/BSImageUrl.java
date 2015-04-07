@@ -1,7 +1,6 @@
 package me.himi.love.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 含大小两张图的 url

@@ -11,11 +11,6 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.Header;
-
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.IAppServiceExtend.LoadWaitingForReviewArticlesPostParams;
 import me.himi.love.IAppServiceExtend.OnLoadArticlesResponseListener;
@@ -26,10 +21,12 @@ import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.HttpUtil;
 import me.himi.love.view.list.XListView;
 import me.himi.love.view.list.XListView.IXListViewListener;
+
+import org.apache.http.Header;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.SyncStateContract.Constants;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +36,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /**
  * 等待审核的帖子
@@ -118,8 +118,8 @@ public class WaitingForReviewArticlesActivity extends BaseActivity implements On
 	    @Override
 	    public boolean onTouch(View arg0, MotionEvent arg1) {
 		// TODO Auto-generated method stub
-		touchedX = arg1.getX();
-		touchedY = arg1.getY();
+		touchedX = arg1.getRawX();// 绝对坐标
+		touchedY = arg1.getRawY(); // 绝对坐标
 		return false;
 	    }
 
@@ -281,7 +281,10 @@ public class WaitingForReviewArticlesActivity extends BaseActivity implements On
 	    pwMenuWin.dismiss();
 	}
 
-	pwMenuWin.showAtLocation(v, Gravity.LEFT | Gravity.CENTER, (int) touchedX, (int) touchedY);
+	int[] location = new int[2];
+	v.getLocationOnScreen(location);
+	pwMenuWin.showAtLocation(v, Gravity.NO_GRAVITY, (int) touchedX, (int) touchedY);
+	//	pwMenuWin.showAtLocation(v, Gravity.NO_GRAVITY, (int) touchedX, location[1] + v.getHeight() / 2);
 	//	pwMenuWin.showAsDropDown(mListView.getChildAt(pos), 0, 0, Gravity.CENTER);
 	//	pwMenuWin.showAsDropDown(v);
 

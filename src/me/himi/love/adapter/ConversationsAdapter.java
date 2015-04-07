@@ -1,6 +1,5 @@
 package me.himi.love.adapter;
 
-import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient.Conversation;
 import io.rong.imlib.RongIMClient.MessageContent;
 import io.rong.message.TextMessage;

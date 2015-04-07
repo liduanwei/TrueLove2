@@ -1,7 +1,6 @@
 package me.himi.love.view.list;
 
 import me.himi.love.R;
-import me.himi.love.ui.sound.SoundPlayer;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.text.format.Time;

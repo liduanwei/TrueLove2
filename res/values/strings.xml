@@ -19,5 +19,6 @@
     <string name="main_tab_set">我</string>
     <string name="visitor_all"><u>查看更多</u></string>
     <string name="loading">加载中...</string>
+    <string name="loadfromhistories"><u>从更多历史备份中恢复</u></string>
 
 </resources>

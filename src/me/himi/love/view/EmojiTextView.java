@@ -2,7 +2,6 @@ package me.himi.love.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.util.AttributeSet;
 import android.widget.TextView;

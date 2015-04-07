@@ -6,7 +6,6 @@ import me.himi.love.entity.CheckUpdateVersion;
 import me.himi.love.entity.DetailInfoUser;
 import me.himi.love.entity.LoadUserNewsComments;
 import me.himi.love.entity.LoginedUser;
-import me.himi.love.entity.ReceivedSayHi;
 import me.himi.love.entity.RegisteredUser;
 import me.himi.love.entity.UserNews;
 import me.himi.love.entity.UserNewsComment;

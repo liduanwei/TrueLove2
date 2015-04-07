@@ -23,7 +23,6 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.smssdk.SMSSDK;
 
 import com.handmark.pulltorefresh.library.PullToRefreshWebView;
 import com.loopj.android.http.AsyncHttpResponseHandler;

@@ -6,7 +6,6 @@ import java.util.List;
 import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.IAppServiceExtend.LoadVisitedUsersPostParams;
 import me.himi.love.IAppServiceExtend.OnLoadVisitedUsersResponseListener;
-import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.VisitedUsersAdapter;
 import me.himi.love.entity.VisitedUser;

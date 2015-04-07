@@ -6,7 +6,6 @@ import java.util.List;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.IAppService.OnLoadUserVisitorsListener;
 import me.himi.love.IAppService.UserVisitorsParams;
-import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.UserVisitorsAdapter;
 import me.himi.love.entity.VisitorUser;

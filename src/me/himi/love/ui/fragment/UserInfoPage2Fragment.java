@@ -18,7 +18,6 @@ import me.himi.love.ui.UserFansActivity;
 import me.himi.love.ui.UserFollowsActivity;
 import me.himi.love.ui.UserInfoTextActivity;
 import me.himi.love.ui.UserNewsActivity;
-import me.himi.love.ui.UserVisitorsActivity;
 import me.himi.love.ui.VisitorsAndVisitwhoActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.util.HttpUtil;

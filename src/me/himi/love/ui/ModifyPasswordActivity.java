@@ -7,30 +7,21 @@ import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
 import me.himi.love.util.HttpUtil;
 import me.himi.love.util.ShareSMSConstants;
-import me.himi.love.util.StringUtils;
 import me.himi.love.util.ToastFactory;
 
 import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 

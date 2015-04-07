@@ -8,6 +8,11 @@
 
 package cn.sharesdk.onekeyshare.theme.classic;
 
+import static cn.sharesdk.framework.utils.R.getBitmapRes;
+import static cn.sharesdk.framework.utils.R.getStringRes;
+
+import java.util.ArrayList;
+
 import android.content.res.Configuration;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -18,13 +23,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-
 import cn.sharesdk.onekeyshare.PlatformListFakeActivity;
-
-import static cn.sharesdk.framework.utils.R.getBitmapRes;
-import static cn.sharesdk.framework.utils.R.getStringRes;
 
 public class PlatformListPage extends PlatformListFakeActivity implements View.OnClickListener {
     // page container

@@ -1,13 +1,5 @@
 package me.himi.love.ui.fragment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.huewu.pla.lib.MultiColumnListView.OnLoadMoreListener;
 import com.huewu.pla.lib.MultiColumnPullToRefreshListView;
 import com.huewu.pla.lib.MultiColumnPullToRefreshListView.OnRefreshListener;
 import com.huewu.pla.lib.internal.PLA_AbsListView;

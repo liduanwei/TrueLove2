@@ -1,12 +1,12 @@
 package me.himi.love.ui;
 
 import me.himi.love.AppServiceBuyImpl;
+import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.IAppServiceBuy.OnBuyedVipPostParams;
 import me.himi.love.IAppServiceBuy.OnBuyedVipResponseListener;
 import me.himi.love.IAppServiceExtend.HomeInfo;
 import me.himi.love.IAppServiceExtend.LoadHomeInfoPostParams;
 import me.himi.love.IAppServiceExtend.OnLoadHomeInfoResponseListener;
-import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.entity.DetailInfoUser;
@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;

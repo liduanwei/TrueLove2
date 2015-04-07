@@ -1,7 +1,6 @@
 package me.himi.love.util;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import android.app.Activity;
 

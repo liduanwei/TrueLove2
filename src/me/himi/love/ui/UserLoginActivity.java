@@ -4,8 +4,6 @@ import io.rong.imlib.RongIMClient.ConnectCallback;
 
 import java.util.List;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import me.himi.love.AppServiceImpl;
 import me.himi.love.AppServiceRongCloudIMImpl;
 import me.himi.love.IAppService.OnLoginListener;
@@ -44,6 +42,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * @ClassName:UserInfoActivity

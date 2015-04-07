@@ -2,14 +2,6 @@ package me.himi.love.ui;
 
 import io.rong.imkit.RongIM;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +12,6 @@ import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.MyFriendsAdapter;
 import me.himi.love.entity.FriendUser;
-import me.himi.love.entity.Gift;
-import me.himi.love.entity.UserGift;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.CacheUtils;
 import me.himi.love.view.list.XListView.IXListViewListener;

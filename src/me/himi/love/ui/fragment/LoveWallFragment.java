@@ -3,25 +3,12 @@ package me.himi.love.ui.fragment;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
-import java.util.ArrayList;
-import java.util.List;
 
-import me.himi.love.AppServiceExtendImpl;
-import me.himi.love.IAppServiceExtend.OnPostRecommendUsersResponseListener;
-import me.himi.love.IAppServiceExtend.PostRecommendUsersParams;
-import me.himi.love.MyApplication;
 import me.himi.love.R;
-import me.himi.love.adapter.UserWallAdapter;
-import me.himi.love.entity.RecommendUser;
-import me.himi.love.entity.loader.IRecommendUserLoader;
-import me.himi.love.entity.loader.impl.NearbyUserLoaderImpl;
 import me.himi.love.ui.fragment.base.BaseFragment;
-import me.himi.love.ui.sound.SoundPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -30,11 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.huewu.pla.lib.MultiColumnListView.OnLoadMoreListener;
-import com.huewu.pla.lib.MultiColumnPullToRefreshListView;
 import com.huewu.pla.lib.MultiColumnPullToRefreshListView.OnRefreshListener;
-import com.huewu.pla.lib.internal.PLA_AbsListView;
-import com.huewu.pla.lib.internal.PLA_AbsListView.OnScrollListener;
 
 /**
  * 爱墙,表白墙

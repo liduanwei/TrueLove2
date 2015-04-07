@@ -1,7 +1,5 @@
 package me.himi.love.boost.androidservice;
 
-import io.rong.imkit.RongIM;
-
 import java.util.List;
 
 import me.himi.love.MyApplication;

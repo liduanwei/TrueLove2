@@ -12,14 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.himi.love.AppServiceExtendImpl;
-import me.himi.love.MyApplication;
-import me.himi.love.R;
 import me.himi.love.IAppServiceExtend.LoadArticlesPostParams;
 import me.himi.love.IAppServiceExtend.OnLoadArticlesResponseListener;
+import me.himi.love.MyApplication;
+import me.himi.love.R;
 import me.himi.love.adapter.ArticleAdapter;
 import me.himi.love.entity.Article;
 import me.himi.love.ui.ArticleCommentsActivity;
-import me.himi.love.ui.EditArticleActivity;
 import me.himi.love.ui.EditQiushiActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.view.list.XListView;
@@ -31,8 +30,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;

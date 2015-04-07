@@ -3,37 +3,24 @@ package me.himi.love.adapter;
 import java.util.List;
 
 import me.himi.love.AppServiceChatImpl;
-import me.himi.love.AppServiceExtendImpl;
-import me.himi.love.MyApplication;
 import me.himi.love.IAppServiceChat.OnSendMessageResponseListener;
 import me.himi.love.IAppServiceChat.SendMessagePostParams;
-import me.himi.love.IAppServiceExtend.OnVoteArticleLoveResponseListener;
-import me.himi.love.IAppServiceExtend.VoteArticleLovePostParams;
+import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.base.BaseListAdapter;
 import me.himi.love.adapter.base.ViewHolder;
-import me.himi.love.entity.Article;
 import me.himi.love.entity.ChatMessage;
 import me.himi.love.ui.ZoombleImageActivity;
-import me.himi.love.util.ActivityUtil;
-import me.himi.love.util.ImageLoaderOptions;
-import me.himi.love.view.ZoomableImageView;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 /**
  * @ClassName:UserRecommendAdapter

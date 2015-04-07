@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.AppServiceRongCloudIMImpl;
 import me.himi.love.IAppService.OnLoadDetailUserListener;

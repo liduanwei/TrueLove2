@@ -4,7 +4,6 @@ import me.himi.love.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.AttributeSet;
 import android.widget.TextView;
 

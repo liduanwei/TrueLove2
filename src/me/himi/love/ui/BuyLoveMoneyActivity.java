@@ -12,7 +12,6 @@ import me.himi.love.R;
 import me.himi.love.entity.DetailInfoUser;
 import me.himi.love.entity.LoginedUser;
 import me.himi.love.ui.base.BaseActivity;
-import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
 import me.himi.love.util.StringUtils;
 import me.himi.love.util.ToastFactory;

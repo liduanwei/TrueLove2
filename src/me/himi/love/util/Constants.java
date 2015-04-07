@@ -238,4 +238,13 @@ public interface Constants {
     // 查看目标用户的礼物
     String URL_USER_GIFT_LIST = HOST + "/index.php/index/gift/select";
 
+    // 备份手机联系人
+    String URL_CONTACTS_BACKUP = HOST + "/index.php/index/backup/backup";
+    // 恢复手机联系人
+    String URL_CONTACTS_RESTORE = HOST + "/index.php/index/backup/restore";
+    // 上次备份
+    String URL_CONTACTS_BACKUP_LAST = HOST + "/index.php/index/backup/last";
+    // 备份历史
+    String URL_CONTACTS_BACKUP_HISTORIES = HOST + "/index.php/index/backup/selectBackups";
+
 }

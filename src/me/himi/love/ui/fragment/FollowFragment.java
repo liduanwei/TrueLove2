@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.himi.love.AppServiceExtendImpl;
-import me.himi.love.MyApplication;
 import me.himi.love.IAppServiceExtend.FollowParams;
 import me.himi.love.IAppServiceExtend.LoadFollowParams;
 import me.himi.love.IAppServiceExtend.OnFollowResponseListener;
 import me.himi.love.IAppServiceExtend.OnLoadFollowResponseListener;
+import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.UserNearbyAdapter;
 import me.himi.love.dao.DBHelper;

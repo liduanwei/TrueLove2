@@ -8,8 +8,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.tenpay.android.service.DownloadDialog;
-
 import me.himi.love.R;
 import me.himi.love.entity.CheckUpdateVersion;
 import me.himi.love.ui.base.BaseActivity;

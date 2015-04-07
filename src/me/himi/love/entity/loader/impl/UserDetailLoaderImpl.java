@@ -4,13 +4,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import me.himi.love.entity.DetailInfoUser;
-import me.himi.love.entity.UserNews;
 import me.himi.love.entity.loader.IUserDetailLoader;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
 import me.himi.love.util.ConstellationUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

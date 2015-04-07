@@ -8,10 +8,8 @@ import java.util.TimerTask;
 
 import me.himi.love.MyApplication;
 import me.himi.love.dao.DBHelper;
-import me.himi.love.dao.DBHelper.RecommendUser;
 import me.himi.love.entity.PrivateMessage;
 import me.himi.love.entity.PrivateMessage.MessageType;
-import me.himi.love.entity.loader.impl.UserDetailLoaderImpl;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.Constants;
 import me.himi.love.util.HttpUtil;

@@ -10,31 +10,17 @@ import me.himi.love.entity.RegisteredUser;
 import me.himi.love.ui.base.BaseActivity;
 import me.himi.love.util.ActivityManagerUtils;
 import me.himi.love.util.ActivityUtil;
-import me.himi.love.util.ShareSMSConstants;
 import me.himi.love.util.StringUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
 
 /**
  * @ClassName:UserRegisterStep2Activity

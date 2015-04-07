@@ -8,9 +8,7 @@ import me.himi.love.AppServiceExtendImpl;
 import me.himi.love.AppServiceImpl;
 import me.himi.love.IAppService.OnLoadDetailUserListener;
 import me.himi.love.IAppServiceExtend.FollowParams;
-import me.himi.love.IAppServiceExtend.GiveGiftPostParams;
 import me.himi.love.IAppServiceExtend.OnFollowResponseListener;
-import me.himi.love.IAppServiceExtend.OnGiveGiftResponseListener;
 import me.himi.love.IAppServiceExtend.OnSayHiResponseListener;
 import me.himi.love.IAppServiceExtend.SayHiParams;
 import me.himi.love.MyApplication;
@@ -19,7 +17,6 @@ import me.himi.love.dao.DBHelper;
 import me.himi.love.dao.DBHelper.UserFollow;
 import me.himi.love.entity.DetailInfoUser;
 import me.himi.love.entity.LoginedUser;
-import me.himi.love.entity.UserGift;
 import me.himi.love.entity.loader.IUserDetailLoader;
 import me.himi.love.entity.loader.impl.UserDetailLoaderImpl;
 import me.himi.love.entity.loader.impl.UserNewsLoaderImpl;
@@ -31,7 +28,6 @@ import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.CacheUserManager;
 import me.himi.love.util.HttpUtil;
 import me.himi.love.util.ImageLoaderOptions;
-import me.himi.love.util.Share;
 import me.himi.love.util.ToastFactory;
 import me.himi.love.view.EmojiTextView;
 import android.app.Dialog;
@@ -79,7 +75,7 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 
     EmojiTextView tvTopTitle, tvTopAction;
 
-    View layoutBottomMenu; // 底部 菜单的布局容器
+    View layoutBottomMenu, layoutBottomMenuEdit; // 底部 菜单的布局容器, 其他用户的资料页菜单, 当前登录用户自己的资料页菜单
 
     //
     TextView[] tvTabs;
@@ -168,6 +164,8 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 
 	// 底部菜单
 	layoutBottomMenu = findViewById(R.id.layout_bottom_menu);
+	// 底部菜单(当前用户的资料)
+	layoutBottomMenuEdit = findViewById(R.id.layout_bottom_menu_self);
 
 	// 关注
 	final TextView btnFollow = (TextView) findViewById(R.id.btn_follow);
@@ -301,13 +299,27 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 		    startActivityForResult(intent, requestCode);
 		}
 	    }
-
 	});
 
-	// 是当前登录用户则不显示底部菜单
+	// 编辑资料
+	layoutBottomMenuEdit.setOnClickListener(new OnClickListener() {
+
+	    @Override
+	    public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		// todo
+		//		    Share.share(UserInfoTextActivity.this, "我正在使用" + getResources().getString(R.string.app_name) + "征婚交友APP,这是" + mUserId + "的个人主页,帮你发现身边的陌生朋友,寻找即将与自己相守一生的另一半,\"等你发现,真爱就在这里\"");
+		Intent intent = new Intent(UserInfoTextActivity.this, EditMyInfoActivity.class);
+		// 已有数据则直接传递过去,否则直接跳转让其自己加载
+		startActivityForResult(intent, EditMyInfoActivity.EDIT_MY_INFO_RESULT_CODE);
+	    }
+	});
+
+	// 是当前登录用户则区分绘制不同的底部菜单
 	if (isCurrentLoginedUser()) {
 	    tvTopTitle.setEmojiText("我");
 	    layoutBottomMenu.setVisibility(View.GONE);
+	    layoutBottomMenuEdit.setVisibility(View.VISIBLE);
 
 	    tvTopAction.setVisibility(View.VISIBLE);
 	    tvTopAction.setText("编辑");
@@ -324,6 +336,7 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 	} else {
 	    tvTopTitle.setEmojiText("正在查看 " + userNickname + " 的资料");
 	    layoutBottomMenu.setVisibility(View.VISIBLE);
+	    layoutBottomMenuEdit.setVisibility(View.GONE);
 	    tvTopAction.setVisibility(View.GONE);
 	}
 
@@ -800,35 +813,35 @@ public class UserInfoTextActivity extends BaseActivity implements OnClickListene
 	// TODO Auto-generated method stub
 	if (requestCode == 1) {
 	    if (resultCode == RESULT_OK) { // 选中礼物确认提交
-	    //		final ProgressDialog dialog = new ProgressDialog(this);
-	    //		dialog.setMessage("赠送中...");
-	    //		dialog.show();
-	    //
-	    //		String targetUserId = arg2.getStringExtra("user_id");
-	    //		String targetGiftId = arg2.getStringExtra("gift_id");
-	    //		String word = arg2.getStringExtra("word"); // 赠言
-	    //
-	    //		GiveGiftPostParams postParams = new GiveGiftPostParams();
-	    //		postParams.giftId = targetGiftId;
-	    //		postParams.toUserId = targetUserId;
-	    //		postParams.word = word;
-	    //
-	    //		AppServiceExtendImpl.getInstance().giveGift(postParams, new OnGiveGiftResponseListener() {
-	    //
-	    //		    @Override
-	    //		    public void onSuccess(UserGift userGift) {
-	    //			// TODO Auto-generated method stub
-	    //			showToast("已赠送!");
-	    //			dialog.dismiss();
-	    //		    }
-	    //
-	    //		    @Override
-	    //		    public void onFailure(String errorMsg) {
-	    //			// TODO Auto-generated method stub
-	    //			showToast(errorMsg);
-	    //			dialog.dismiss();
-	    //		    }
-	    //		});
+		//		final ProgressDialog dialog = new ProgressDialog(this);
+		//		dialog.setMessage("赠送中...");
+		//		dialog.show();
+		//
+		//		String targetUserId = arg2.getStringExtra("user_id");
+		//		String targetGiftId = arg2.getStringExtra("gift_id");
+		//		String word = arg2.getStringExtra("word"); // 赠言
+		//
+		//		GiveGiftPostParams postParams = new GiveGiftPostParams();
+		//		postParams.giftId = targetGiftId;
+		//		postParams.toUserId = targetUserId;
+		//		postParams.word = word;
+		//
+		//		AppServiceExtendImpl.getInstance().giveGift(postParams, new OnGiveGiftResponseListener() {
+		//
+		//		    @Override
+		//		    public void onSuccess(UserGift userGift) {
+		//			// TODO Auto-generated method stub
+		//			showToast("已赠送!");
+		//			dialog.dismiss();
+		//		    }
+		//
+		//		    @Override
+		//		    public void onFailure(String errorMsg) {
+		//			// TODO Auto-generated method stub
+		//			showToast(errorMsg);
+		//			dialog.dismiss();
+		//		    }
+		//		});
 	    }
 	}
 

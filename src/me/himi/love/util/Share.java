@@ -3,8 +3,6 @@ package me.himi.love.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.List;
 
 import me.himi.love.R;
 import me.himi.love.entity.Article;
@@ -16,12 +14,8 @@ import android.graphics.Bitmap.CompressFormat;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import cn.sharesdk.onekeyshare.PlatformListFakeActivity.OnShareButtonClickListener;
 
 /**
  * @ClassName:Share

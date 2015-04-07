@@ -1,7 +1,6 @@
 package me.himi.love.ui.fragment;
 
 import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient.ConversationType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +12,8 @@ import me.himi.love.MyApplication;
 import me.himi.love.R;
 import me.himi.love.adapter.MyFriendsAdapter;
 import me.himi.love.entity.FriendUser;
-import me.himi.love.ui.ChatActivity;
 import me.himi.love.ui.fragment.base.BaseFragment;
 import me.himi.love.view.list.XListView.IXListViewListener;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

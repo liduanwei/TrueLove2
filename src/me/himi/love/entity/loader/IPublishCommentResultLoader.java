@@ -1,7 +1,5 @@
 package me.himi.love.entity.loader;
 
-import java.util.List;
-
 import me.himi.love.entity.UserNewsComment;
 
 /**

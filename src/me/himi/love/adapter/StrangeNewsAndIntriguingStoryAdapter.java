@@ -2,22 +2,14 @@ package me.himi.love.adapter;
 
 import java.util.List;
 
-import me.himi.love.AppServiceExtendImpl;
-import me.himi.love.IAppServiceExtend.OnVoteArticleLoveResponseListener;
-import me.himi.love.IAppServiceExtend.VoteArticleLovePostParams;
 import me.himi.love.R;
 import me.himi.love.adapter.base.BaseListAdapter;
 import me.himi.love.adapter.base.ViewHolder;
-import me.himi.love.entity.Article;
 import me.himi.love.entity.StrangeNews;
-import me.himi.love.ui.UserInfoTextActivity;
-import me.himi.love.ui.ZoombleImageActivity;
 import me.himi.love.util.ActivityUtil;
 import me.himi.love.util.ImageLoaderOptions;
 import me.himi.love.util.Share;
-import me.himi.love.view.EmojiTextView;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
