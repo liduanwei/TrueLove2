@@ -17,7 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -88,7 +90,30 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 	    backup();
 	    break;
 	case R.id.layout_restore:
-	    restore();
+	    if (mPbLoading.getVisibility() == View.VISIBLE) {
+		showToast("读取中,请稍候");
+		return;
+	    }
+	    if (!isBackupExists) {
+		showToast("您还没有备份,建议立即备份");
+		return;
+	    }
+	    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    final AlertDialog dialog = builder.create();
+
+	    builder.setMessage("此操作可能会造成已有联系人资料重复,确认从服务器恢复联系人到您的手机上");
+	    builder.setNegativeButton("恢复", new DialogInterface.OnClickListener() {
+
+		@Override
+		public void onClick(DialogInterface arg0, int arg1) {
+		    // TODO Auto-generated method stub
+		    restore();
+		}
+	    });
+
+	    builder.setPositiveButton("取消", null);
+	    builder.show();
+
 	    break;
 	case R.id.tv_restoreFromHistories:
 	    startActivity(new Intent(ContactsBackupActivity.this, ContactsBackupHistoryActivity.class));
@@ -104,6 +129,8 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 	mTvContactsCount.setText(contacts.size() + " 联系人");
 	loadLast();
     }
+
+    private boolean isBackupExists; // 服务器上是否存在备份
 
     private void loadLast() {
 	// TODO Auto-generated method stub
@@ -124,12 +151,16 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 			mTvLastTime.setTextColor(getResources().getColor(R.color.c_f98800));
 			mTvLastTime.setText("您还没有进行过备份,建议立即备份以防止数据意外丢失");
 			mPbLoading.setVisibility(View.GONE);
+
+			isBackupExists = false;
 			return;
 		    }
 		    mTvLastServerSize.setText(size + " 联系人");
 		    String timeStr = ActivityUtil.getTimeStr("yyyy年MM月dd日 HH:mm:ss", time);
 		    mTvLastTime.setTextColor(getResources().getColor(R.color.text_gray));
 		    mTvLastTime.setText("上次备份时间:" + timeStr);
+
+		    isBackupExists = true;
 		} catch (JSONException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
@@ -209,12 +240,15 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 		    if (time == 0 || size == 0) {
 			mTvLastTime.setTextColor(getResources().getColor(R.color.c_f98800));
 			mTvLastTime.setText("您还没有进行过备份,建议立即备份以防止数据意外丢失");
+
+			isBackupExists = false;
 			return;
 		    }
 		    String timeStr = ActivityUtil.getTimeStr("yyyy年MM月dd日 HH:mm:ss", time);
 		    mTvLastTime.setTextColor(getResources().getColor(R.color.text_gray));
 		    mTvLastTime.setText("上次备份时间:" + timeStr);
 		    mTvLastServerSize.setText(size + " 联系人");
+		    isBackupExists = true;
 		    showToast("备份成功!");
 		} catch (JSONException e) {
 		    // TODO Auto-generated catch block
@@ -251,6 +285,7 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 
     private void restore() {
 	// TODO Auto-generated method stub
+
 	if (null == progressDialog) {
 	    progressDialog = new ProgressDialog(this);
 	}
@@ -270,6 +305,10 @@ public class ContactsBackupActivity extends BaseActivity implements OnClickListe
 		List<Contact> contacts = jsonToContacts(data);
 		System.out.println("服务器端联系人数据:" + data);
 		if (contacts != null) {
+		    if (contacts.size() == 0) {
+			showToast("未备份过");
+			return;
+		    }
 		    showToast("json还原contact:" + contacts.size());
 		    ContactsHelper.getInstance(ContactsBackupActivity.this).insertToPhone(contacts, new OpCallback() {
 

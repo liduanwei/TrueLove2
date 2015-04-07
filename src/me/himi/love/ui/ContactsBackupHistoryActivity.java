@@ -114,9 +114,9 @@ public class ContactsBackupHistoryActivity extends BaseActivity implements OnCli
 
     private void loadFromCache() {
 	// TODO Auto-generated method stub
-	List<ContactBackup> userNews = CacheUtils.loadFromCache(cachePath);
-	if (userNews != null) {
-	    mAdapter.setList(userNews);
+	List<ContactBackup> backups = CacheUtils.loadFromCache(cachePath);
+	if (backups != null) {
+	    mAdapter.setList(backups);
 	} else {
 	    loadBackupHistories();
 	}
